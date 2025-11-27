@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://diht0krytbejs"]
+
+[ext_resource type="Texture2D" uid="uid://de6c2gfj8phqg" path="res://pepernotenfabriek/shared/assets.webp" id="1_c7vgw"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=489109551]
+texture = ExtResource("1_c7vgw")
+hframes = 4
+vframes = 4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c1e1d5xy7ycei"
+
+[deps]
+
+files=["res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation"]
+
+source_file="res://pq-obg/localization/obg.csv"
+dest_files=["res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -6,24 +6,30 @@ const GRID_SIZE := Vector2(10, 8)
 const NUM_BELTS := 3
 var belt_positions : Array[Vector2i]
 var belt_directions : Array[Vector2]
+var belt_gift_types : Array[PackedInt32Array]
 
 const NUM_MACHINES := 6
 var machine_positions : Array[Vector2i]
 
 const NUM_BASKETS := 10
 var basket_positions : Array[Vector2i]
-var basket_types : Array[String] # @TODO
+var basket_types : Array[Gift.GiftType]
 
 var grid : Array
 var grid_flat : Array[GridCell]
 
 var belt_directions_allowed := [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 var generation_failed := false
+var generation_attempts := 0
 
 const MAX_DIST_BASKET_MACHINE := 4
 
+func is_valid() -> bool:
+	return not generation_failed and generation_attempts > 0
+
 func generate() -> void:
 	generation_failed = false
+	generation_attempts += 1
 	create_grid()
 	place_belts()
 	place_machines()
@@ -32,10 +38,9 @@ func generate() -> void:
 	print_grid()
 
 func print_grid() -> void:
+	print("### MAP GENERATOR ###")
 	print("Generation Success? ", not generation_failed)
-	print(belt_positions)
-	print(belt_directions)
-	
+
 	var size := get_grid_size()
 	for y in range(size.y):
 		var outputs := []
@@ -43,6 +48,8 @@ func print_grid() -> void:
 			outputs.append(get_cell_at(Vector2(x,y)).print_pretty())
 		var string := " | ".join(outputs)
 		print(string)
+	
+	print("###")
 
 func create_grid() -> void:
 	
@@ -191,6 +198,13 @@ func place_baskets() -> void:
 	basket_positions = []
 	basket_types = []
 	
+	# create list of wanted types first (to ensure balanced distribution)
+	var basket_types_all := []
+	var all_gift_types := Gift.GiftType.values()
+	while basket_types_all.size() < NUM_BASKETS:
+		basket_types_all += all_gift_types
+	basket_types_all.shuffle()
+	
 	# get all empty cells left
 	var cells := get_all_cells_for_content(GridCell.ContentType.BASKET)
 	var cells_reachable := []
@@ -211,15 +225,41 @@ func place_baskets() -> void:
 		generation_failed = true
 		return
 	
-	# finally, place based on that
+	belt_gift_types = []
+	for i in range(belt_positions.size()):
+		belt_gift_types.append(PackedInt32Array())
+	
 	for i in range(NUM_BASKETS):
-		var cell : GridCell = cells_reachable.pop_front().cell
+		var query = cells_reachable.pop_front()
+		
+		# mark cells as baskets (we know the cells are valid by now, so any will do)
+		var cell : GridCell = query.cell
 		basket_positions.append(cell.pos)
+		var gift_type : Gift.GiftType = basket_types_all.pop_back()
+		basket_types.append(gift_type)
 		cell.set_content(GridCell.ContentType.BASKET)
+		
+		# let belts remember which basket types are reachable through them
+		for belt in query.belts:
+			belt_gift_types[belt].append(gift_type)
+	
+	# a belt can be completely unused by the end, which is bad, so just fail if so
+	var belts_without_gifts := belt_gift_types.filter(func(tps): return tps.size() <= 0)
+	if belts_without_gifts.size() > 0:
+		generation_failed = true
+		return
 	
 func query_basket_suitability(cell:GridCell) -> Dictionary:
 	var my_pos := Vector2(cell.pos)
-	var data = { "cell": cell, "valid": false, "belts": [], "machines": [], "dist_closest": INF, "dist_avg": INF, "dist_total": 0 }
+	var data = { 
+		"cell": cell, 
+		"valid": false, 
+		"belts": [], 
+		"machines": [], 
+		"dist_closest": INF, 
+		"dist_avg": INF, 
+		"dist_total": 0 
+	}
 	
 	# for every machine...
 	for m in range(machine_positions.size()):

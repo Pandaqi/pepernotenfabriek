@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://na47h6r8oeyx"]
+[gd_scene load_steps=17 format=3 uid="uid://na47h6r8oeyx"]
 
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_0bfsn"]
 [ext_resource type="Script" uid="uid://cdcntna38tpg5" path="res://pepernotenfabriek/map/map_generator.gd" id="3_tgxkw"]
@@ -10,6 +10,12 @@
 [ext_resource type="Script" uid="uid://daomj0u4jovnd" path="res://pepernotenfabriek/map/map.gd" id="7_65gjl"]
 [ext_resource type="Script" uid="uid://cadyhgrfq7kju" path="res://pepernotenfabriek/map/camera/camera_2d.gd" id="8_0bfsn"]
 [ext_resource type="PackedScene" uid="uid://bnyrjm2gdr6sv" path="res://pepernotenfabriek/machine/machine_shooter.tscn" id="8_tgxkw"]
+[ext_resource type="Script" uid="uid://cdt6r7eggio0d" path="res://pepernotenfabriek/machine/machine_distributor.gd" id="10_rddda"]
+[ext_resource type="PackedScene" uid="uid://c3mew7u5cevle" path="res://pq-obg/state/state.tscn" id="13_ehouy"]
+[ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="14_1tmg5"]
+[ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/tools/players/player_spawner.gd" id="15_ernh0"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/tools/players/player_data.tres" id="15_fj44h"]
+[ext_resource type="PackedScene" uid="uid://s10incg4a6hm" path="res://pepernotenfabriek/player/player.tscn" id="16_qeb6e"]
 
 [node name="Main" type="Node2D" unique_id=1617459695]
 
@@ -29,7 +35,23 @@ script = ExtResource("4_rddda")
 belt_scene = ExtResource("5_tgxkw")
 machine_scene = ExtResource("8_tgxkw")
 basket_scene = ExtResource("6_tgxkw")
+map_data = ExtResource("2_0bfsn")
+
+[node name="MachineDistributor" type="Node2D" parent="Map" unique_id=224796423]
+script = ExtResource("10_rddda")
+player_data = ExtResource("15_fj44h")
+map_data = ExtResource("2_0bfsn")
+
+[node name="PlayerSpawner" type="Node2D" parent="Map" unique_id=431052717]
+script = ExtResource("15_ernh0")
+player_scene = ExtResource("16_qeb6e")
+player_data = ExtResource("15_fj44h")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=15986191 node_paths=PackedStringArray("map_visualizer")]
 script = ExtResource("8_0bfsn")
 map_visualizer = NodePath("../Map/Visualizer")
+
+[node name="State" parent="." unique_id=1145839826 instance=ExtResource("13_ehouy")]
+start_game_immediately = true
+
+[node name="ButtonInstructions" parent="." unique_id=13185939 instance=ExtResource("14_1tmg5")]

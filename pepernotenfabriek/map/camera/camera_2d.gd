@@ -5,7 +5,7 @@ const ZOOM_SPEED := 8.0
 
 @export var map_visualizer : MapVisualizer
 
-@export var EDGE_MARGIN := Vector2.ZERO
+@export var EDGE_MARGIN := Vector2(0.0, 64.0)
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS

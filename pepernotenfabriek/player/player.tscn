@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://s10incg4a6hm"]
+
+[ext_resource type="Script" uid="uid://lm7mmlvckyaq" path="res://pepernotenfabriek/player/player.gd" id="1_s0ber"]
+[ext_resource type="Script" uid="uid://5otym1ynh7vi" path="res://pepernotenfabriek/player/module_machines.gd" id="2_jtfek"]
+[ext_resource type="Script" uid="uid://cbh8pskekcq4r" path="res://pq-obg/tools/input/module_input.gd" id="3_7jauv"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/tools/players/player_data.tres" id="4_o3ge3"]
+
+[node name="Player" type="Node2D" unique_id=847895026 node_paths=PackedStringArray("module_machines")]
+script = ExtResource("1_s0ber")
+module_machines = NodePath("ModuleMachines")
+
+[node name="ModuleMachines" type="Node2D" parent="." unique_id=992780434 node_paths=PackedStringArray("module_input")]
+script = ExtResource("2_jtfek")
+module_input = NodePath("../ModuleInput")
+
+[node name="ModuleInput" type="Node2D" parent="." unique_id=69098766]
+script = ExtResource("3_7jauv")
+player_data = ExtResource("4_o3ge3")

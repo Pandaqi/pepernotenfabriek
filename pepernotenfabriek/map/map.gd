@@ -13,5 +13,12 @@ func _ready() -> void:
 	map_data.cache_gifts(self, gift_scene)
 	map_data.cache_bullets(self, bullet_scene)
 	
-	generator.generate()
+	map_data.out_of_bullets.connect(_on_out_of_bullets)
+	
+	while not generator.is_valid():
+		generator.generate()
 	visualizer.visualize(generator)
+
+func _on_out_of_bullets() -> void:
+	print("GAME OVER! Out of bullets")
+	return

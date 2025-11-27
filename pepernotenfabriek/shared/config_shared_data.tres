@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ConfigSharedData" load_steps=13 format=3 uid="uid://dvtq7hggu4kjk"]
+
+[ext_resource type="AudioStream" uid="uid://cfe2jylsp4enn" path="res://pq-obg/audio/sfx/ui_click.mp3" id="1_5brs3"]
+[ext_resource type="PackedScene" uid="uid://bfclclol7g0ea" path="res://pq-obg/ui/button_visualizer/button_visualizer.tscn" id="2_f3dyq"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_d5p23"]
+[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="4_vxfi0"]
+[ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="5_g5o6o"]
+[ext_resource type="Texture2D" uid="uid://bex3uoa5xtsv8" path="res://pq-obg/ui/textures/icon_settings.tres" id="6_sboe8"]
+[ext_resource type="Script" uid="uid://dui163ptds6sq" path="res://pq-obg/tools/config/config_shared_data.gd" id="7_o1a7f"]
+[ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="8_dtlrj"]
+[ext_resource type="Resource" uid="uid://bkdl045h6lnih" path="res://pq-obg/settings/default/tab_core.tres" id="9_if6eq"]
+[ext_resource type="Resource" uid="uid://rof0eke27qbk" path="res://pq-obg/settings/default/theme/tab_theme.tres" id="10_go5d3"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_tsist"]
+[ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/ui/tutorial/tutorial_stage.gd" id="12_lbq6e"]
+
+[resource]
+script = ExtResource("7_o1a7f")
+game_id = "de-pepernotenfabriek"
+language_default = "nl"
+metadata/_custom_type_script = "uid://dui163ptds6sq"

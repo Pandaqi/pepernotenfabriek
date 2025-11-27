@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3mew7u5cevle"]
+
+[ext_resource type="Script" uid="uid://c51fddt4uf8oa" path="res://pq-obg/state/state.gd" id="1_t3kc4"]
+[ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="2_pnxkm"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/tools/players/player_data.tres" id="3_q42ym"]
+[ext_resource type="PackedScene" uid="uid://ddcriby0xa2bw" path="res://pq-obg/ui/pause/pause_menu.tscn" id="4_mwql8"]
+[ext_resource type="Script" uid="uid://0cruceeytcjc" path="res://pq-obg/ui/tutorial/tutorial.gd" id="5_ttvql"]
+[ext_resource type="PackedScene" uid="uid://djftun4vq0s5o" path="res://pq-obg/ui/tutorial/tutorial_sprite.tscn" id="6_ahbfw"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="7_q42ym"]
+[ext_resource type="Script" uid="uid://cua7u6fes6yxk" path="res://pq-obg/ui/touch/touch_areas.gd" id="8_ttvql"]
+
+[node name="State" type="CanvasLayer" unique_id=1145839826 node_paths=PackedStringArray("pause_menu", "tutorial", "touch_areas")]
+script = ExtResource("1_t3kc4")
+state_data = ExtResource("2_pnxkm")
+player_data = ExtResource("3_q42ym")
+pause_menu = NodePath("PauseMenu")
+tutorial = NodePath("Tutorial")
+touch_areas = NodePath("TouchAreas")
+metadata/_custom_type_script = "uid://c51fddt4uf8oa"
+
+[node name="PauseMenu" parent="." unique_id=1738070768 instance=ExtResource("4_mwql8")]
+mouse_filter = 2
+
+[node name="Tutorial" type="Node2D" parent="." unique_id=2138962056]
+script = ExtResource("5_ttvql")
+sprite_scene = ExtResource("6_ahbfw")
+metadata/_custom_type_script = "uid://0cruceeytcjc"
+
+[node name="TouchAreas" type="Control" parent="." unique_id=2067382508 node_paths=PackedStringArray("area_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("7_q42ym")
+script = ExtResource("8_ttvql")
+area_container = NodePath(".")

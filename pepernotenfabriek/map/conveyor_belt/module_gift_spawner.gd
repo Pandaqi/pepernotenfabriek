@@ -20,6 +20,7 @@ func place_gift() -> void:
 	# @TODO: Read/save somewhere from `g`
 	var gift_size := 64.0
 	var pos := belt.get_pos_with_offset(0.0, 0.5*gift_size)
+	g.set_type(belt.gift_types.pick_random())
 	g.set_active(true, pos)
 
 func restart_timer() -> void:

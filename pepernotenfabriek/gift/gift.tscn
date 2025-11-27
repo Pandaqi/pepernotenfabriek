@@ -1,22 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://doytdydxwb44d"]
 
 [ext_resource type="Script" uid="uid://b3e4aouflphvv" path="res://pepernotenfabriek/gift/gift.gd" id="1_1t74h"]
-[ext_resource type="Texture2D" uid="uid://dq281tqkhnmnr" path="res://icon.svg" id="1_oulrs"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_5ql64"]
+[ext_resource type="PackedScene" uid="uid://diht0krytbejs" path="res://pepernotenfabriek/shared/asset_sprite.tscn" id="3_5ql64"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7v7v6"]
 radius = 33.24154
 
 [node name="Gift" type="RigidBody2D" unique_id=371013316 node_paths=PackedStringArray("col_shape", "sprite")]
 gravity_scale = 0.0
+linear_damp = 1.0
 script = ExtResource("1_1t74h")
 col_shape = NodePath("CollisionShape2D")
 sprite = NodePath("Sprite2D")
 map_data = ExtResource("2_5ql64")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=987079844]
-scale = Vector2(0.51999867, 0.51999867)
-texture = ExtResource("1_oulrs")
+[node name="Sprite2D" parent="." unique_id=489109551 instance=ExtResource("3_5ql64")]
+position = Vector2(0, -4.9999995)
+scale = Vector2(0.33, 0.33)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=507519095]
 shape = SubResource("CircleShape2D_7v7v6")

@@ -13,11 +13,21 @@ var bullets_inactive : Array[Bullet]
 var gifts_delivered := 0
 var gifts_failed := 0
 
+var belts : Array[ConveyorBelt]
+var machines : Array[Machine]
+var baskets : Array[Basket]
+
+signal out_of_bullets()
+
 func reset() -> void:
 	gifts_active = []
 	gifts_inactive = []
 	gifts_delivered = 0
 	gifts_failed = 0
+	
+	belts = []
+	machines = []
+	baskets = []
 
 func grab_gift_from_pool() -> Gift:
 	if gifts_inactive.size() <= 0: return null

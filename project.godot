@@ -15,6 +15,19 @@ run/main_scene="uid://na47h6r8oeyx"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://cjblsc7fxuoqg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

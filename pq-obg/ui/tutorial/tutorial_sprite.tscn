@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://djftun4vq0s5o"]
+
+[ext_resource type="Script" uid="uid://dj8dcab5wtmjl" path="res://pq-obg/ui/tutorial/tutorial_sprite.gd" id="1_mn6vr"]
+[ext_resource type="PackedScene" uid="uid://dch28bffyv2mx" path="res://pq-obg/ui/sprite_ui.tscn" id="2_1gkfh"]
+[ext_resource type="Texture2D" uid="uid://df4nshcux4r4m" path="res://pq-obg/ui/ui_shared.webp" id="3_ws2ov"]
+
+[node name="TutorialSprite" type="Node2D"]
+script = ExtResource("1_mn6vr")
+
+[node name="BG" parent="." instance=ExtResource("2_1gkfh")]
+frame = 3
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 29)
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("3_ws2ov")
+hframes = 8
+vframes = 4

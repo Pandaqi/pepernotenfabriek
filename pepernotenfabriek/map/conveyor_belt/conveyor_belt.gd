@@ -2,7 +2,8 @@ extends Node2D
 class_name ConveyorBelt
 
 @export var dir := Vector2.RIGHT
-@export var push_force := 50.0
+@export var push_force := 500.0
+@export var max_push_change_per_frame := 60.0
 @export var area : Area2D
 @export var col_shape : CollisionShape2D
 @export var sprite : Sprite2D
@@ -14,6 +15,7 @@ var start_pos : Vector2
 var end_pos : Vector2
 
 var bodies : Array[Gift]
+var gift_types : Array[Gift.GiftType]
 
 func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
@@ -21,15 +23,24 @@ func _ready() -> void:
 
 func _on_body_entered(body:Node2D) -> void:
 	if not (body is Gift): return
+	if body.is_on_belt(): return
 	bodies.append(body)
+	body.add_belt(self)
 
 func _on_body_exited(body:Node2D) -> void:
 	if not (body is Gift): return
+	if not bodies.has(body): return
 	bodies.erase(body)
+	body.remove_belt(self)
 
 func _physics_process(_delta: float) -> void:
+	var target_velocity := dir.normalized() * push_force
 	for body in bodies:
-		body.apply_central_force(dir.normalized() * push_force)
+		var cur_velocity := body.get_linear_velocity()
+		var change_needed := target_velocity - cur_velocity
+		var change_amount_clamped : float = clamp(change_needed.length(), 0.0, max_push_change_per_frame)
+		var change_clamped := change_amount_clamped * change_needed.normalized()
+		body.apply_central_force(change_clamped)
 
 func get_belt_vec() -> Vector2:
 	return end_pos - start_pos
@@ -53,6 +64,13 @@ func get_pos_with_offset(ratio:float, edge_margin:= 0.0) -> Vector2:
 	var pos_base := start_pos + ratio * get_belt_vec()
 	var pos_offset := get_offset_vec() * (randf() - 0.5) * (belt_thickness - edge_margin)
 	return pos_base + pos_offset
+
+func set_gift_types(tp:PackedInt32Array) -> void:
+	var types : Array[Gift.GiftType] = []
+	for elem in tp:
+		if types.has(elem): continue
+		types.append(elem)
+	gift_types = types
 
 func update_sizes(map_bounds:Rect2) -> void:
 	var vp := map_bounds.size

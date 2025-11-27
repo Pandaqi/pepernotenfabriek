@@ -14,8 +14,9 @@ metadata/_custom_type_script = "uid://dyg6agl64qnj"
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_q5wxt")
 
-[node name="ModuleCannon" type="Node2D" parent="." unique_id=666162926]
+[node name="ModuleCannon" type="Node2D" parent="." unique_id=666162926 node_paths=PackedStringArray("entity")]
 script = ExtResource("2_mawh5")
+entity = NodePath("..")
 map_data = ExtResource("3_q5wxt")
 
 [node name="ModuleRotator" type="Node2D" parent="." unique_id=698014199 node_paths=PackedStringArray("entity")]
