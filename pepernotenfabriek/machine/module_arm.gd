@@ -11,7 +11,7 @@ func _input(ev:InputEvent) -> void:
 		extend(extend_impulse * mass)
 
 func get_direction() -> Vector2:
-	return Vector2.from_angle(self.rotation)
+	return Vector2.from_angle(self.global_rotation)
 
 func extend(speed:float) -> void:
 	var force := speed * get_direction()

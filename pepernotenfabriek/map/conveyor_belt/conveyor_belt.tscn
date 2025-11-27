@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1lylpto53a00"]
+
+[ext_resource type="Script" uid="uid://jy5ift4owb6k" path="res://pepernotenfabriek/map/conveyor_belt/conveyor_belt.gd" id="1_klpob"]
+[ext_resource type="Texture2D" uid="uid://dq281tqkhnmnr" path="res://icon.svg" id="2_eklo4"]
+[ext_resource type="Script" uid="uid://bpdcd5s815ftg" path="res://pepernotenfabriek/map/conveyor_belt/module_gift_spawner.gd" id="3_opekm"]
+[ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="4_nogow"]
+
+[node name="ConveyorBelt" type="Node2D" unique_id=1870260274 node_paths=PackedStringArray("area", "col_shape", "sprite")]
+script = ExtResource("1_klpob")
+dir = Vector2(1, 1)
+area = NodePath("Area2D")
+col_shape = NodePath("Area2D/CollisionShape2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1130371821]
+texture = ExtResource("2_eklo4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=322419693]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=56475511]
+
+[node name="ModuleGiftSpawner" type="Node2D" parent="." unique_id=221763612 node_paths=PackedStringArray("belt", "timer")]
+script = ExtResource("3_opekm")
+belt = NodePath("..")
+timer = NodePath("Timer")
+map_data = ExtResource("4_nogow")
+
+[node name="Timer" type="Timer" parent="ModuleGiftSpawner" unique_id=1351701614]
+one_shot = true

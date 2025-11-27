@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapData" load_steps=2 format=3 uid="uid://dwrgtsldm0xft"]
+
+[ext_resource type="Script" uid="uid://bf1tym8dumxkx" path="res://pepernotenfabriek/map/map_data.gd" id="1_aqutn"]
+
+[resource]
+script = ExtResource("1_aqutn")
+metadata/_custom_type_script = "uid://bf1tym8dumxkx"

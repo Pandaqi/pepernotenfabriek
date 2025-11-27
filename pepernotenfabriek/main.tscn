@@ -1,78 +1,35 @@
-[gd_scene load_steps=9 format=3 uid="uid://na47h6r8oeyx"]
+[gd_scene load_steps=11 format=3 uid="uid://na47h6r8oeyx"]
 
-[ext_resource type="Script" uid="uid://dyg6agl64qnj" path="res://pepernotenfabriek/machine/machine.gd" id="1_fq6oo"]
-[ext_resource type="Texture2D" uid="uid://dq281tqkhnmnr" path="res://icon.svg" id="2_38rfg"]
-[ext_resource type="Script" uid="uid://ec68bpqil64a" path="res://pepernotenfabriek/machine/module_arm.gd" id="2_ef4f8"]
-[ext_resource type="Script" uid="uid://demybhw66n310" path="res://pepernotenfabriek/machine/module_rotator.gd" id="3_r6nfu"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ef4f8"]
-friction = 0.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ef4f8"]
-radius = 35.128338
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v7v6"]
-size = Vector2(154, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_38rfg"]
-size = Vector2(128, 20)
+[ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_0bfsn"]
+[ext_resource type="Script" uid="uid://cdcntna38tpg5" path="res://pepernotenfabriek/map/map_generator.gd" id="3_tgxkw"]
+[ext_resource type="PackedScene" uid="uid://br2xkqc0v4nn3" path="res://pepernotenfabriek/machine/bullet/bullet.tscn" id="4_e0xgt"]
+[ext_resource type="Script" uid="uid://bhpvv6yfa3bah" path="res://pepernotenfabriek/map/map_visualizer.gd" id="4_rddda"]
+[ext_resource type="PackedScene" uid="uid://b1lylpto53a00" path="res://pepernotenfabriek/map/conveyor_belt/conveyor_belt.tscn" id="5_tgxkw"]
+[ext_resource type="PackedScene" uid="uid://dptbgcw6japqe" path="res://pepernotenfabriek/map/basket/basket.tscn" id="6_tgxkw"]
+[ext_resource type="PackedScene" uid="uid://doytdydxwb44d" path="res://pepernotenfabriek/gift/gift.tscn" id="7_0bfsn"]
+[ext_resource type="Script" uid="uid://daomj0u4jovnd" path="res://pepernotenfabriek/map/map.gd" id="7_65gjl"]
+[ext_resource type="Script" uid="uid://cadyhgrfq7kju" path="res://pepernotenfabriek/map/camera/camera_2d.gd" id="8_0bfsn"]
+[ext_resource type="PackedScene" uid="uid://bnyrjm2gdr6sv" path="res://pepernotenfabriek/machine/machine_shooter.tscn" id="8_tgxkw"]
 
 [node name="Main" type="Node2D" unique_id=1617459695]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=975397189]
-position = Vector2(362, 180)
-physics_material_override = SubResource("PhysicsMaterial_ef4f8")
+[node name="Map" type="Node2D" parent="." unique_id=2086301137 node_paths=PackedStringArray("generator", "visualizer")]
+script = ExtResource("7_65gjl")
+map_data = ExtResource("2_0bfsn")
+gift_scene = ExtResource("7_0bfsn")
+bullet_scene = ExtResource("4_e0xgt")
+generator = NodePath("Generator")
+visualizer = NodePath("Visualizer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=793981879]
-shape = SubResource("CircleShape2D_ef4f8")
+[node name="Generator" type="Node2D" parent="Map" unique_id=751466631]
+script = ExtResource("3_tgxkw")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=80789304]
-position = Vector2(100, -15)
-shape = SubResource("RectangleShape2D_7v7v6")
+[node name="Visualizer" type="Node2D" parent="Map" unique_id=1152759193]
+script = ExtResource("4_rddda")
+belt_scene = ExtResource("5_tgxkw")
+machine_scene = ExtResource("8_tgxkw")
+basket_scene = ExtResource("6_tgxkw")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=377073427]
-position = Vector2(100, 15)
-shape = SubResource("RectangleShape2D_7v7v6")
-
-[node name="ModuleRotator2" type="Node2D" parent="StaticBody2D" unique_id=1520952755]
-position = Vector2(-295, -121)
-script = ExtResource("3_r6nfu")
-
-[node name="Arm2" type="RigidBody2D" parent="." unique_id=502117554 node_paths=PackedStringArray("joint_node")]
-position = Vector2(462, 180)
-mass = 10.0
-gravity_scale = 0.0
-script = ExtResource("2_ef4f8")
-joint_node = NodePath("../GrooveJoint2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm2" unique_id=1473732705]
-shape = SubResource("RectangleShape2D_38rfg")
-
-[node name="GrooveJoint2D" type="GrooveJoint2D" parent="." unique_id=1493661357]
-position = Vector2(397, 180)
-rotation = -1.5707964
-node_a = NodePath("../StaticBody2D")
-node_b = NodePath("../Arm2")
-disable_collision = false
-length = 100.0
-
-[node name="Machine" type="Node2D" parent="." unique_id=351278667]
-position = Vector2(67, 66)
-script = ExtResource("1_fq6oo")
-
-[node name="ModuleArm" type="Node2D" parent="Machine" unique_id=1326453506]
-
-[node name="Arm" type="RigidBody2D" parent="Machine/ModuleArm" unique_id=730631037]
-mass = 10.0
-gravity_scale = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Machine/ModuleArm/Arm" unique_id=108560343]
-shape = SubResource("RectangleShape2D_38rfg")
-
-[node name="ModuleVisuals" type="Node2D" parent="Machine" unique_id=162230410]
-
-[node name="Sprite2D" type="Sprite2D" parent="Machine/ModuleVisuals" unique_id=97735396]
-texture = ExtResource("2_38rfg")
-
-[node name="ModuleRotator" type="Node2D" parent="Machine" unique_id=1502338813]
-script = ExtResource("3_r6nfu")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=15986191 node_paths=PackedStringArray("map_visualizer")]
+script = ExtResource("8_0bfsn")
+map_visualizer = NodePath("../Map/Visualizer")

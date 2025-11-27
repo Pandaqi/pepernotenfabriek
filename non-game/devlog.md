@@ -87,7 +87,89 @@ Allemaal opties om later te bekijken. Voor nu werkt mijn originele idee met de u
 
 ## Pepernoten Afleveren
 
-@TODO: Over emmers die dat checken, de object pooling voor het geheel
+Dit is vrij simpel vergeleken met de rest.
+
+* Ik maak weer een `Area`, en deze keer op `body_entered` checkt hij of het een pakje is. Zo ja, dan is het nu afgeleverd.
+* Ik maak een plaatje van "hier afleveren" dat even groot is als die Area.
+
+Het interessante deel hier is denk ik dat ik "object pooling" gebruik. 
+
+* Ik zou de hele tijd pakjes kunnen _maken_, en dan weer kunnen _vernietigen_ als ze in de container belanden.
+* Maar maken en vernietigen zijn vaak de zwaarste dingen voor een game engine, en ze kunnen dus ook de physics in de war brengen.
+* In plaats daarvan maak ik (helemaal aan het begin) een "pool" van 30 pakjes. En die worden gewoon steeds hergebruikt.
+  * We hebben een pakje nodig? Haal de eerste uit de pool en gooi hem op de loopband.
+  * Een pakje is afgeleverd? Maak hem onzichtbaar en gooi hem terug in de pool.
+
+Dit is lekker efficiënt en zet tegelijkertijd een mooie limiet op het maximale aantal pakjes. 
+
+{{% remark %}}
+In oudere spellen van mij vergat ik dat wel eens, en vervolgens deden mijn spelers hun uiterste best om 100+ dingen op het scherm te laten komen en de computer te laten crashen. Limieten zijn goed! Restricties zorgen voor creativiteit!
+{{% /remark %}}
+
+## De Fabriek Maken
+
+Ondertussen heb ik een nachtje geslapen. De volgende ochtend wil ik beginnen met de fabriek maken, oftewel, hij "genereert" willekeurig wat loopbanden en machines waarmee je speelt.
+
+En dan zie ik een (achteraf overduidelijk) probleem.
+
+* One Button Games kunnen meestal van 2 tot 6 of 8 spelers.
+* Tegelijkertijd moet de fabriek zodanig zijn gebouwd dat je altijd een kans hebt om een pakje in een emmer te krijgen. Als het pakje bijvoorbeeld nooit langs jou komt, of de emmer ervoor staat niet aan de andere kant, dan... kan je hem letterlijk niet afleveren!
+* Dus hoe garanderen we dat?
+* En hoe werkt dat als het aantal spelers---en dus het aantal machines---niet altijd hetzelfde is?
+
+Meestal bedenkt je hoofd dan een aantal oplossingen die vast heel netjes zouden werken, maar ook véél te complex of tijdrovend zijn. Bijvoorbeeld,
+
+* Ik zou kunnen zeggen "één loopband per 2 spelers". Dus zodra een 3e speler inlogt, verschijnt plots een _tweede loopband_ in de fabriek, waar zij dan verantwoordelijk voor zijn.
+* Ik zou de loopband kunnen veranderen naar een _pad_ (ipv gewoon een rechte lijn). Zo kan je een cirkel maken, wat garandeert dat iets natuurlijk overal langskomt. Nieuwe spelers krijgen gewoon een nieuwe machine ergens op een lege plek langs dit pad/deze cirkel.
+* En meer van dit soort ingenieuze oplossingen.
+
+Maar ik wil dit graag klein en simpel houden. Dus ik bedacht het volgende voor de fabrieksgeneratie,
+
+* Houdt stiekem een "grid" bij. (Dus je deelt het scherm op in nette vakjes.) Dit is puur om op te slaan waar al dingen staan, zodat je weet welke vakjes nog leeg zijn.
+* Plaats eerst ~3 loopbanden. (En alle gridvakjes die ze gebruiken, die markeer je dus als "vol"!)
+* Plaats vervolgens 6 machines op vakjes langs de loopbanden. (Ook die vakjes zijn nu natuurlijk "vol".)
+* En nu komt de truc,
+  * Ga langs alle overgebleven vakjes.
+  * Trek een lijn van dat vakje naar elke machine.
+  * Als er tenminste één zo'n lijn is die _kruist met een loopband_, dan weet je dus het volgende: er staat een machine aan de _ene kant_ van de loopband, en deze emmer zou aan de _andere kant_ komen. Dus hij is bereikbaar. Hier kan je een emmer plaatsen!
+  * Ik geef voorkeur aan vakjes die zoveel mogelijk machines kunnen bereiken + zo dicht bij de loopband mogelijk staan. Dáár plaats ik emmers.
+
+En wat als er minder dan die 6 spelers zijn? Dan worden de machines gewoon _verdeeld_ over de spelers. **Sommige spelers besturen dus twee machines tegelijk.**
+
+Het is niet perfect. Ook nu kan je toevallig een fabriek krijgen die net wat minder speelbaar is, bijvoorbeeld doordat machines net in elkaars lijn zitten. Het is wel de meest simpele/efficiënte manier om al deze problemen in één klap op te lossen.
+
+De _breedte_ van de loopbanden is identiek aan die van vakjes in het grid. Dat leek me een goed ijkpunt. De machines en emmers zijn net ietsje kleiner zodat ze fijn in één vakje passen met wat witruimte eromheen.
+
+O ja, iets wat dit algoritme duizend keer beter maakte was om een maximale afstand te hebben tussen machines. Dus het telt alleen "deze emmer kan worden bereikt door machine X" als hij behoorlijk dichtbij staat (binnen 4 gridvakjes volgens mij). Die ene regel code maakt de hele fabriek een stuk mooier en speelbaarder dan eerst.
+
+## Lastige Keuzes Maken
+
+Zoals ik aan het begin al vermoedde: met één loopband, en de machines netjes ernaast, is het spel gewoon niet echt een spel. Je drukt op de knop als precies jouw pakje langskomt, en dat is het.
+
+Meerdere loopbanden maakt het al beter, maar dan moet je de machines dus draaien (of een veel slimmer algoritme schrijven voor genereren van de fabriek).
+
+En als machines moeten draaien, en eventueel een redelijke afstand moeten overbruggen ... dan werkt zo'n uitschuifarm niet meer. Dan moet je dingen kunnen afvuren / over grotere afstand werken.
+
+En als je dus zoveel vrijheid hebt, dan moet ik eigenlijk ook toestaan dat pakjes niet worden opgepikt door "foute" containers (maar eroverheen vliegen). Want nu krijg je soms fabrieken waarbij emmers achter elkaar staan en je moet toch echt dat pakje eerst langs die andere emmer krijgen.
+
+Dit soort dingen worden altijd vrij snel duidelijk nadat je iets hebt gemaakt. Meestal is dat eerste idee ook helemaal niet goed, en dan voelt het een beetje alsof je tijd hebt verspild ("ugh waarom werken mijn ideeën nooit in één keer"). Maar dat is dus niet zo, want dit was nodig om te zien hoe het wel moest.
+
+Uiteindelijk moet ik mezelf steeds herinneren dat het gaat om _een leuk spel_. Houd dingen simpel. Kies gewoon iets wat grappig en speels is, dat is belangrijker dan dat iets helemaal "eerlijk" of "speelbaar" is.
+
+Dus het werd...
+
+* Pepernoten afvuren vanuit je machine. 
+* Die pepernoten herladen alleen als ze uit het scherm vliegen. Dus je kan ook gewoon verliezen door te slecht te schieten en je hele fabriek vol stilstaande pepernoten te hebben.
+* Die pepernoten knallen tegen pakjes, en zo moeten ze in de emmer.
+* Het is bijna logisch :p
+
+@TODO
+
+
+
+
+
+
 
 ## Een speelbaar spel
 

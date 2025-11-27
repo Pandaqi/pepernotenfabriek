@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://co6mn8viwcgmm"]
+
+[ext_resource type="Script" uid="uid://dyg6agl64qnj" path="res://pepernotenfabriek/machine/machine.gd" id="1_2eal2"]
+[ext_resource type="Script" uid="uid://ec68bpqil64a" path="res://pepernotenfabriek/machine/module_arm.gd" id="1_kky6b"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ef4f8"]
+friction = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ef4f8"]
+radius = 35.128338
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v7v6"]
+size = Vector2(154, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38rfg"]
+size = Vector2(128, 20)
+
+[node name="MachineBetter" type="Node2D" unique_id=1913437167]
+rotation = 1.5707964
+script = ExtResource("1_2eal2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=396214476]
+collision_layer = 2
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_ef4f8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2086010034]
+shape = SubResource("CircleShape2D_ef4f8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1371380530]
+position = Vector2(100, -15)
+shape = SubResource("RectangleShape2D_7v7v6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=278202445]
+position = Vector2(100, 15)
+shape = SubResource("RectangleShape2D_7v7v6")
+
+[node name="Arm2" type="RigidBody2D" parent="." unique_id=978939729 node_paths=PackedStringArray("joint_node")]
+position = Vector2(100, 0)
+collision_mask = 3
+mass = 10.0
+gravity_scale = 0.0
+script = ExtResource("1_kky6b")
+joint_node = NodePath("../GrooveJoint2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm2" unique_id=1324208260]
+shape = SubResource("RectangleShape2D_38rfg")
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="." unique_id=1124926376]
+position = Vector2(35, 0)
+rotation = -1.5707964
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../Arm2")
+disable_collision = false
+length = 100.0
