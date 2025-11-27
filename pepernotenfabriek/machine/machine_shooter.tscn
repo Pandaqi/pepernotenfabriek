@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dyg6agl64qnj" path="res://pepernotenfabriek/machine/machine.gd" id="1_vqvy0"]
 [ext_resource type="Script" uid="uid://dikjje4c1af4m" path="res://pepernotenfabriek/machine/module_cannon.gd" id="2_mawh5"]
-[ext_resource type="Texture2D" uid="uid://dq281tqkhnmnr" path="res://icon.svg" id="2_q5wxt"]
+[ext_resource type="PackedScene" uid="uid://diht0krytbejs" path="res://pepernotenfabriek/shared/asset_sprite.tscn" id="2_q5wxt"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="3_q5wxt"]
 [ext_resource type="Script" uid="uid://demybhw66n310" path="res://pepernotenfabriek/machine/module_rotator.gd" id="4_obqqw"]
 
@@ -10,9 +10,8 @@
 script = ExtResource("1_vqvy0")
 metadata/_custom_type_script = "uid://dyg6agl64qnj"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1337425367]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_q5wxt")
+[node name="Sprite2D" parent="." unique_id=489109551 instance=ExtResource("2_q5wxt")]
+frame = 9
 
 [node name="ModuleCannon" type="Node2D" parent="." unique_id=666162926 node_paths=PackedStringArray("entity")]
 script = ExtResource("2_mawh5")

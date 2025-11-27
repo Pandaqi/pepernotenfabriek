@@ -2,8 +2,8 @@ extends Node2D
 class_name ConveyorBelt
 
 @export var dir := Vector2.RIGHT
-@export var push_force := 500.0
-@export var max_push_change_per_frame := 60.0
+@export var push_force := 700.0
+@export var max_push_change_per_frame := 100.0
 @export var area : Area2D
 @export var col_shape : CollisionShape2D
 @export var sprite : Sprite2D
@@ -20,22 +20,25 @@ var gift_types : Array[Gift.GiftType]
 func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
 	area.body_exited.connect(_on_body_exited)
+	
+	sprite.material = sprite.material.duplicate()
 
 func _on_body_entered(body:Node2D) -> void:
 	if not (body is Gift): return
-	if body.is_on_belt(): return
 	bodies.append(body)
 	body.add_belt(self)
 
 func _on_body_exited(body:Node2D) -> void:
 	if not (body is Gift): return
-	if not bodies.has(body): return
 	bodies.erase(body)
 	body.remove_belt(self)
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity := dir.normalized() * push_force
 	for body in bodies:
+		var controlled_by_other_belt := body.belts[0] != self
+		if controlled_by_other_belt: continue
+		
 		var cur_velocity := body.get_linear_velocity()
 		var change_needed := target_velocity - cur_velocity
 		var change_amount_clamped : float = clamp(change_needed.length(), 0.0, max_push_change_per_frame)
@@ -113,7 +116,11 @@ func update_sizes(map_bounds:Rect2) -> void:
 	var belt_size := get_belt_size()
 	set_position(get_belt_center())
 	set_rotation(get_belt_angle())
-	var base_scale := 128.0
-	sprite.set_scale(belt_size / base_scale)
+	var base_scale := 256.0
+	var new_scale := belt_size / base_scale
+	sprite.set_scale(new_scale)
 	col_shape.shape = RectangleShape2D.new()
 	col_shape.shape.size = belt_size
+	
+	var x_repeat := belt_size.x / belt_thickness
+	sprite.material.set_shader_parameter("repeat_x", x_repeat)

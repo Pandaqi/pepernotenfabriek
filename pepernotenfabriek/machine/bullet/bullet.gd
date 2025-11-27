@@ -25,7 +25,7 @@ func shoot(vec:Vector2) -> void:
 # @NOTE: Safest bet for teleporting RigidBodies is always this, otherwise really weird errors/flickering/etc
 func _integrate_forces(state):
 	if reset_state.length() > 0.03:
-		state.transform.origin = reset_state
+		state.transform = Transform2D(randf()*2*PI, reset_state)
 		reset_state = Vector2.ZERO
 		col_shape.set_deferred("disabled", not is_active)
 

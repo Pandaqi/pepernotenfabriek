@@ -11,11 +11,13 @@ static func get_pitch_shift_semitones():
 	var value := pow(multiplier, power)
 	return value if randf() >= 0.5 else 1.0/value
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	ensure_buses_exist()
-	create_bg_music()
 	create_ui_audio()
 	get_tree().node_added.connect(_on_node_added)
+
+func _ready() -> void:
+	create_bg_music()
 
 func ensure_buses_exist():
 	var buses := ["Background", "UI", "Game"]

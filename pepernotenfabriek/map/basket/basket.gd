@@ -19,7 +19,7 @@ func set_size(s:Vector2) -> void:
 	new_shape.size = s
 	col_shape.shape = new_shape
 	
-	var base_scale := 128
+	var base_scale := 256
 	sprite.set_scale(s / base_scale)
 
 func _on_body_entered(body:Node2D) -> void:

@@ -11,7 +11,7 @@ var touch_area_scene := preload("res://pq-obg/ui/touch/input_touch_area.tscn")
 var touch_area : InputTouchArea
 
 @export var hold_time := 250.0
-@export var player_data : PlayerData
+@export var player_data : PlayerData = preload("res://pq-obg/tools/players/player_data.tres")
 @export var num_button_visualizers := 1
 
 signal pressed()
@@ -68,8 +68,10 @@ func clear_button_visualizers() -> void:
 		bv.queue_free()
 	button_visualizers = []
 
-func add_button_visualizer() -> void:
-	button_visualizers.append(create_button_visualizer())
+func add_button_visualizer() -> ButtonVisualizer:
+	var vis := create_button_visualizer()
+	button_visualizers.append(vis)
+	return vis
 
 func create_button_visualizer() -> ButtonVisualizer:
 	var node = Global.config_shared.button_visualizer_scene.instantiate()

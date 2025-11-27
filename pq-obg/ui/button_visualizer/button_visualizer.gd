@@ -35,6 +35,7 @@ const FRAMES : Dictionary[InputButton.InputType, int] = {
 	MOUSE_BUTTON_MIDDLE: mouse_middle,
 	MOUSE_BUTTON_RIGHT: mouse_right
 }
+
 @onready var GAMEPAD_BUTTONS_TO_NODES : Dictionary[int,Node2D] = {
 	JOY_BUTTON_Y: gamepad_top,
 	JOY_BUTTON_A: gamepad_right,

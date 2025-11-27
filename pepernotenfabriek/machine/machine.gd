@@ -20,6 +20,10 @@ func debug_input(ev:InputEvent) -> void:
 		var time_held := Time.get_ticks_msec() - time_press
 		_on_released(time_held)
 
+func set_size(s:Vector2) -> void:
+	var base_scale := 256.0
+	set_scale(s / base_scale)
+
 func _on_pressed() -> void:
 	is_button_held = true
 	time_press = Time.get_ticks_msec()
@@ -28,3 +32,6 @@ func _on_pressed() -> void:
 func _on_released(dur:float) -> void:
 	is_button_held = false
 	released.emit(dur)
+
+func _on_cancel_input() -> void:
+	is_button_held = false

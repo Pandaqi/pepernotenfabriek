@@ -15,6 +15,8 @@ var is_active := false
 @export var sprite : Sprite2D
 @export var map_data : MapData
 
+const STANDING_STILL_THRESHOLD := 1.0
+
 var type : GiftType
 var reset_state := Vector2.ZERO
 var belts : Array[ConveyorBelt] = []
@@ -32,12 +34,12 @@ func set_active(val:bool, pos := Vector2(-1000,-1000)) -> void:
 # @NOTE: Safest bet for teleporting RigidBodies is always this, otherwise really weird errors/flickering/etc
 func _integrate_forces(state:PhysicsDirectBodyState2D):
 	if reset_state.length() > 0.03:
-		state.transform.origin = reset_state
+		state.transform = Transform2D(randf()*2*PI, reset_state)
 		reset_state = Vector2.ZERO
 		col_shape.set_deferred("disabled", not is_active)
 
 func _physics_process(_delta: float) -> void:
-	var standing_still := linear_velocity.length() <= 5.0
+	var standing_still := linear_velocity.length() <= STANDING_STILL_THRESHOLD
 	if standing_still and (not is_on_belt()) and has_been_on_screen:
 		call_deferred("kill")
 

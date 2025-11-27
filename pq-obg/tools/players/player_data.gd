@@ -30,6 +30,9 @@ func get_player_num_for(p:Player) -> int:
 func get_color_for(p:Player) -> Color:
 	return colors_used[get_player_num_for(p)]
 
+func get_ratio() -> float:
+	return count() / float(Global.config_shared.input_max_players_bound)
+
 # @TODO: how to add easy SIGNALS for when this has changed? Through the ModuleScore script?
 func get_score_for_team(team_num:int) -> float:
 	var sum := 0.0

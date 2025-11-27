@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cjj4ilxnt1xvs" path="res://pepernotenfabriek/machine/bullet/bullet.gd" id="1_ayk53"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_dwgax"]
-[ext_resource type="Texture2D" uid="uid://dq281tqkhnmnr" path="res://icon.svg" id="2_fiwtx"]
+[ext_resource type="PackedScene" uid="uid://diht0krytbejs" path="res://pepernotenfabriek/shared/asset_sprite.tscn" id="3_fiwtx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fj44h"]
+radius = 32.01562
 
 [node name="Bullet" type="RigidBody2D" unique_id=868741138 node_paths=PackedStringArray("col_shape", "sprite")]
 gravity_scale = 0.0
@@ -16,11 +17,12 @@ map_data = ExtResource("2_dwgax")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2050958823]
 shape = SubResource("CircleShape2D_fj44h")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1109492654]
-scale = Vector2(-0.18762606, 0.17237395)
-texture = ExtResource("2_fiwtx")
+[node name="Sprite2D" parent="." unique_id=489109551 instance=ExtResource("3_fiwtx")]
+scale = Vector2(0.25, 0.25)
+frame = 7
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=801038566]
+rect = Rect2(-15, -14, 30, 28)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

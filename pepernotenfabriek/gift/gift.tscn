@@ -9,7 +9,7 @@ radius = 33.24154
 
 [node name="Gift" type="RigidBody2D" unique_id=371013316 node_paths=PackedStringArray("col_shape", "sprite")]
 gravity_scale = 0.0
-linear_damp = 1.0
+linear_damp = 2.0
 script = ExtResource("1_1t74h")
 col_shape = NodePath("CollisionShape2D")
 sprite = NodePath("Sprite2D")

@@ -161,9 +161,28 @@ Dus het werd...
 * Pepernoten afvuren vanuit je machine. 
 * Die pepernoten herladen alleen als ze uit het scherm vliegen. Dus je kan ook gewoon verliezen door te slecht te schieten en je hele fabriek vol stilstaande pepernoten te hebben.
 * Die pepernoten knallen tegen pakjes, en zo moeten ze in de emmer.
-* Het is bijna logisch :p
+* Het is bijna logisch, hoe je zo'n fabriek runt :p
 
-@TODO
+Dat is het algemene idee. Er waren ook een hoop kleine dingetjes die het spel fijner maakten.
+
+* Ik veranderde de code voor loopbanden om ze "strenger" te maken. Een pakje behoort maar tot één loopband (dat is gewoon leuker spelen dan als er twee of drie banden tegelijk aan kunnen sjorren). Ook trekt de loopband harder om het pakje "in het gareel" te krijgen, zodat ze duidelijker meegaan met de band.
+* Er zit een limiet op de hoeveelheid pakjes, en hoe snel ze verschijnen, op basis van het _aantal actieve spelers_. Met meer spelers kan je veel meer pakjes aan; als je met maar 2 spelers bent is datzelfde aantal natuurlijk al snel overweldigend.
+* Ik maakte de pepernoten die je schiet een stuk groter dan eerst. (Eerst waren het meer "kogels", meer "realistische grootte".) Dat maakt ze gewoon beter zichtbaar en maakt het makkelijker om dingen te raken.
+
+Het allerlastigste was het spel speelbaar maken voor zowel 2 spelers als (maximaal) 8 spelers. Ik was een paar uur bezig met van alles testen, zoals
+
+* Iedereen bestuurt één machine, maar je kan switchen door heel snel/kort je knop in te drukken. (Met 2 spelers moet je dan alsnog de hele tijd tussen 4 machines heen en weer, en dat was gewoon te lastig.)
+* De machines worden volledig opgedeeld. (Met 2/3 spelers schiet elke speler dan de hele tijd 3/4 pepernoten tegelijk, en dat is een rotzooi.)
+* Ik schakel gewoon alle overbodige machines uit. (Maakt het spel weer overzichtelijk en simpel, maar zorgt dus ook dat je allerlei pakjes überhaupt nooit had kunnen raken ... omdat die machines dus weg zijn.)
+* Maar als ik het aantal machines omlaag doe, of de kaart versimpel, is het spel weer saai/meh met 4(+) spelers.
+
+De wanhoop nabij zag ik toen eindelijk het licht :p
+
+* Ik stel een "maximum" aantal machines per speler in. Dus zelfs met weinig spelers kan je er maar 2 tegelijk hebben.
+* Maar je kan nog steeds _switchen_ van machine---maar dan _allebei tegelijk_.
+* Zo kan één speler effectief 4 machines hebben (of je bestuurt A+B, of je bestuurt C+D). Dat is overzichtelijk, dat is te doen, dat is "speelbaar".
+* Tegelijkertijd kan je zo dus zelfs met 2 spelers de volledige fabriek beslaan.
+
 
 
 
@@ -173,7 +192,69 @@ Dus het werd...
 
 ## Een speelbaar spel
 
+Het grote probleem met dit project was dat ik eigenlijk nooit had vastgelegd wat nou je _doel_ was. Het is een coöperatief spel. Het moet ook te spelen zijn met jonge kinderen, op bijv Sinterklaasavond. Dus iets heel competitiefs zag ik niet zitten, en iets heel strengs ook niet (zoals verliezen/doodgaan als je 10 pakjes hebt gemist bijvoorbeeld),
+
+Het spel moet luchtig en grappig blijven. Het is expres lastig om de fabriek te besturen, dus foute pakjes moeten geen (grote) straf hebben. Het moet juist grappig zijn---het moet goed voelen als je wél een paar dingen op rij goed aflevert. Het moet _simpel_ zijn.
+
+Zo kwam ik uit bij het volgende doel.
+
+* Er is wel een score, maar die is niet cruciaal (zodat kinderen die getallen nog niet kennen ook begrijpen of ze goed bezig zijn)
+* Je wilt gewoon "genoeg dingen klaarmaken". Dus alles wat je aflevert brengt je verder richting "100%". 
+  * Als in: het spel eindigt als je daar komt (je hebt X dingen goed afgeleverd). Je _score_, die het eindscherm prominent toont, staat los daarvan.
+* Maar je wordt wel beloond voor minder dingen verspillen, natuurlijk. Namelijk:
+  * COMBO (1): Het spel houdt bij wat jouw pepernoten raken. Zolang jij dingen raakt die uiteindelijk worden afgeleverd, gaat jouw "streak" door en scoor je meer punten voor alles wat jij aflevert.
+  * COMBO (2): Het spel houdt ook in het geheel bij of iets niet op tijd wordt afgeleverd. Als dat gebeurt, gaat de "streak" van je hele groep weer naar nul.
+  * LANGER HOUDBAAR: Andersom, als het niet zo lekker gaat, blijven dingen langer op het veld liggen voordat ze verdwijnen. Zo raak je nooit helemaal in een negatieve spiraal, want dat is niet leuk.
+
+Nou goed, zoals je ziet duurt dit hele project al een stuk langer dan ik in eerste instantie had gepland. Maar ik leer weer een hele hoop nieuwe dingen, want ik heb bijvoorbeeld (op een of andere manier) nog nooit streaks/combos geprogrammeerd in een eerder spel. En uiteindelijk is iteratie toch het toverwoord voor spellen maken, nog meer dan bij alle andere creatieve uitingen.
+
+
+
+
+
+
 @TODO: over wanneer het eigenlijk eindigt/wat je score is, het hele spel rond maken en speelbaar
+
+
+
+@TODO VOOR SPEL:
+
+* UITLEGPLAATJES
+* STREAKS & SCORES
+  * Set a package target + a progress bar ----> just copy the staff from Stoomboten??
+  * Hand out points for deliveries (taking streaks into account)
+  * Show some "fire" animation behind machines or the general score counter, brighter and bigger/faster if their streak is going on longer.
+  * Have bullets track what they hit. If a package _disappears_ (not delivered), any players that hit it have their streak broken.
+  * Also track a group-streak, which is broken if _anything_ disappears.
+  * Play with the duration of keeping "standstill" things on-screen. (Maybe ... just keep them permanently? ---> No, I added this because the belts don't fully continue until the edge of the screen, so my method of detecting if they're off the conveyor belt doesn't work then. I can, of course, simply check if they're out of bounds of the MAP instead. -> **YES I SHOULD DO THAT ANYWAY, BECAUSE CAMERA ZOOMS OUT AT START AND THUS KILLS SOME PACKAGES ALREADY**)
+
+* Spel is eigenlijk te moeilijk nu met switching en allerlei machines, als je maar met 2/3 spelers bent.
+  * Ik zou alsnog machines kunnen uitzetten als ze niet worden gebruikt, maar dan moet dus wel de regel zijn dat dingen "van het scherm af laten gaan" geen strafpunten oplevert.
+  * Ik kan ook gewoon switchen naar de hele fabriek volgooien met emmers ..
+  * ... of "van de loopband schieten is al goed"
+  * **KAN IK EEN "VEILIGE" LOOPBAND + MACHINE + BASKETS**-groep markeren in de generatie? En dan die hele groep aanzetten/uitzetten?
+    * Nah, ik maak dit weer te lastig. Ik kan gewoon max 2 machines per speler aanzetten, de rest uit, en verder niks veranderen.
+* Game over check + scherm
+* Wat is eigenlijk je _doel_? X pakjes afleveren? Zijn pakjes ook slecht als ze gewoon van het scherm af gaan? Is dit iets met SCORE of gewoon COOPERATIEF IETS HALEN?
+* GOED IDEE: Op game over, laat alle machines al hun kogels afvuren razendsnel (alsof ik zelf heel snel op Enter druk 10 keer), ziet er feestelijk en grappig uit
+* (REFACTOR: Dubbele code tussen Gift en Bullet; trek naar één of twee herbruikbare modules?)
+* (Disable firing anything if you change dir after quick tap)
+* **WAIT THAT'S THE SOLUTION.** On low player counts, you control 2 machines at once, but you can still _switch_ to ANOTHER pair of 2 machines. This way, your only switch is a toggle back and forth. (With 2 players, you now control all 8 machines already.)
+
+POLISHING:
+
+* Animation/Tween/Notifier
+  * Shoot
+  * When held down
+  * Gift Appear/Disappear
+  * Gift Deliver
+  * (Machine Switch)
+* UI: Score/Time counter
+* Sound Effects
+  * Shoot
+  * Gift Appear/Disappear
+  * Gift Deliver
+  * (Machine Switch)
 
 
 
@@ -184,11 +265,12 @@ Dus het werd...
 
 **THEME/SETTINGS ISSUES LEFT**:
 
+* Turn the **game over screen** from Samen Stoomboten into a **standard OBG thing** I can just copy/reuse in all games?
 * `use_system_fonts` does not _immediately_ refresh those with "custom font overrrides". Is that bad? Or should I find a different system for that anyway? Is there a way to differentiate 2 labels within the same theme? (One `LabelBody` and one `LabelHeading`? **No, don't think so.**)
 * No, I do _not_ actually read settings when bypassing menu at the moment. I should at least make that possible: just call SettingsReader function on all Global.config_shared.settings?
 * Also style the TOGGLE (for CheckButton) and SCROLLBAR
 * TUTORIAL: Has no text anymore by default (removed that from image), so I must add a label there with translated text myself 
-* Switch audio button sound thing back to `_enter_tree` to make sure main menu buttons are included too
+  * BUT WAIT, we also want to localize the IMAGES, so should I support just using TEXT in tutorial frame too?
 
 
 SAMEN STOOMBOTEN:

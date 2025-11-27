@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1lylpto53a00"]
+[gd_scene load_steps=8 format=3 uid="uid://b1lylpto53a00"]
 
 [ext_resource type="Script" uid="uid://jy5ift4owb6k" path="res://pepernotenfabriek/map/conveyor_belt/conveyor_belt.gd" id="1_klpob"]
-[ext_resource type="Texture2D" uid="uid://dq281tqkhnmnr" path="res://icon.svg" id="2_eklo4"]
+[ext_resource type="Shader" uid="uid://dcxynyxfydmnn" path="res://pepernotenfabriek/map/conveyor_belt/conveyor_belt.gdshader" id="2_opekm"]
+[ext_resource type="Texture2D" uid="uid://dr3dvfvhdphe2" path="res://pepernotenfabriek/ui/textures/conveyor-belt.webp" id="3_nogow"]
 [ext_resource type="Script" uid="uid://bpdcd5s815ftg" path="res://pepernotenfabriek/map/conveyor_belt/module_gift_spawner.gd" id="3_opekm"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="4_nogow"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/tools/players/player_data.tres" id="6_opekm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jc3p"]
+shader = ExtResource("2_opekm")
+shader_parameter/scroll_speed = 0.08
+shader_parameter/angle_degrees = 0.0
+shader_parameter/repeat_x = 1.0
+shader_parameter/repeat_y = 1.0
+shader_parameter/row_offset = 1.0
+shader_parameter/texture_to_scroll = ExtResource("3_nogow")
 
 [node name="ConveyorBelt" type="Node2D" unique_id=1870260274 node_paths=PackedStringArray("area", "col_shape", "sprite")]
 script = ExtResource("1_klpob")
@@ -13,7 +24,8 @@ col_shape = NodePath("Area2D/CollisionShape2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1130371821]
-texture = ExtResource("2_eklo4")
+material = SubResource("ShaderMaterial_7jc3p")
+texture = ExtResource("3_nogow")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=322419693]
 
@@ -24,6 +36,7 @@ script = ExtResource("3_opekm")
 belt = NodePath("..")
 timer = NodePath("Timer")
 map_data = ExtResource("4_nogow")
+player_data = ExtResource("6_opekm")
 
 [node name="Timer" type="Timer" parent="ModuleGiftSpawner" unique_id=1351701614]
 one_shot = true

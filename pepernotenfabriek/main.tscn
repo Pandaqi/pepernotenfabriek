@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://na47h6r8oeyx"]
+[gd_scene load_steps=18 format=3 uid="uid://na47h6r8oeyx"]
 
+[ext_resource type="Texture2D" uid="uid://c0hmiy682c01l" path="res://pepernotenfabriek/ui/textures/fabrieksvloer@0.5x.webp" id="1_1tmg5"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_0bfsn"]
 [ext_resource type="Script" uid="uid://cdcntna38tpg5" path="res://pepernotenfabriek/map/map_generator.gd" id="3_tgxkw"]
 [ext_resource type="PackedScene" uid="uid://br2xkqc0v4nn3" path="res://pepernotenfabriek/machine/bullet/bullet.tscn" id="4_e0xgt"]
@@ -18,6 +19,18 @@
 [ext_resource type="PackedScene" uid="uid://s10incg4a6hm" path="res://pepernotenfabriek/player/player.tscn" id="16_qeb6e"]
 
 [node name="Main" type="Node2D" unique_id=1617459695]
+
+[node name="BG" type="CanvasLayer" parent="." unique_id=1114809584]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="BG" unique_id=563109809]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1tmg5")
+stretch_mode = 1
 
 [node name="Map" type="Node2D" parent="." unique_id=2086301137 node_paths=PackedStringArray("generator", "visualizer")]
 script = ExtResource("7_65gjl")

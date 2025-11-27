@@ -33,6 +33,7 @@ func visualize(g:MapGenerator) -> void:
 	for i in range(g.machine_positions.size()):
 		var m : Machine = machine_scene.instantiate()
 		m.set_position(get_real_pos(g.machine_positions[i]))
+		m.set_size(CELL_SIZE * 0.9 * Vector2.ONE)
 		add_child(m)
 		map_data.machines.append(m)
 	
