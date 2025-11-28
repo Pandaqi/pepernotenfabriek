@@ -3,7 +3,7 @@ extends Camera2D
 const MOVE_SPEED := 8.0
 const ZOOM_SPEED := 8.0
 
-@export var map_visualizer : MapVisualizer
+@export var map_data : MapData
 
 @export var EDGE_MARGIN := Vector2(0.0, 64.0)
 
@@ -11,7 +11,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(dt:float) -> void:
-	var map_bounds := map_visualizer.bounds
+	var map_bounds := map_data.bounds
 	if not map_bounds: return
 	
 	var target_position := map_bounds.get_center()

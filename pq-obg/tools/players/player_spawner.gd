@@ -16,6 +16,8 @@ func _ready() -> void:
 	var btns_already_in_play = Global.input.buttons_used.duplicate()
 	for btn in btns_already_in_play:
 		place_player(btn)
+	
+	player_data.all_players_ready.emit()
 
 func on_button_added(btn:InputButton) -> void:
 	place_player(btn)

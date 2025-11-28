@@ -9,56 +9,19 @@ enum GiftType
 	GIFT_2
 }
 
-var has_been_on_screen := false
-var is_active := false
-@export var col_shape : CollisionShape2D
 @export var sprite : Sprite2D
+@export var col_shape : CollisionShape2D
 @export var map_data : MapData
 
-const STANDING_STILL_THRESHOLD := 1.0
-
 var type : GiftType
-var reset_state := Vector2.ZERO
-var belts : Array[ConveyorBelt] = []
 
-func set_active(val:bool, pos := Vector2(-1000,-1000)) -> void:
-	reset_state = pos
-	
-	has_been_on_screen = false
-	is_active = val
-	
-	set_visible(val)
-	set_linear_velocity(Vector2.ZERO)
-	set_angular_velocity(0)
+@export var module_pooling : ModulePooling
+@export var module_belt_tracker : ModuleBeltTracker
+@export var module_map_bounds : ModuleMapBounds
+@export var module_bullet_hits : ModuleBulletHits
+@export var module_visuals : Node2D
+@export var module_audio : ModuleAudioGift
 
-# @NOTE: Safest bet for teleporting RigidBodies is always this, otherwise really weird errors/flickering/etc
-func _integrate_forces(state:PhysicsDirectBodyState2D):
-	if reset_state.length() > 0.03:
-		state.transform = Transform2D(randf()*2*PI, reset_state)
-		reset_state = Vector2.ZERO
-		col_shape.set_deferred("disabled", not is_active)
-
-func _physics_process(_delta: float) -> void:
-	var standing_still := linear_velocity.length() <= STANDING_STILL_THRESHOLD
-	if standing_still and (not is_on_belt()) and has_been_on_screen:
-		call_deferred("kill")
-
-func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	has_been_on_screen = true
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	if has_been_on_screen:
-		kill()
-
-func kill(score := false) -> void:
-	if not is_active: return
-	
-	print("Kill gift, reason score = ", score)
-	if score: map_data.gifts_delivered += 1
-	else: map_data.gifts_failed += 1
-	
-	map_data.return_gift_to_pool(self)
-	set_active(false)
 
 static func get_frame(tp:GiftType) -> int:
 	if tp == GiftType.LETTER: return 4
@@ -67,15 +30,51 @@ static func get_frame(tp:GiftType) -> int:
 	if tp == GiftType.GIFT_2: return 2
 	return -1
 
+func _ready() -> void:
+	module_pooling.killed.connect(_on_killed)
+	module_pooling.revived.connect(_on_revived)
+
+func set_size(s:float) -> void:
+	col_shape.shape = CircleShape2D.new()
+	col_shape.shape.radius = 0.5*s
+	module_visuals.set_scale(s / 256.0 * Vector2.ONE)
+	module_map_bounds.cache_size(Vector2.ONE * s)
+
+# Unfortunately, I don't see an automatic way to hook into a RigidBody's _integrate_forces
+# Using events here has timing issues
+func _integrate_forces(state:PhysicsDirectBodyState2D):
+	module_pooling._integrate_forces(state)
+
+func _on_revived() -> void:
+	module_audio.play_appear()
+
+func _on_enter_basket(b:Basket) -> void:
+	module_audio.play_deliver()
+	
+	freeze = true
+	var tw := Global.tween.play_shrink_tween(sprite)
+	await tw.finished
+	
+	freeze = false
+	module_pooling.tween_kill = false
+	module_pooling.kill(true)
+	module_pooling.tween_kill = true
+
+func _on_killed(good := false) -> void:
+	print("Kill gift, reason score = ", good)
+	
+	if good: 
+		map_data.gift_delivered.emit(self)
+	
+	if not good:
+		module_audio.play_fail()
+		map_data.gift_failed.emit(self)
+	
+	module_belt_tracker.has_been_on_belt = false
+	module_bullet_hits._on_killed()
+	
+	map_data.return_gift_to_pool(self)
+
 func set_type(tp:GiftType) -> void:
 	type = tp
 	sprite.set_frame(get_frame(type))
-
-func is_on_belt() -> bool:
-	return belts.size() > 0
-
-func add_belt(b:ConveyorBelt) -> void:
-	belts.append(b)
-
-func remove_belt(b:ConveyorBelt) -> void:
-	belts.erase(b)

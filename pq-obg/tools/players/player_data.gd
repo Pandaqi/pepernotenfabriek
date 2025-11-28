@@ -6,6 +6,8 @@ var colors_available : Array[Color] = []
 var colors_used : Array[Color] = []
 var touch_area_layer : Control
 
+signal all_players_ready()
+
 func reset(colors:Array[Color]) -> void:
 	players = []
 	colors_available = colors.duplicate()
@@ -31,7 +33,7 @@ func get_color_for(p:Player) -> Color:
 	return colors_used[get_player_num_for(p)]
 
 func get_ratio() -> float:
-	return count() / float(Global.config_shared.input_max_players_bound)
+	return (count() - 1) / float(Global.config_shared.input_max_players_bound - 1)
 
 # @TODO: how to add easy SIGNALS for when this has changed? Through the ModuleScore script?
 func get_score_for_team(team_num:int) -> float:

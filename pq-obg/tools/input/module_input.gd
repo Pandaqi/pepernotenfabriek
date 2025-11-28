@@ -115,3 +115,6 @@ func check_for_removal(time_held:float) -> void:
 	# actually remove us if needed
 	if time_held >= Global.input.get_removal_time():
 		Global.input.request_button_removal(button)
+
+func get_player_index() -> int:
+	return Global.input.get_player_index(button)

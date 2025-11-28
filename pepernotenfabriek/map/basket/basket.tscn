@@ -13,14 +13,14 @@ col_shape = NodePath("Area2D/CollisionShape2D")
 sprite = NodePath("Sprite2D")
 sprite_type = NodePath("SpriteType")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=457953195]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1863662250]
-shape = SubResource("RectangleShape2D_bki5v")
-
 [node name="Sprite2D" parent="." unique_id=489109551 instance=ExtResource("3_bki5v")]
 scale = Vector2(0.5, 0.5)
 frame = 10
 
 [node name="SpriteType" parent="." unique_id=890528591 instance=ExtResource("3_bki5v")]
 scale = Vector2(0.3, 0.3)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=457953195]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1863662250]
+shape = SubResource("RectangleShape2D_bki5v")

@@ -4,10 +4,15 @@ class_name MachineDistributor
 @export var player_data : PlayerData
 @export var map_data : MapData
 
+var enable_max_machines_per_player := false
 var max_machines_per_player := 2
 
 func _ready() -> void:
 	Global.input.buttons_changed.connect(_on_buttons_changed)
+	player_data.all_players_ready.connect(_on_all_players_ready)
+
+func _on_all_players_ready() -> void:
+	_on_buttons_changed()
 
 func _on_buttons_changed() -> void:
 	refresh_machine_input_connections()
@@ -23,7 +28,9 @@ func refresh_machine_input_connections() -> void:
 	
 	# then fairly distribute the new ones, one at a time
 	var machines := map_data.machines
-	var num_machines_to_distribute : int = min(machines.size(), num_players * max_machines_per_player)
+	var num_machines_to_distribute : int = machines.size()
+	if enable_max_machines_per_player:
+		num_machines_to_distribute = min(num_machines_to_distribute, num_players * max_machines_per_player)
 	
 	for i in range(machines.size()):
 		machines[i].hide()

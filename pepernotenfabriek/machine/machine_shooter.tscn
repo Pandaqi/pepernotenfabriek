@@ -1,24 +1,231 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnyrjm2gdr6sv"]
+[gd_scene load_steps=15 format=3 uid="uid://bnyrjm2gdr6sv"]
 
 [ext_resource type="Script" uid="uid://dyg6agl64qnj" path="res://pepernotenfabriek/machine/machine.gd" id="1_vqvy0"]
 [ext_resource type="Script" uid="uid://dikjje4c1af4m" path="res://pepernotenfabriek/machine/module_cannon.gd" id="2_mawh5"]
+[ext_resource type="Script" uid="uid://mae7ut1metvt" path="res://pepernotenfabriek/machine/module_visuals.gd" id="2_obqqw"]
 [ext_resource type="PackedScene" uid="uid://diht0krytbejs" path="res://pepernotenfabriek/shared/asset_sprite.tscn" id="2_q5wxt"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="3_q5wxt"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_vnpx2"]
 [ext_resource type="Script" uid="uid://demybhw66n310" path="res://pepernotenfabriek/machine/module_rotator.gd" id="4_obqqw"]
+[ext_resource type="Animation" uid="uid://7gcej1qu8mj7" path="res://pepernotenfabriek/score/score_streak_animation.res" id="5_qppn1"]
+[ext_resource type="AudioStream" uid="uid://qkxq1v74n67s" path="res://pepernotenfabriek/machine/machine_shot.mp3" id="7_vnpx2"]
 
-[node name="Machine" type="Node2D" unique_id=1650040033]
+[sub_resource type="Animation" id="Animation_qppn1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveIndicators/ActiveIndicator/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(84, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActiveIndicators/ActiveIndicator2/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(84, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ActiveIndicators/ActiveIndicator3/Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(84, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActiveIndicators/ActiveIndicator4/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(84, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_20joj"]
+resource_name = "machine_active"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActiveIndicators/ActiveIndicator/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(84, 0), Vector2(118, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActiveIndicators/ActiveIndicator2/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(84, 0), Vector2(118, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ActiveIndicators/ActiveIndicator3/Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(84, 0), Vector2(118, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActiveIndicators/ActiveIndicator4/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(84, 0), Vector2(118, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0q2k"]
+_data = {
+&"RESET": SubResource("Animation_qppn1"),
+&"machine_active": SubResource("Animation_20joj")
+}
+
+[sub_resource type="Animation" id="Animation_vnpx2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Machine:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Machine:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy1ud"]
+_data = {
+&"RESET": SubResource("Animation_vnpx2"),
+&"score_streak": ExtResource("5_qppn1")
+}
+
+[node name="Machine" type="Node2D" unique_id=1650040033 node_paths=PackedStringArray("module_rotator", "module_cannon", "module_visuals")]
 script = ExtResource("1_vqvy0")
+module_rotator = NodePath("ModuleRotator")
+module_cannon = NodePath("ModuleCannon")
+module_visuals = NodePath("ModuleVisuals")
 metadata/_custom_type_script = "uid://dyg6agl64qnj"
 
-[node name="Sprite2D" parent="." unique_id=489109551 instance=ExtResource("2_q5wxt")]
+[node name="ModuleVisuals" type="Node2D" parent="." unique_id=1986401030 node_paths=PackedStringArray("machine", "active_indicators", "anim_player_streak")]
+script = ExtResource("2_obqqw")
+machine = NodePath("..")
+active_indicators = NodePath("ActiveIndicators")
+anim_player_streak = NodePath("AnimationPlayerStreak")
+
+[node name="ActiveIndicators" type="Node2D" parent="ModuleVisuals" unique_id=375551882]
+
+[node name="ActiveIndicator" type="Node2D" parent="ModuleVisuals/ActiveIndicators" unique_id=533818194]
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals/ActiveIndicators/ActiveIndicator" unique_id=473822609]
+position = Vector2(84, 0)
+texture = ExtResource("3_vnpx2")
+
+[node name="ActiveIndicator2" type="Node2D" parent="ModuleVisuals/ActiveIndicators" unique_id=401154637]
+rotation = 1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals/ActiveIndicators/ActiveIndicator2" unique_id=1866357454]
+position = Vector2(84, 0)
+texture = ExtResource("3_vnpx2")
+
+[node name="ActiveIndicator3" type="Node2D" parent="ModuleVisuals/ActiveIndicators" unique_id=673546872]
+rotation = -3.1415925
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals/ActiveIndicators/ActiveIndicator3" unique_id=1167557682]
+position = Vector2(84, 0)
+texture = ExtResource("3_vnpx2")
+
+[node name="ActiveIndicator4" type="Node2D" parent="ModuleVisuals/ActiveIndicators" unique_id=891299118]
+rotation = -1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="ModuleVisuals/ActiveIndicators/ActiveIndicator4" unique_id=56118411]
+position = Vector2(84, 0)
+texture = ExtResource("3_vnpx2")
+
+[node name="Machine" type="Node2D" parent="ModuleVisuals" unique_id=391784587]
+
+[node name="Sprite2D" parent="ModuleVisuals/Machine" unique_id=489109551 instance=ExtResource("2_q5wxt")]
 frame = 9
 
-[node name="ModuleCannon" type="Node2D" parent="." unique_id=666162926 node_paths=PackedStringArray("entity")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ModuleVisuals" unique_id=1593512326]
+libraries = {
+&"": SubResource("AnimationLibrary_r0q2k")
+}
+autoplay = &"machine_active"
+
+[node name="AnimationPlayerStreak" type="AnimationPlayer" parent="ModuleVisuals" unique_id=919040601]
+libraries = {
+&"": SubResource("AnimationLibrary_iy1ud")
+}
+
+[node name="ModuleCannon" type="Node2D" parent="." unique_id=666162926 node_paths=PackedStringArray("entity", "rotation_node", "audio_player")]
 script = ExtResource("2_mawh5")
 entity = NodePath("..")
+rotation_node = NodePath("../ModuleVisuals/Machine")
 map_data = ExtResource("3_q5wxt")
+audio_player = NodePath("AudioStreamPlayer2D")
 
-[node name="ModuleRotator" type="Node2D" parent="." unique_id=698014199 node_paths=PackedStringArray("entity")]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ModuleCannon" unique_id=689493144]
+stream = ExtResource("7_vnpx2")
+volume_db = -3.0
+max_distance = 8000.0
+bus = &"Game"
+
+[node name="ModuleRotator" type="Node2D" parent="." unique_id=698014199 node_paths=PackedStringArray("entity", "node_to_rotate")]
 script = ExtResource("4_obqqw")
 entity = NodePath("..")
+node_to_rotate = NodePath("../ModuleVisuals/Machine")
 metadata/_custom_type_script = "uid://demybhw66n310"

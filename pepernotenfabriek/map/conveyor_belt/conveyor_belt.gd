@@ -8,7 +8,7 @@ class_name ConveyorBelt
 @export var col_shape : CollisionShape2D
 @export var sprite : Sprite2D
 @export var belt_thickness := 80.0
-@export var belt_extra_margin := 64.0
+@export var belt_extra_margin := 0.0
 
 var bounds : Array[Vector2]
 var start_pos : Vector2
@@ -26,18 +26,18 @@ func _ready() -> void:
 func _on_body_entered(body:Node2D) -> void:
 	if not (body is Gift): return
 	bodies.append(body)
-	body.add_belt(self)
+	body.module_belt_tracker.add_belt(self)
 
 func _on_body_exited(body:Node2D) -> void:
 	if not (body is Gift): return
 	bodies.erase(body)
-	body.remove_belt(self)
+	body.module_belt_tracker.remove_belt(self)
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity := dir.normalized() * push_force
 	for body in bodies:
-		var controlled_by_other_belt := body.belts[0] != self
-		if controlled_by_other_belt: continue
+		var controlled_by_this_belt := body.module_belt_tracker.is_controlled_by(self)
+		if not controlled_by_this_belt: continue
 		
 		var cur_velocity := body.get_linear_velocity()
 		var change_needed := target_velocity - cur_velocity

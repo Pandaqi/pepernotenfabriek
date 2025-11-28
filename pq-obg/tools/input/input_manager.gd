@@ -238,3 +238,6 @@ func is_button_possible(btn:InputButton) -> bool:
 
 func get_next_button_any() -> InputButton:
 	return buttons_available_all.front()
+
+func get_player_index(btn:InputButton) -> int:
+	return buttons_used.find(btn)

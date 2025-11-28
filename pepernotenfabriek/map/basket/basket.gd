@@ -6,6 +6,7 @@ class_name Basket
 @export var sprite : Sprite2D
 @export var sprite_type : Sprite2D
 var type : Gift.GiftType
+var area_size_factor := 0.7
 
 func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
@@ -16,7 +17,7 @@ func set_type(tp:Gift.GiftType) -> void:
 
 func set_size(s:Vector2) -> void:
 	var new_shape = RectangleShape2D.new()
-	new_shape.size = s
+	new_shape.size = s * area_size_factor
 	col_shape.shape = new_shape
 	
 	var base_scale := 256
@@ -26,5 +27,5 @@ func _on_body_entered(body:Node2D) -> void:
 	if not (body is Gift): return
 	if body.type != type: return
 	
-	# @TODO: play some simple animation for dropping into the bucket, then kill
-	body.call_deferred("kill", true)
+	Global.tween.play_popup_tween(self)
+	body.call_deferred("_on_enter_basket", self)

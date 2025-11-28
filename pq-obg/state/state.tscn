@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cua7u6fes6yxk" path="res://pq-obg/ui/touch/touch_areas.gd" id="8_ttvql"]
 
 [node name="State" type="CanvasLayer" unique_id=1145839826 node_paths=PackedStringArray("pause_menu", "tutorial", "touch_areas")]
+layer = 8
 script = ExtResource("1_t3kc4")
 state_data = ExtResource("2_pnxkm")
 player_data = ExtResource("3_q42ym")

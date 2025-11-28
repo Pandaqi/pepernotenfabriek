@@ -220,47 +220,13 @@ Nou goed, zoals je ziet duurt dit hele project al een stuk langer dan ik in eers
 @TODO VOOR SPEL:
 
 * UITLEGPLAATJES
-* STREAKS & SCORES
-  * Set a package target + a progress bar ----> just copy the staff from Stoomboten??
-  * Hand out points for deliveries (taking streaks into account)
-  * Show some "fire" animation behind machines or the general score counter, brighter and bigger/faster if their streak is going on longer.
-  * Have bullets track what they hit. If a package _disappears_ (not delivered), any players that hit it have their streak broken.
-  * Also track a group-streak, which is broken if _anything_ disappears.
-  * Play with the duration of keeping "standstill" things on-screen. (Maybe ... just keep them permanently? ---> No, I added this because the belts don't fully continue until the edge of the screen, so my method of detecting if they're off the conveyor belt doesn't work then. I can, of course, simply check if they're out of bounds of the MAP instead. -> **YES I SHOULD DO THAT ANYWAY, BECAUSE CAMERA ZOOMS OUT AT START AND THUS KILLS SOME PACKAGES ALREADY**)
-
-* Spel is eigenlijk te moeilijk nu met switching en allerlei machines, als je maar met 2/3 spelers bent.
-  * Ik zou alsnog machines kunnen uitzetten als ze niet worden gebruikt, maar dan moet dus wel de regel zijn dat dingen "van het scherm af laten gaan" geen strafpunten oplevert.
-  * Ik kan ook gewoon switchen naar de hele fabriek volgooien met emmers ..
-  * ... of "van de loopband schieten is al goed"
-  * **KAN IK EEN "VEILIGE" LOOPBAND + MACHINE + BASKETS**-groep markeren in de generatie? En dan die hele groep aanzetten/uitzetten?
-    * Nah, ik maak dit weer te lastig. Ik kan gewoon max 2 machines per speler aanzetten, de rest uit, en verder niks veranderen.
+* UI / PROGRESS BAR
 * Game over check + scherm
-* Wat is eigenlijk je _doel_? X pakjes afleveren? Zijn pakjes ook slecht als ze gewoon van het scherm af gaan? Is dit iets met SCORE of gewoon COOPERATIEF IETS HALEN?
-* GOED IDEE: Op game over, laat alle machines al hun kogels afvuren razendsnel (alsof ik zelf heel snel op Enter druk 10 keer), ziet er feestelijk en grappig uit
-* (REFACTOR: Dubbele code tussen Gift en Bullet; trek naar één of twee herbruikbare modules?)
-* (Disable firing anything if you change dir after quick tap)
-* **WAIT THAT'S THE SOLUTION.** On low player counts, you control 2 machines at once, but you can still _switch_ to ANOTHER pair of 2 machines. This way, your only switch is a toggle back and forth. (With 2 players, you now control all 8 machines already.)
-
-POLISHING:
-
-* Animation/Tween/Notifier
-  * Shoot
-  * When held down
-  * Gift Appear/Disappear
-  * Gift Deliver
-  * (Machine Switch)
-* UI: Score/Time counter
-* Sound Effects
-  * Shoot
-  * Gift Appear/Disappear
-  * Gift Deliver
-  * (Machine Switch)
 
 
 
 
-
-
+REMEMBER: When doing object pooling, have a delay before giving it back, to make sure it has probably turned off physics and finished tweens and stuff before it's being reused. Current solution = add back to back, pop from front, which makes it very unlikely it's reused.
 
 
 **THEME/SETTINGS ISSUES LEFT**:

@@ -6,6 +6,7 @@ extends Node
 var input : InputManager
 var audio : AudioManager
 var theme : ThemeManager
+var tween : TweenManager
 
 signal pause_mode_change()
 
@@ -18,3 +19,6 @@ func _ready():
 	
 	audio = AudioManager.new()
 	add_child(audio)
+	
+	tween = TweenManager.new()
+	add_child(tween)

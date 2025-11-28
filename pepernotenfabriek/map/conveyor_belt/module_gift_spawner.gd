@@ -6,11 +6,11 @@ class_name ModuleGiftSpawner
 @export var map_data : MapData
 @export var player_data : PlayerData
 
-var min_time_between_gifts := 12.0 # at minimum player count
-var max_time_between_gifts := 6.0 # at maximum player count
+var min_time_between_gifts := 6.0 # at minimum player count (1)
+var max_time_between_gifts := 2.0 # at maximum player count (8)
 
-var min_gift_limit : int = 5
-var max_gift_limit : int = 12
+var min_gift_limit : int = 3 # at minimum player count (1)
+var max_gift_limit : int = 10 # at maximum player count (8)
 
 func _ready() -> void:
 	timer.timeout.connect(_on_timeout)
@@ -26,11 +26,9 @@ func place_gift() -> void:
 	var g := map_data.grab_gift_from_pool()
 	if not g: return
 	
-	# @TODO: Read/save somewhere from `g`
-	var gift_size := 64.0
-	var pos := belt.get_pos_with_offset(0.0, 0.5*gift_size)
+	var pos := belt.get_pos_with_offset(0.0, 0.75*g.module_map_bounds.size_box.y)
 	g.set_type(belt.gift_types.pick_random())
-	g.set_active(true, pos)
+	g.module_pooling.revive(pos)
 
 func restart_timer() -> void:
 	timer.stop()

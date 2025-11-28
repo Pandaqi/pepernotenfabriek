@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://na47h6r8oeyx"]
+[gd_scene load_steps=27 format=3 uid="uid://na47h6r8oeyx"]
 
 [ext_resource type="Texture2D" uid="uid://c0hmiy682c01l" path="res://pepernotenfabriek/ui/textures/fabrieksvloer@0.5x.webp" id="1_1tmg5"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_0bfsn"]
@@ -16,7 +16,50 @@
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="14_1tmg5"]
 [ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/tools/players/player_spawner.gd" id="15_ernh0"]
 [ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/tools/players/player_data.tres" id="15_fj44h"]
+[ext_resource type="Script" uid="uid://bog5gg2bb0gxf" path="res://pepernotenfabriek/score/score.gd" id="15_qeb6e"]
+[ext_resource type="Script" uid="uid://d0cl065fevm6l" path="res://pepernotenfabriek/score/score_streak.gd" id="16_iqoxf"]
 [ext_resource type="PackedScene" uid="uid://s10incg4a6hm" path="res://pepernotenfabriek/player/player.tscn" id="16_qeb6e"]
+[ext_resource type="Script" uid="uid://1ey01g548jb" path="res://pepernotenfabriek/ui/ui.gd" id="17_crau4"]
+[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="17_yde53"]
+[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="18_crau4"]
+[ext_resource type="FontFile" uid="uid://r4wr5f23gxn5" path="res://pepernotenfabriek/ui/fonts/heading.otf" id="20_g0dew"]
+
+[sub_resource type="Animation" id="Animation_iqoxf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/MarginContainer/Score:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tt8t8"]
+resource_name = "score_streak"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/MarginContainer/Score:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1.0027088, 0.2632873, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p74vk"]
+_data = {
+&"RESET": SubResource("Animation_iqoxf"),
+&"score_streak": SubResource("Animation_tt8t8")
+}
 
 [node name="Main" type="Node2D" unique_id=1617459695]
 
@@ -50,19 +93,97 @@ machine_scene = ExtResource("8_tgxkw")
 basket_scene = ExtResource("6_tgxkw")
 map_data = ExtResource("2_0bfsn")
 
-[node name="MachineDistributor" type="Node2D" parent="Map" unique_id=224796423]
-script = ExtResource("10_rddda")
-player_data = ExtResource("15_fj44h")
-map_data = ExtResource("2_0bfsn")
-
 [node name="PlayerSpawner" type="Node2D" parent="Map" unique_id=431052717]
 script = ExtResource("15_ernh0")
 player_scene = ExtResource("16_qeb6e")
 player_data = ExtResource("15_fj44h")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=15986191 node_paths=PackedStringArray("map_visualizer")]
+[node name="MachineDistributor" type="Node2D" parent="Map" unique_id=224796423]
+script = ExtResource("10_rddda")
+player_data = ExtResource("15_fj44h")
+map_data = ExtResource("2_0bfsn")
+
+[node name="Score" type="Node2D" parent="." unique_id=926846671 node_paths=PackedStringArray("streak_global")]
+script = ExtResource("15_qeb6e")
+map_data = ExtResource("2_0bfsn")
+player_data = ExtResource("15_fj44h")
+streak_global = NodePath("ScoreStreak")
+
+[node name="ScoreStreak" type="Node2D" parent="Score" unique_id=2105720983]
+script = ExtResource("16_iqoxf")
+metadata/_custom_type_script = "uid://d0cl065fevm6l"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=15986191]
 script = ExtResource("8_0bfsn")
-map_visualizer = NodePath("../Map/Visualizer")
+map_data = ExtResource("2_0bfsn")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=251231002 node_paths=PackedStringArray("score", "score_label", "target_label", "prog_bar", "anim_player_streak")]
+layer = 4
+script = ExtResource("17_crau4")
+score = NodePath("../Score")
+score_label = NodePath("Control/MarginContainer/Score")
+target_label = NodePath("Control/MarginContainer/Target")
+prog_bar = NodePath("Control/MarginContainer/TextureProgressBar")
+map_data = ExtResource("2_0bfsn")
+anim_player_streak = NodePath("AnimationPlayerStreak")
+
+[node name="Control" type="Control" parent="UI" unique_id=711419068]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control" unique_id=1045842183]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/MarginContainer" unique_id=159282888]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+fill_mode = 3
+texture_under = ExtResource("17_yde53")
+texture_progress = ExtResource("18_crau4")
+
+[node name="Score" type="Label" parent="UI/Control/MarginContainer" unique_id=734411477]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5058824)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("20_g0dew")
+theme_override_font_sizes/font_size = 64
+text = "??"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Target" type="Label" parent="UI/Control/MarginContainer" unique_id=1205578397]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5058824)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("20_g0dew")
+theme_override_font_sizes/font_size = 32
+text = "??"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayerStreak" type="AnimationPlayer" parent="UI" unique_id=1816811078]
+libraries = {
+&"": SubResource("AnimationLibrary_p74vk")
+}
 
 [node name="State" parent="." unique_id=1145839826 instance=ExtResource("13_ehouy")]
 start_game_immediately = true

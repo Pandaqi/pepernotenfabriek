@@ -1,28 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://br2xkqc0v4nn3"]
+[gd_scene load_steps=8 format=3 uid="uid://br2xkqc0v4nn3"]
 
 [ext_resource type="Script" uid="uid://cjj4ilxnt1xvs" path="res://pepernotenfabriek/machine/bullet/bullet.gd" id="1_ayk53"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_dwgax"]
 [ext_resource type="PackedScene" uid="uid://diht0krytbejs" path="res://pepernotenfabriek/shared/asset_sprite.tscn" id="3_fiwtx"]
+[ext_resource type="Script" uid="uid://dmu7dkemsofnd" path="res://pepernotenfabriek/gift/module_pooling.gd" id="4_triqx"]
+[ext_resource type="Script" uid="uid://1liqehnhw7vw" path="res://pepernotenfabriek/map/module_map_bounds.gd" id="5_xxfri"]
+[ext_resource type="AudioStream" uid="uid://ybpor3c5kdls" path="res://pepernotenfabriek/gift/bounce_hit.mp3" id="6_xxfri"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fj44h"]
 radius = 32.01562
 
-[node name="Bullet" type="RigidBody2D" unique_id=868741138 node_paths=PackedStringArray("col_shape", "sprite")]
+[node name="Bullet" type="RigidBody2D" unique_id=868741138 node_paths=PackedStringArray("sprite", "col_shape", "module_pooling", "module_map_bounds", "module_visuals", "audio_player")]
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_ayk53")
-col_shape = NodePath("CollisionShape2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("ModuleVisuals/Sprite2D")
 map_data = ExtResource("2_dwgax")
+col_shape = NodePath("CollisionShape2D")
+module_pooling = NodePath("ModulePooling")
+module_map_bounds = NodePath("ModuleMapBounds")
+module_visuals = NodePath("ModuleVisuals")
+audio_player = NodePath("AudioHit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2050958823]
 shape = SubResource("CircleShape2D_fj44h")
 
-[node name="Sprite2D" parent="." unique_id=489109551 instance=ExtResource("3_fiwtx")]
-scale = Vector2(0.25, 0.25)
+[node name="ModuleVisuals" type="Node2D" parent="." unique_id=400795373]
+
+[node name="Sprite2D" parent="ModuleVisuals" unique_id=489109551 instance=ExtResource("3_fiwtx")]
 frame = 7
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=801038566]
-rect = Rect2(-15, -14, 30, 28)
+[node name="ModulePooling" type="Node2D" parent="." unique_id=559604279 node_paths=PackedStringArray("entity", "module_map_bounds", "col_shape", "tween_node")]
+script = ExtResource("4_triqx")
+entity = NodePath("..")
+module_map_bounds = NodePath("../ModuleMapBounds")
+col_shape = NodePath("../CollisionShape2D")
+tween_node = NodePath("../ModuleVisuals/Sprite2D")
+tween_kill = true
+metadata/_custom_type_script = "uid://dmu7dkemsofnd"
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[node name="ModuleMapBounds" type="Node2D" parent="." unique_id=709964868 node_paths=PackedStringArray("target")]
+script = ExtResource("5_xxfri")
+target = NodePath("..")
+map_data = ExtResource("2_dwgax")
+metadata/_custom_type_script = "uid://1liqehnhw7vw"
+
+[node name="AudioHit" type="AudioStreamPlayer2D" parent="." unique_id=844190664]
+stream = ExtResource("6_xxfri")
+max_distance = 8000.0
+bus = &"Game"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
