@@ -6,12 +6,15 @@ var colors_available : Array[Color] = []
 var colors_used : Array[Color] = []
 var touch_area_layer : Control
 
-signal all_players_ready()
+@warning_ignore("unused_signal")
+signal setup_finished()
+signal reset_finished()
 
 func reset(colors:Array[Color]) -> void:
 	players = []
 	colors_available = colors.duplicate()
 	colors_used = []
+	reset_finished.emit()
 
 func add_player(p:Player) -> void:
 	colors_used.append(colors_available.pop_front())
@@ -25,6 +28,19 @@ func remove_player(p:Player) -> void:
 
 func count() -> int:
 	return players.size()
+
+func exists_at(idx:int) -> bool:
+	return idx >= 0 and idx < count()
+
+func get_from_indices(idxs:Array[int]) -> Array[Player]:
+	var arr : Array[Player] = []
+	for idx in idxs:
+		if not exists_at(idx): continue
+		arr.append(get_player(idx))
+	return arr
+
+func get_player(idx:int) -> Player:
+	return players[idx]
 
 func get_player_num_for(p:Player) -> int:
 	return players.find(p)

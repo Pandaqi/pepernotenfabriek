@@ -12,9 +12,9 @@ func _ready() -> void:
 	
 	create_instructions()
 	create_touch_area_layer()
-	Global.input.buttons_changed.connect(on_buttons_changed)
+	Global.input.buttons_changed.connect(_on_buttons_changed)
 	# prepare_anchor_tool()
-	on_buttons_changed()
+	_on_buttons_changed()
 
 	Global.pause_mode_change.connect(_on_pause_changed)
 	instruction_container.modulate.a = 0.5
@@ -36,7 +36,7 @@ func create_instructions() -> void:
 		instructions.append(instruc)
 		instructions_by_type[type] = instruc
 
-func on_buttons_changed() -> void:
+func _on_buttons_changed() -> void:
 	# set everything to the right (next) button
 	for type in instructions_by_type:
 		if type == InputButton.InputType.NONE: continue

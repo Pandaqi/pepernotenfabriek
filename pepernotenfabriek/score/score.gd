@@ -23,7 +23,7 @@ func _ready() -> void:
 	map_data.gift_delivered.connect(_on_gift_delivered)
 	map_data.gift_failed.connect(_on_gift_failed)
 	
-	player_data.all_players_ready.connect(_on_all_players_ready)
+	player_data.setup_finished.connect(_on_all_players_ready)
 	Global.input.buttons_changed.connect(_on_buttons_changed)
 	
 	streak_global = ScoreStreak.new()
@@ -60,8 +60,9 @@ func get_delivery_ratio() -> float:
 func _on_gift_delivered(g:Gift) -> void:
 	gifts_delivered += 1
 	
-	for idx in g.module_bullet_hits.player_indices:
-		player_data.players[idx].module_streak.grow()
+	var players := player_data.get_from_indices(g.module_bullet_hits.player_indices)
+	for p in players:
+		p.module_streak.grow()
 	
 	streak_global.grow()
 	
@@ -77,8 +78,9 @@ func check_game_over() -> void:
 
 func calculate_score_for_gift(g:Gift) -> float:
 	var max_streak := 0.0
-	for idx in g.module_bullet_hits.player_indices:
-		max_streak = max(max_streak, player_data.players[idx].module_streak.get_ratio())
+	var players := player_data.get_from_indices(g.module_bullet_hits.player_indices)
+	for p in players:
+		max_streak = max(max_streak, p.module_streak.get_ratio())
 	
 	var base_score : float = lerp(Global.config.score_min, Global.config.score_max, max_streak)
 	var multiplier : float = lerp(Global.config.mult_min, Global.config.mult_max, streak_global.get_ratio())
@@ -96,8 +98,9 @@ func _on_gift_failed(g:Gift) -> void:
 	gifts_failed += 1
 	
 	if Global.config.break_player_streak_for_failed_gifts:
-		for idx in g.module_bullet_hits.player_indices:
-			player_data.players[idx].module_streak.kill()
+		var players := player_data.get_from_indices(g.module_bullet_hits.player_indices)
+		for p in players:
+			p.module_streak.kill()
 	
 	if Global.config.break_global_streak_for_failed_gifts:
 		streak_global.kill()

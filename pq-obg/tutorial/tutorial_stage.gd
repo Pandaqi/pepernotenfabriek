@@ -12,3 +12,6 @@ enum Type
 
 @export var type := Type.GAMEPLAY
 @export var frame := 0
+
+@export var heading := "" # a custom heading that overrules the usual
+@export_multiline var content := "" # text to display (instead of image)

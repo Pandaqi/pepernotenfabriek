@@ -92,14 +92,14 @@ func initialize(r:SettingReader) -> void:
 	if get_default() == null:
 		set_default(r.read_default_value(self))
 	
-	on_value_changed(r.read_value(self), r)
+	_on_value_changed(r.read_value(self), r)
 
 func ensure_matching_types() -> void:
 	if type == Type.COLOR: type_display = TypeDisplay.COLOR
 	if type == Type.CHECKBOX: type_display = TypeDisplay.BOOL
 
 func reset(r:SettingReader) -> void:
-	on_value_changed(get_default(), r)
+	_on_value_changed(get_default(), r)
 	force_update_control()
 
 func get_tooltip_key() -> String:
@@ -132,7 +132,7 @@ func visualize(r:SettingReader) -> HBoxContainer:
 		
 		cpb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		cpb.color_changed.connect(func(c:Color):
-			on_value_changed(c, r)
+			_on_value_changed(c, r)
 		)
 	
 	if type == Type.DROPDOWN:
@@ -146,7 +146,7 @@ func visualize(r:SettingReader) -> HBoxContainer:
 		
 		dd.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		dd.item_selected.connect(func(idx:int):
-			on_value_changed(dd.get_item_text(idx), r)
+			_on_value_changed(dd.get_item_text(idx), r)
 		)
 	
 	if type == Type.CHECKBOX:
@@ -158,7 +158,7 @@ func visualize(r:SettingReader) -> HBoxContainer:
 		cb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		cb.set_text(label)
 		cb.toggled.connect(func(val:bool):
-			on_value_changed(val, r)
+			_on_value_changed(val, r)
 		)
 	
 	if type == Type.RANGE or type == Type.RANGE_DISCRETE:
@@ -169,7 +169,12 @@ func visualize(r:SettingReader) -> HBoxContainer:
 		if min_value != -INF: slider.min_value = min_value
 		if max_value != INF: slider.max_value = max_value
 		
-		var step := (slider.max_value - slider.min_value) / 20.0
+		# we want a step size that includes the default value
+		var range_diff := (slider.max_value - slider.min_value)
+		var diff_to_default : float = float(get_default()) - slider.min_value
+		var desired_step_size := range_diff / 20.0
+		var num_steps_to_default : float = ceil(diff_to_default / desired_step_size)
+		var step := diff_to_default / num_steps_to_default
 		if type == Type.RANGE_DISCRETE: 
 			slider.min_value = floor(slider.min_value)
 			slider.max_value = ceil(slider.max_value)
@@ -179,7 +184,7 @@ func visualize(r:SettingReader) -> HBoxContainer:
 		slider.step = step
 		
 		slider.value_changed.connect(func(val:float):
-			on_value_changed(val, r)
+			_on_value_changed(val, r)
 		)
 	
 	hbox.add_child(control_node)
@@ -195,7 +200,7 @@ func visualize(r:SettingReader) -> HBoxContainer:
 	hbox.add_child(reset_btn)
 	
 	# init call
-	on_value_changed(value, r)
+	_on_value_changed(value, r)
 	force_update_control()
 	
 	return hbox
@@ -249,14 +254,15 @@ func force_update_control() -> void:
 func is_value_default() -> bool:
 	var def : Variant = get_default()
 	var value_string := str(value)
+	
 	# to prevent floating point errors
-	if value_string.is_valid_int() or value_string.is_valid_float(): 
-		return abs(value - def) <= 0.03
+	if (value_string.is_valid_int() or value_string.is_valid_float()): 
+		return abs(float(value) - float(def)) <= 0.03
 	
 	# @NOTE: by moving it to a string we can check for equality between objects (like Color) too
 	return value_string == str(def)
 
-func on_value_changed(new_val:Variant, r:SettingReader) -> void:
+func _on_value_changed(new_val:Variant, r:SettingReader) -> void:
 	var actually_changed : bool = (value != new_val)
 	
 	# save the value on ourselves, so it permanently enters into the ConfigFile

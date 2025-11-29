@@ -1,44 +1,38 @@
-class_name Tutorial extends Node2D
+extends Control
+class_name Tutorial 
 
 var stages : Array[TutorialStage] = []
-@export var stages_debug : Array[TutorialStage] = []
 
-@export var sprite_scene : PackedScene
+@export var container : Control
+var sprite_scene : PackedScene = preload("res://pq-obg/tutorial/tutorial_sprite.tscn")
 var sprites : Array[TutorialSprite] = []
 
-var sprite_size := Vector2(512.0, 512.0)
-
+var enabled := false
 var active := false
 var num_times_shown := 0
 
 func _ready() -> void:
+	enabled = Global.config_shared.tutorial_enabled
 	prepare_sprites()
-	prepare_anchor_tool()
 
 func prepare_sprites() -> void:
-	# collect the right stages
-	if "tutorials" in Global.config_shared:
-		stages = Global.config_shared.tutorials
+	if not enabled: return
 	
-	if stages_debug.size() > 0:
-		stages = stages_debug
+	# collect the right stages
+	stages = Global.config_shared.tutorials
+	var debug_stages : Array[TutorialStage] = Global.config_shared.tutorials_debug
+	if debug_stages.size() > 0: stages = debug_stages
 	
 	# create objects for them
-	for i in range(count_stages()):
+	for i in range(count()):
 		var t : TutorialSprite = sprite_scene.instantiate()
-		add_child(t)
+		container.add_child(t)
 		sprites.append(t)
+		t.refresh_size(Global.config_shared.tutorial_scale)
 		t.set_stage(stages[i])
 
-func prepare_anchor_tool() -> void:
-	var anchor_tool := ScreenAnchorTool.new(
-		Global.config_shared.tutorial_anchor,
-		sprite_size, 0.1*Global.config_shared.tutorial_sprite_scale
-	)
-	add_child(anchor_tool)
-	anchor_tool.show_elements(sprites)
-
 func set_active(val:bool) -> void:
+	if not enabled: return
 	if Global.config_shared.tutorial_only_once and num_times_shown > 0: 
 		set_visible(false)
 		return
@@ -52,7 +46,16 @@ func appear() -> void:
 	num_times_shown += 1
 	# make them pop into view one by one
 	for sprite in sprites:
-		await sprite.appear()
+		sprite.appear()
+		await get_tree().create_timer(Global.config_shared.tutorial_delay).timeout
 
-func count_stages() -> int:
+func count() -> int:
 	return stages.size()
+
+#func prepare_anchor_tool() -> void:
+	#var anchor_tool := ScreenAnchorTool.new(
+		#Global.config_shared.tutorial_anchor,
+		#sprite_size, 0.1*Global.config_shared.tutorial_sprite_scale
+	#)
+	#add_child(anchor_tool)
+	#anchor_tool.show_elements(sprites)

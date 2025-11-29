@@ -9,6 +9,12 @@ enum Type
 @export var button_visualizer : ButtonVisualizer
 @export var button_container : Control
 @export var label : Label
+@export var state_data : StateData
+
+var button : InputButton
+
+func _ready() -> void:
+	gui_input.connect(_on_input_event)
 
 func activate(btn: InputButton, tp:Type) -> void:
 	set_type(tp)
@@ -29,15 +35,32 @@ func set_type(tp:Type) -> void:
 		label.set_text(get_logout_text())
 
 func get_logout_text() -> String:
-	if Global.input.removal_type == Global.input.ButtonRemovalType.NONE:
+	if Global.input.is_removal_type(Global.input.ButtonRemovalType.NONE):
 		return "BUTTON_LOGOUT_RELOAD"
-	if Global.input.removal_type == Global.input.ButtonRemovalType.HOLD_COND:
+	if Global.input.is_removal_type(Global.input.ButtonRemovalType.HOLD_COND):
 		return "BUTTON_LOGOUT_MODE"
 	
-	var time : int = ceil(Global.input.get_removal_time() / 1000.0)
+	var time : int = ceil(Global.input.get_removal_time())
 	return "{tr_1} ({time}s)".format({ tr_1 = tr("BUTTON_LOGOUT"), time = time })
 
 func set_button(btn:InputButton) -> void:
 	button_container.set_visible(btn != null)
 	if not btn: return
+	button = btn
 	button_container.set_button(btn)
+
+func _on_input_event(ev:InputEvent) -> void:
+	var is_click := ev is InputEventScreenTouch
+	if not is_click: return
+	if ev.pressed: return # only trigger on RELEASE
+	
+	# the logout screen has no button; let it bring up the pause menu
+	if not button: 
+		state_data.request_paused_state.emit(true)
+		return
+	
+	var clicks_allowed : bool = Global.config_shared.allow_login_by_clicking_instruction
+	if not clicks_allowed and (not button.is_touch()):
+		return
+	
+	Global.input.request_login(button)

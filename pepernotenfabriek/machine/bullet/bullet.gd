@@ -35,7 +35,7 @@ func shoot(player:int, from:Vector2, vec:Vector2) -> void:
 func _integrate_forces(state:PhysicsDirectBodyState2D):
 	module_pooling._integrate_forces(state)
 
-func _on_killed(good := false) -> void:
+func _on_killed(_good := false) -> void:
 	map_data.return_bullet_to_pool(self)
 
 func get_size() -> Vector2:

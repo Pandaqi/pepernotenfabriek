@@ -40,7 +40,7 @@ func _draw() -> void:
 	draw_rect(map_data.bounds, Color.RED, false)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var pos := target.global_position
 	var off_map := map_data.is_out_of_bounds(pos, size_box)
 	set_state(not off_map)

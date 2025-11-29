@@ -6,7 +6,7 @@ class_name MachineDistributor
 
 func _ready() -> void:
 	Global.input.buttons_changed.connect(_on_buttons_changed)
-	player_data.all_players_ready.connect(_on_all_players_ready)
+	player_data.setup_finished.connect(_on_all_players_ready)
 
 func _on_all_players_ready() -> void:
 	_on_buttons_changed()
@@ -17,8 +17,6 @@ func _on_buttons_changed() -> void:
 func refresh_machine_input_connections() -> void:
 	var num_players : int = player_data.count()
 	if num_players <= 0: return
-	
-	await get_tree().process_frame
 	
 	# first let all players forget about their current machines
 	var players : Array[Player] = player_data.players

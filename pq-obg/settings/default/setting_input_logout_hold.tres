@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_s0e05")
 type = 1
-type_unit = 3
+type_unit = 2
 key = "input_logout_hold_duration"
 label = "ST_LOGOUT_HOLD_DUR"
-min_value = 200.0
-max_value = 15000.0
+min_value = 0.5
+max_value = 10.0

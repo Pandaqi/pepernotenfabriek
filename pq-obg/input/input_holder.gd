@@ -11,6 +11,7 @@ var is_down := false
 var is_held := false
 
 func _init(d:float = 0.0) -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	delay = d
 
 func _unhandled_input(ev:InputEvent) -> void:
@@ -36,7 +37,7 @@ func hold() -> void:
 	is_held = true
 	started.emit()
 
-func stop_tracking(_time_held_raw:float) -> void:
+func stop_tracking(_time_held_raw:= 0.0) -> void:
 	is_down = false
 	is_held = false
 	ended.emit(get_time_held())

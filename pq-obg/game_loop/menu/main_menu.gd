@@ -9,7 +9,7 @@ class_name MainMenu extends CanvasLayer
 
 func _ready() -> void:
 	if Global.config_shared.clear_input_at_menu: Global.input.clear()
-	settings.active_changed.connect(on_settings_active_changed)
+	settings.active_changed.connect(_on_settings_active_changed)
 	grab_focus()
 	set_icons()
 
@@ -32,7 +32,7 @@ func _on_settings_pressed() -> void:
 	set_visible(false)
 	settings.set_active(true)
 
-func on_settings_active_changed(is_active:bool) -> void:
+func _on_settings_active_changed(is_active:bool) -> void:
 	if not is_active: 
 		set_visible(true)
 		grab_focus()

@@ -12,7 +12,6 @@
 [ext_resource type="FontFile" uid="uid://d7mos0rr3b31" path="res://pepernotenfabriek/ui/fonts/body_italic.otf" id="5_if6eq"]
 [ext_resource type="FontFile" uid="uid://d1lemkj24xadb" path="res://pepernotenfabriek/ui/fonts/body_regular.otf" id="6_go5d3"]
 [ext_resource type="Texture2D" uid="uid://bex3uoa5xtsv8" path="res://pq-obg/ui/textures/icon_settings.tres" id="6_sboe8"]
-[ext_resource type="Script" uid="uid://dui163ptds6sq" path="res://pq-obg/tools/config/config_shared_data.gd" id="7_o1a7f"]
 [ext_resource type="FontFile" uid="uid://r4wr5f23gxn5" path="res://pepernotenfabriek/ui/fonts/heading.otf" id="7_tsist"]
 [ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="8_dtlrj"]
 [ext_resource type="FontFile" uid="uid://c6hbb35jgav1g" path="res://pepernotenfabriek/ui/fonts/special.ttf" id="8_lbq6e"]
@@ -21,14 +20,16 @@
 [ext_resource type="Resource" uid="uid://bkrcguybtagps" path="res://pepernotenfabriek/ui/game_over_data.tres" id="11_go5d3"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_tsist"]
 [ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="12_lbq6e"]
+[ext_resource type="Script" uid="uid://dui163ptds6sq" path="res://pq-obg/settings/config_shared_data.gd" id="16_go5d3"]
 
 [resource]
-script = ExtResource("7_o1a7f")
+script = ExtResource("16_go5d3")
 game_id = "de-pepernotenfabriek"
 language_default = "nl"
 game_scene = "pepernotenfabriek/main.tscn"
 game_over_data = ExtResource("11_go5d3")
 audio_bg = Array[AudioStream]([ExtResource("1_if6eq")])
+bg_color = Color(1, 0.6097793, 0.22592148, 1)
 bg_image = ExtResource("2_dtlrj")
 font_body_regular = ExtResource("6_go5d3")
 font_body_italic = ExtResource("5_if6eq")

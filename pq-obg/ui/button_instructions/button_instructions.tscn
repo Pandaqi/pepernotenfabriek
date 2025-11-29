@@ -17,7 +17,7 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource("3_csk8l")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=531285955]
@@ -26,7 +26,9 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 32.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer" unique_id=1797108689]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1

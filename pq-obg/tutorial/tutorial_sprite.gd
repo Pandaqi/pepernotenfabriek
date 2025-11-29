@@ -1,38 +1,82 @@
-class_name TutorialSprite extends Node2D
+extends Control
+class_name TutorialSprite 
 
 var stage : TutorialStage
 
-@onready var bg : Sprite2D = $BG
-@onready var sprite : Sprite2D = $Sprite
+@export var texture_background : TextureRect
+@export var texture_content : TextureRect
 
-const bg_frames := [TutorialStage.Type.OBJECTIVE, TutorialStage.Type.GAME_OVER, TutorialStage.Type.BUTTON_PRESS, TutorialStage.Type.BUTTON_HOLD, TutorialStage.Type.GAMEPLAY]
+@export var label_heading : Label
+@export var label_content : Label
+
+@export var label_heading_icon : Control
+@export var heading_hbox : HBoxContainer
+@export var margin_container : MarginContainer
+@export var margin_container_texture : MarginContainer
+
+var backgrounds : Dictionary[TutorialStage.Type, AtlasTexture] = {
+	TutorialStage.Type.OBJECTIVE: preload("res://pq-obg/tutorial/textures/tutorial_bg_objective.tres"),
+	TutorialStage.Type.GAME_OVER: preload("res://pq-obg/tutorial/textures/tutorial_bg_game_over.tres"),
+	TutorialStage.Type.BUTTON_PRESS: preload("res://pq-obg/tutorial/textures/tutorial_bg_button_press.tres"),
+	TutorialStage.Type.BUTTON_HOLD: preload("res://pq-obg/tutorial/textures/tutorial_bg_button_hold.tres"),
+	TutorialStage.Type.GAMEPLAY: preload("res://pq-obg/tutorial/textures/tutorial_bg_gameplay.tres")
+}
+
+var type_to_heading_key : Dictionary[TutorialStage.Type, String] = {
+	TutorialStage.Type.OBJECTIVE: "TUT_OBJECTIVE_HEADING",
+	TutorialStage.Type.GAME_OVER: "TUT_GAME_OVER_HEADING",
+	TutorialStage.Type.BUTTON_PRESS: "TUT_BUTTON_PRESS_HEADING",
+	TutorialStage.Type.BUTTON_HOLD: "TUT_BUTTON_HOLD_HEADING",
+	TutorialStage.Type.GAMEPLAY: "TUT_GAMEPLAY_HEADING"
+}
 
 func set_stage(s:TutorialStage) -> void:
 	stage = s
-	bg.set_frame(get_background_frame(stage.type))
 	
-	sprite.texture = Global.config_shared.tutorial_spritesheet
-	var frames := Global.config_shared.tutorial_spritesheet_frames
-	sprite.hframes = frames.x
-	sprite.vframes = frames.y
-	sprite.set_frame(stage.frame)
+	label_heading.add_theme_font_size_override("font_size", Global.config_shared.tutorial_heading_font_size)
+	label_heading.add_theme_font_override("font", Global.theme.get_font(ThemeManager.FontType.HEADING))
+	
+	label_heading.set_text(type_to_heading_key[stage.type])
+	if stage.heading:
+		label_heading.set_text(stage.heading)
+	
+	label_content.add_theme_font_size_override("font_size", Global.config_shared.tutorial_content_font_size)
+	label_content.set_text("This is an empty tutorial screen.")
+	if stage.content:
+		label_content.set_text(stage.content)
+	
+	texture_background.texture = backgrounds[stage.type]
+	
+	texture_content.hide()
+	if stage.texture:
+		texture_content.show()
+		label_content.hide()
+		texture_content.texture = stage.texture
+	
+	hide()
 
-func get_background_frame(tp:TutorialStage.Type) -> int:
-	var base_frame := 3
-	var offset := bg_frames.find(tp)
-	return base_frame + offset
+func refresh_size(factor:float) -> void:
+	var base_size := 256.0
+	
+	label_heading_icon.custom_minimum_size.x = factor * (48.0 / base_size)
+	heading_hbox.add_theme_constant_override("separation", int(factor * 24.0 / base_size))
+	heading_hbox.custom_minimum_size.y = factor * 42.0 / base_size
+	
+	# the container that has the whole thing
+	var m : int = int(factor * (8.0 / base_size))
+	margin_container.add_theme_constant_override("margin_left", m)
+	margin_container.add_theme_constant_override("margin_right", m)
+	margin_container.add_theme_constant_override("margin_top", m)
+	margin_container.add_theme_constant_override("margin_bottom", int((20/8.0) * m))
+	
+	# the container that has the tutorial texture
+	var mt : int = int(factor * (16.0 / base_size))
+	margin_container_texture.add_theme_constant_override("margin_left", mt)
+	margin_container_texture.add_theme_constant_override("margin_right", mt)
+	margin_container_texture.add_theme_constant_override("margin_top", mt)
+	margin_container_texture.add_theme_constant_override("margin_bottom", mt)
 
 func appear() -> void:
-	# always start being invisible
-	var target_scale := scale
-	set_scale(Vector2.ZERO)
-	
-	var dur := 0.3 # this is just the popup animation
-	var tw := get_tree().create_tween()
-	tw.tween_property(self, "scale", 1.15*target_scale, 0.5*dur)
-	tw.tween_property(self, "scale", target_scale, 0.5*dur)
-	
-	var delay := Global.config_shared.tutorial_delay
-	tw.tween_interval(delay)
-	
-	await tw.finished
+	show()
+	# @TODO: tween/animate this in a nicer way?
+	# @TODO: also set a timer for REMOVING it again after a while

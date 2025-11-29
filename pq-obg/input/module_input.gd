@@ -4,6 +4,8 @@ class_name ModuleInput
 @onready var entity = get_parent()
 
 var holder : InputHolder
+## this one is never paused or interrupted, so it's able to track your button and log you out at pause screen; we go through module_input because it knows about touchscreen areas
+var holder_logout : InputHolder 
 var button : InputButton
 var button_visualizers : Array[ButtonVisualizer] = []
 var removal_warning_enabled := false
@@ -18,6 +20,9 @@ signal pressed()
 signal released(time_held:float)
 signal removal_warning_started()
 signal removal_warning_ended()
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func activate(new_button:InputButton) -> void:
 	if button: Global.input.give_back_button(button)
@@ -44,11 +49,18 @@ func activate(new_button:InputButton) -> void:
 	holder = InputHolder.new(hold_time)
 	pressed.connect(holder.start_tracking)
 	released.connect(holder.stop_tracking)
-	holder.held.connect(on_button_held)
+	holder.held.connect(_on_button_held)
 	add_child(holder)
+	
+	# the holder_logout is basically the inverse
+	# it runs while in pause mode to allow logging out by holding the button
+	holder_logout = InputHolder.new()
+	holder_logout.held.connect(_on_logout_button_held)
+	add_child(holder_logout)
 
 func deactivate() -> void:
 	Global.audio.play_player_change_sound()
+	clear_touch_area()
 	if not Global.input.is_button_grabbable(button):
 		Global.input.give_back_button(button)
 
@@ -62,6 +74,10 @@ func create_touch_area() -> void:
 	
 	var area_layer = player_data.touch_area_layer
 	area_layer.add_area(touch_area)
+
+func clear_touch_area() -> void:
+	if not touch_area: return
+	touch_area.queue_free()
 
 func clear_button_visualizers() -> void:
 	for bv in button_visualizers:
@@ -94,26 +110,36 @@ func _unhandled_input(ev:InputEvent) -> void:
 		_on_released()
 
 func _on_pressed() -> void:
+	holder_logout.start_tracking()
+	if get_tree().paused: return
 	pressed.emit()
 
 func _on_released() -> void:
+	holder_logout.stop_tracking()
+	if get_tree().paused: return
 	released.emit(holder.get_time_since_press())
 
-func on_button_held(time_held:float) -> void:
+func _on_button_held(_time_held:float) -> void:
+	pass #not using this anymore atm
+
+func _on_logout_button_held(time_held:float) -> void:
 	check_for_removal(time_held)
 
+# time durations within the (input) system are always milliseconds
+# but configuration times are always seconds to make it easier on players
 func check_for_removal(time_held:float) -> void:
 	if not Global.input.can_remove_button_by_hold(button, time_held): return
 	
 	# turn warnings on/off (for "you're about to remove yourself")
-	var removal_time_warning : float = 0.75*Global.input.get_removal_time()
+	var removal_time_threshold : float = Global.input.get_removal_time() * 1000.0
+	var removal_time_warning : float = 0.75*removal_time_threshold
 	if not removal_warning_enabled and time_held >= removal_time_warning:
 		removal_warning_started.emit()
 	if removal_warning_enabled and time_held < removal_time_warning:
 		removal_warning_ended.emit()
 	
 	# actually remove us if needed
-	if time_held >= Global.input.get_removal_time():
+	if time_held >= removal_time_threshold:
 		Global.input.request_button_removal(button)
 
 func get_player_index() -> int:

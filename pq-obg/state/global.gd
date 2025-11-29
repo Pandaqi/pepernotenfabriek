@@ -9,6 +9,7 @@ var theme : ThemeManager
 var tween : TweenManager
 var state : StateManager
 
+@warning_ignore("unused_signal")
 signal pause_mode_change()
 
 func _ready():

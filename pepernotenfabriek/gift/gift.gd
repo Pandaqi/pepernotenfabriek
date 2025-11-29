@@ -48,7 +48,7 @@ func _integrate_forces(state:PhysicsDirectBodyState2D):
 func _on_revived() -> void:
 	module_audio.play_appear()
 
-func _on_enter_basket(b:Basket) -> void:
+func _on_enter_basket(_b:Basket) -> void:
 	module_audio.play_deliver()
 	
 	freeze = true

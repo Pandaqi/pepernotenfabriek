@@ -5,25 +5,28 @@ class_name PlayerSpawner extends Node2D
 
 @export var clear_input_on_reload := false
 
+func _enter_tree() -> void:
+	player_data.reset(Global.config_shared.player_colors)
+
 func _ready() -> void:
-	Global.input.button_added.connect(on_button_added)
-	Global.input.button_removed.connect(on_button_removed)
-	Global.input.buttons_changed.connect(on_buttons_changed)
+	Global.input.button_added.connect(_on_button_added)
+	Global.input.button_removed.connect(_on_button_removed)
+	Global.input.buttons_changed.connect(_on_buttons_changed)
 	
 	# init calls
-	player_data.reset(Global.config_shared.player_colors)
 	if clear_input_on_reload: Global.input.clear()
 	var btns_already_in_play = Global.input.buttons_used.duplicate()
 	for btn in btns_already_in_play:
 		place_player(btn)
 	
-	# @NOTE: other things wait for this signal, which is why the PlayerSpawner must be the LAST of all the map elements, otherwise it emits the signal too soon and some things are not initialized
-	player_data.all_players_ready.emit()
+	# @NOTE: delay because if we call now other objects' _ready() might not have triggered yet
+	await get_tree().process_frame
+	player_data.setup_finished.emit()
 
-func on_button_added(btn:InputButton) -> void:
+func _on_button_added(btn:InputButton) -> void:
 	place_player(btn)
 
-func on_button_removed(btn:InputButton) -> void:
+func _on_button_removed(btn:InputButton) -> void:
 	remove_player(btn)
 
 func place_player(btn:InputButton) -> void:
@@ -54,7 +57,7 @@ func get_player_with_button(btn:InputButton) -> Player:
 			return p
 	return null
 
-func on_buttons_changed() -> void:
+func _on_buttons_changed() -> void:
 	for p in player_data.players:
 		var btn : InputButton = p.get_node("ModuleInput").button
 		if Global.input.is_button_possible(btn): continue

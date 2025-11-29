@@ -17,8 +17,13 @@ var baskets : Array[Basket]
 var bounds := Rect2(Vector2.ZERO, Vector2.ZERO)
 const CELL_SIZE := 128.0
 
+@warning_ignore("unused_signal")
 signal out_of_bullets()
+
+@warning_ignore("unused_signal")
 signal gift_delivered(g:Gift)
+
+@warning_ignore("unused_signal")
 signal gift_failed(g:Gift)
 
 func reset() -> void:

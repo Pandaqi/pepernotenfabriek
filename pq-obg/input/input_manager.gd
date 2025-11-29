@@ -10,15 +10,12 @@ enum ButtonRemovalType
 var keyboard_buttons := []
 const mouse_buttons := [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]
 const gamepad_buttons := [JOY_BUTTON_A, JOY_BUTTON_B, JOY_BUTTON_Y, JOY_BUTTON_X]
-const max_gamepads := 4
-const max_touch := 4
 
 var buttons : Array[InputButton] = []
 var buttons_available_all : Array[InputButton] = []
 var buttons_available : Dictionary = {} # InputType, Array[InputButton]
 var buttons_used : Array[InputButton] = []
 
-var removal_type := ButtonRemovalType.NONE
 var pause_mode := false
 
 # set to true during gameplay, false to prevent changes during menus and stuff -> see set_active()
@@ -34,8 +31,9 @@ func _ready() -> void:
 	add_shared_buttons() # the keys in every game for pause/unpause/navigation
 	generate_all_buttons() # fills the input map with everything
 	refresh_button_selection() # only makes available what is possible/selected => preferably called on every reload/restart of the game
-	Input.joy_connection_changed.connect(on_gamepad_change)
+	Input.joy_connection_changed.connect(_on_gamepad_change)
 	
+	# @TODO: AAAARGH this doesn't actually work, need to do this manually
 	ProjectSettings.set_setting("input_devices/pointing/emulate_touch_from_mouse", true)
 	ProjectSettings.set_setting("input_devices/pointing/emulate_mouse_from_touch", true)
 
@@ -87,13 +85,13 @@ func generate_all_buttons() -> void:
 		register_button(btn)
 	
 	# GAMEPADS
-	for i in range(max_gamepads):
+	for i in range(Global.config_shared.input_max_gamepads):
 		for gamepad_button in gamepad_buttons:
 			var btn := InputButton.new(InputButton.InputType.GAMEPAD, gamepad_button, i)
 			register_button(btn)
 	
 	# TOUCH
-	for i in range(max_touch):
+	for i in range(Global.config_shared.input_max_touch):
 		var btn := InputButton.new(InputButton.InputType.TOUCH, 0, i)
 		register_button(btn)
 
@@ -129,6 +127,9 @@ func refresh_button_selection(shuffle = true) -> void:
 		var touch_impossible := btn.type == InputButton.InputType.TOUCH and not has_touch_capability
 		if touch_impossible: continue
 		
+		var left_mouse_bad : bool = btn.key == MOUSE_BUTTON_LEFT and (not Global.config_shared.input_allow_left_mouse_button)
+		if left_mouse_bad: continue
+		
 		if not (btn.type in buttons_available): buttons_available[tp] = []
 		buttons_available[tp].append(btn)
 	
@@ -144,9 +145,13 @@ func refresh_button_selection(shuffle = true) -> void:
 		for elem in buttons_available[key]:
 			buttons_available_all.append(elem)
 	
+	_on_buttons_changed()
+
+func _on_buttons_changed() -> void:
+	await get_tree().process_frame
 	buttons_changed.emit()
 
-func on_gamepad_change() -> void:
+func _on_gamepad_change() -> void:
 	refresh_button_selection(false)
 
 func get_removal_time() -> float:
@@ -179,7 +184,7 @@ func grab_button(btn:InputButton) -> void:
 	
 	buttons_available[btn.type].erase(btn)
 	buttons_used.append(btn)
-	buttons_changed.emit()
+	_on_buttons_changed()
 
 func give_back_button(btn:InputButton) -> void:
 	var btn_already_given_back := is_button_grabbable(btn)
@@ -187,7 +192,7 @@ func give_back_button(btn:InputButton) -> void:
 	
 	buttons_used.erase(btn)
 	buttons_available[btn.type].append(btn)
-	buttons_changed.emit()
+	_on_buttons_changed()
 
 ## It sends a signal, the PlayerSpawner responds by making the node + officially grabbing the button
 func request_login(btn:InputButton) -> void:
@@ -216,8 +221,12 @@ func check_new_login(ev:InputEvent) -> void:
 		var next_button := get_next_button(type)
 		if not next_button: continue
 		if type == InputButton.InputType.TOUCH: continue
-		if ev.is_action_released(next_button.get_input_map_key()):
-			request_login(next_button)
+		
+		var relevant_key := next_button.get_input_map_key()
+		var should_trigger := ev.is_action_released(relevant_key) if  Global.config_shared.input_check_login_on_released else ev.is_action_pressed(relevant_key)
+		if not should_trigger: continue
+		
+		request_login(next_button)
 
 func is_full() -> bool:
 	return count() >= Global.config_shared.input_max_players
@@ -228,8 +237,8 @@ func count() -> int:
 func can_remove_button_by_hold(_button:InputButton, _time_held:float) -> bool:
 	if not open_to_input: return false
 	if not Global.config_shared.input_logout_while_playing and not pause_mode: return false
-	if removal_type == ButtonRemovalType.HOLD: return true
-	if removal_type == ButtonRemovalType.HOLD_COND: return pause_mode
+	if is_removal_type(ButtonRemovalType.HOLD): return true
+	if is_removal_type(ButtonRemovalType.HOLD_COND): return pause_mode
 	return false
 
 func is_button_possible(btn:InputButton) -> bool:
@@ -241,3 +250,6 @@ func get_next_button_any() -> InputButton:
 
 func get_player_index(btn:InputButton) -> int:
 	return buttons_used.find(btn)
+
+func is_removal_type(tp:ButtonRemovalType) -> bool:
+	return Global.config_shared.input_removal_type == tp

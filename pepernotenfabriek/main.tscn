@@ -188,6 +188,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_1tmg5")
 stretch_mode = 1
 
@@ -223,6 +224,7 @@ player_data = ExtResource("15_fj44h")
 script = ExtResource("15_qeb6e")
 map_data = ExtResource("2_0bfsn")
 player_data = ExtResource("15_fj44h")
+debug_game_over = null
 streak_global = NodePath("ScoreStreak")
 
 [node name="ScoreStreak" type="Node2D" parent="Score" unique_id=2105720983]
@@ -257,6 +259,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme = ExtResource("20_mkp4w")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Control" unique_id=1045842183]
@@ -347,6 +350,5 @@ stream = ExtResource("26_e62m8")
 bus = &"Game"
 
 [node name="State" parent="." unique_id=1145839826 instance=ExtResource("13_ehouy")]
-start_game_immediately = true
 
 [node name="ButtonInstructions" parent="." unique_id=13185939 instance=ExtResource("14_1tmg5")]

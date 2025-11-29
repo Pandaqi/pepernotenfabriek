@@ -244,9 +244,8 @@ Tiamo
 
 @TODO VOOR SPEL:
 
-* UITLEGPLAATJES -> de TutorialStage resources kunnen gewoon text erbij krijgen die ze dan laten zien ipv plaatje
+* UITLEGPLAATJES
 * Settings + Localization (specifiek voor spel)
-* Create "PDF" to accompany OBGs? Like I did for the Quiz system?
 
 
 REMEMBER: When doing object pooling, have a delay before giving it back, to make sure it has probably turned off physics and finished tweens and stuff before it's being reused. Current solution = add back to back, pop from front, which makes it very unlikely it's reused.
@@ -254,25 +253,23 @@ REMEMBER: When doing object pooling, have a delay before giving it back, to make
 
 **THEME/SETTINGS ISSUES LEFT**:
 
+* SETTINGS IN DEFAULTS
+  * TUTORIAL
+  * TUTORIAL SCALE/FONT SIZE 
+  * CLICK_INSTRUCTION_TO_LOGIN
 * `use_system_fonts` does not _immediately_ refresh those with "custom font overrrides". Is that bad? Or should I find a different system for that anyway? Is there a way to differentiate 2 labels within the same theme? (One `LabelBody` and one `LabelHeading`? **No, don't think so.**)
-* Also style the TOGGLE (for CheckButton) and SCROLLBAR
-* TUTORIAL: Has no text anymore by default (removed that from image), so I must add a label there with translated text myself 
-  * BUT WAIT, we also want to localize the IMAGES, so should I support just using TEXT in tutorial frame too?
+
 * **The button instructions can be much smaller and more concise.** No need for the whole panel around it. That would also fit more instructions. Just a Nintendo-style "button/icon + small outlined text" would be fine, no?
-* The buttons for the all-important pause menu (Escape/Gamepad??/Touch??) should be much better explained.
-  * TOUCH = Touch the "logout explainer" for pause screen.
-  * GAMEPAD = just show the right button icon next to showing escape key?
-* Make **global.tscn** part of the OBG system. It's fine that it can't find "config_data.tres" when you insert it.
+* The buttons for the all-important pause menu (Escape/Gamepad??/Touch??) should be much better explained. => Show this on the PAUSE MENU, as that's where you start each game anyway + reminds you how to get away.
+  * Some small fixed buttons for ESCAPE / GAMEPAD START / TOUCH LOGOUT below it should do?
+
 * Create an actual `one-button-games` Git project? At least for backup, but also to collect my notes and this to-do and stuff. (Can merge that with the ideas and stuff inside the existing folder. The other games should be ignored for being Git-submodules.)
+* Add a little text with the game name, that I created it, the version, etc on the start screen. Makes it look more professional.
 
 **OTHER**:
-* FIX the fact that I need to wait one frame in the "on_buttons_changed" call -> figure out why/control "order" of signals and stuff better myself
-  * I think it's because it's a signal that activates/connects the input stuff, so you can't rely on things already being set/figured out immediately, must wait for next frame
-  * Is there a cleaner way to solve this issue for good?
 * Add more tweens to `TweenManager` and make that system more robust
 * Move some of those modules (map bounds, pooling, etc) into OBG for standardized reuse?
-  * **Really, I should split pq-obg and pq-obg-tools**. The first one has all the NECESSARY, INTERCONNECTED STUFF. The second one just has reusable modules, static functions, useful algorithms for stuff, etc.
-
+* I COULD maybe style the TOGGLE (for CheckButton) in same style as other buttons, but not necessary right now.
 
 
 

@@ -4,7 +4,7 @@ PAUSED_TEXT,Login players now by pressing one of the buttons indicated. (Use Esc
 BUTTON_NEW_PLAYER,Add new player?,Nieuwe speler toevoegen?
 BUTTON_LOGOUT,Hold for 3 seconds to log out.,Houd 3 seconden vast om uit te loggen.
 BUTTON_LOGOUT_RELOAD,Reload game to log out players.,Herstart het spel als je spelers wilt uitloggen.
-BUTTON_LOGOUT_MODE,Enter pause mode -> press to log out.,Pauzeer het spel -> druk om uit te loggen.
+BUTTON_LOGOUT_MODE,Enter pause mode -> hold your button to log out.,Pauzeer -> houd je knop ingedrukt om uit te loggen.
 MENU_PLAY,Play,Spelen
 MENU_SETTINGS,Settings,Instellingen
 MENU_QUIT,Quit,Afsluiten
@@ -15,6 +15,11 @@ GO_MESSAGE,Press a button to go back to menu or restart with current settings.,K
 GO_CONTINUE,Continue,Doorgaan
 GO_QUIT,Quit,Afsluiten
 GO_PLAY_AGAIN,Play Again,Speel opnieuw
+TUT_OBJECTIVE_HEADING,Objective,Doel,
+TUT_GAME_OVER_HEADING,Game Over,Speleinde,
+TUT_BUTTON_PRESS_HEADING,Button Press,Knop Loslaten
+TUT_BUTTON_HOLD_HEADING,Button Hold,Knop Vasthouden
+TUT_GAMEPLAY_HEADING,Gameplay,Spelregels
 SETTINGS_RESET_ALL,Reset All,Alles herstellen
 SETTINGS_CLOSE,Close,Teruggaan
 ST_BOOL_TRUE,On,Aan

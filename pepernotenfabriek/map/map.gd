@@ -8,8 +8,10 @@ class_name Map
 @export var generator : MapGenerator
 @export var visualizer : MapVisualizer
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	map_data.reset()
+
+func _ready() -> void:
 	map_data.cache_gifts(self, gift_scene)
 	map_data.cache_bullets(self, bullet_scene)
 	

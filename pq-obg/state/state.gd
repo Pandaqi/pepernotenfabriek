@@ -25,7 +25,8 @@ func _ready() -> void:
 	player_data.touch_area_layer = touch_areas
 	
 	state_data.reset()
-	state_data.objective_registered.connect(on_objective_registered)
+	state_data.objective_registered.connect(_on_objective_registered)
+	state_data.request_paused_state.connect(set_paused)
 	Global.input.set_active(true)
 	
 	pause_menu.forward_pressed.connect(_on_forward_pressed)
@@ -34,15 +35,18 @@ func _ready() -> void:
 	
 	# @NOTE: yes, this double call is on purpose, the first call initializes everything properly
 	set_paused(true)
-	if start_game_immediately: set_paused(false)
+	if OS.is_debug_build() and start_game_immediately: set_paused(false)
 
 func _exit_tree() -> void:
 	Global.input.set_active(false)
 
 func set_paused(val:bool) -> void:
+	var no_change_needed := paused == val
+	if no_change_needed: return
+	
 	paused = val
 	pause_menu.set_enabled(paused)
-	if tutorial: tutorial.set_active(paused)
+	tutorial.set_active(paused)
 	get_tree().paused = paused
 	Global.input.set_paused(paused)
 	
@@ -55,7 +59,7 @@ func set_paused(val:bool) -> void:
 func change_state(new_state:GameState) -> void:
 	state = new_state
 
-func on_objective_registered() -> void:
+func _on_objective_registered() -> void:
 	var num_players := player_data.count()
 	var results_registered := state_data.tracker_temporary.count()
 	var all_have_finished := results_registered >= num_players

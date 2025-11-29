@@ -266,6 +266,14 @@ func refresh():
 	#
 	th.set_color("font_color", "TooltipLabel", Color.WHITE)
 	
+	#
+	# Scrollbars
+	#
+	th.set_stylebox("scroll", "VScrollBar", sb_normal)
+	th.set_stylebox("scroll_focus", "VScrollBar", sb_hover)
+	th.set_stylebox("grabber_highlight", "VScrollBar", sb_focus)
+	th.set_stylebox("grabber_pressed", "VScrollBar", sb_focus)
+	
 	# we only swap the shared theme with the new one at the end
 	# so it only updates ONCE, after all properties have been set again
 	var shared_theme : Theme = cfg.theme

@@ -87,15 +87,21 @@ class_name ConfigSharedData
 @export var input_allow_mouse := true
 @export var input_allow_gamepad := true
 @export var input_allow_touch := true
+@export var input_max_gamepads := 4
+@export var input_max_touch := 4
+@export var input_allow_left_mouse_button := true
 
 @export_subgroup("Touch")
 @export var touch_area_size := Vector2(128.0, 128.0)
 @export var touch_area_alpha := 0.4
 
-@export_subgroup("Login / Logout")
+@export_subgroup("Login & Logout")
 @export var input_login_while_playing := true
 @export var input_logout_while_playing := true
-@export var input_logout_hold_duration := 3000.0
+@export var input_logout_hold_duration := 2.0 # ~seconds
+@export var allow_login_by_clicking_instruction := true
+@export var input_removal_type := InputManager.ButtonRemovalType.HOLD_COND
+@export var input_check_login_on_released := true
 
 @export_group("Players")
 @export var player_colors : Array[Color] = [
@@ -131,10 +137,12 @@ class_name ConfigSharedData
 
 @export_group("Tutorial")
 @export var tutorials : Array[TutorialStage] = []
-@export var tutorial_spritesheet : Texture
-@export var tutorial_spritesheet_frames := Vector2(4,1)
+@export var tutorials_debug : Array[TutorialStage] = []
 @export var tutorial_delay := 3 # seconds before next tutorial appears
-@export var tutorial_sprite_scale := 1.0
+@export var tutorial_scale := 1.0
+@export var tutorial_heading_font_size : int = 16
+@export var tutorial_content_font_size : int = 16
+@export var tutorial_enabled := true
 @export var tutorial_only_once := false # if so, doesn't repeat the tutorial any time you pause
 
 @export_group("UI")
@@ -144,8 +152,8 @@ class_name ConfigSharedData
 
 @export_subgroup("Button Instructions")
 @export var button_instructions_anchor := ScreenAnchorTool.Anchor.TOP
-@export var button_instructions_icon_size := 48.0
-@export var button_instructions_font_size := 16.0
+@export var button_instructions_icon_size : int = 48
+@export var button_instructions_font_size : int = 16
 
 @export_subgroup("Button Visualizer")
 @export var button_visualizer_scene := preload("res://pq-obg/ui/button_visualizer/button_visualizer.tscn")
