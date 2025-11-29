@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 	if not was_standing_still and standing_still:
 		time_standstill = Time.get_ticks_msec()
 	
-	var diff : float = Time.get_ticks_msec() - time_standstill
+	var diff : float = (Time.get_ticks_msec() - time_standstill) / 1000.0
 	var delay_before_removal := Global.config.gift_standstill_delay_before_removal
 	var ratio : float = 1.0 - clamp(diff / delay_before_removal, 0.0, 1.0)
 	entity.modulate.a = ratio

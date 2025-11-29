@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bq8atghfmydwl"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_gf87f"]
+
+[resource]
+script = ExtResource("1_gf87f")
+type = 1
+key = "machine_rotate_speed"
+label = "SETTING_MACHINE_ROTATE_SPEED"
+min_value = 0.0
+max_value = 10.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -6,8 +6,10 @@ class_name ConfigData
 
 @export_subgroup("Generator")
 @export var grid_size := Vector2(10,8)
+@export var grid_size_factor := 1.0
 @export var num_belts := 4
 
+@export var basket_quantity_factor := 1.0
 @export var min_num_baskets := 14
 @export var max_num_baskets := 20
 @export var max_dist_basket_to_machine := 4
@@ -34,16 +36,18 @@ class_name ConfigData
 @export var belt_extra_margin_factor := 0.25 # ~belt_thickness
 
 @export_group("Gifts")
-@export var gift_standstill_delay_before_removal := 10000.0 # ms
+@export var gift_standstill_delay_before_removal := 10.0 # s
 
 @export_group("Bullets")
 @export var bullet_min_fire_speed := 125.0
 @export var bullet_max_fire_speed := 2000.0
+@export var bullet_speed_factor := 1.0
 
 @export_group("Objective")
 @export_subgroup("Target")
 @export var gifts_target_min : int = 10
 @export var gifts_target_max : int = 40
+@export var gifts_target_factor := 1.0
 
 @export_subgroup("Score")
 @export var score_min := 1.0 # per gift delivered

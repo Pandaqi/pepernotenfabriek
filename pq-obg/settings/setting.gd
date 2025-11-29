@@ -97,6 +97,7 @@ func initialize(r:SettingReader) -> void:
 func ensure_matching_types() -> void:
 	if type == Type.COLOR: type_display = TypeDisplay.COLOR
 	if type == Type.CHECKBOX: type_display = TypeDisplay.BOOL
+	if type == Type.RANGE_DISCRETE: type_display = TypeDisplay.INT
 
 func reset(r:SettingReader) -> void:
 	_on_value_changed(get_default(), r)

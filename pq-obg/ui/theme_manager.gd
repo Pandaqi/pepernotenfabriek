@@ -37,18 +37,33 @@ func get_font(type:FontType) -> Font:
 	var key := FONT_TYPE_CONFIG_KEYS[type]
 	return Global.config_shared[key]
 
+static func lerp_hue(a:float, b:float, factor:float) -> float:
+	var dist : float = abs(a - b)
+	# if we're more than 180 degrees away, 
+	# change b to be on the "short side" instead
+	if dist > 0.5:
+		b = a + (1.0 - dist)
+	
+	# now we can simply lerp between them
+	var lerped : float = lerp(a,b,factor)
+	
+	# and clamp to [0,1] because that's what Godot wants
+	var lerped_clamped : float = lerped - floor(lerped)
+	
+	return lerped_clamped
+
 ## It looks better when darkening colors to also move their hue towards dark blue/purple
 static func darken_smart(c:Color, diff:float) -> Color:
 	var col := c.darkened(diff)
 	var anti_yellow_hue := (240/360.0)
-	col.h = lerp(col.h, anti_yellow_hue, 0.2)
+	col.h = lerp_hue(col.h, anti_yellow_hue, 0.05)
 	return col
 
 ## It looks better when lightening colors to also move their hue more towards yellow
 static func lighten_smart(c:Color, diff:float) -> Color:
 	var col := c.lightened(diff)
 	var yellow_hue := (60/360.0)
-	col.h = lerp(col.h, yellow_hue, 0.2)
+	col.h = lerp_hue(col.h, yellow_hue, 0.05)
 	return col
 
 static func get_most_contrasting_grayscale(c:Color) -> Color:

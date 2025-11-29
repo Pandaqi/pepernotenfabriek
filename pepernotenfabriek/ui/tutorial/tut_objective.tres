@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TutorialStage" load_steps=2 format=3 uid="uid://b711h7gre405p"]
+
+[ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="1_ee3xh"]
+
+[resource]
+script = ExtResource("1_ee3xh")
+type = 0
+content = "TUT_OBJECTIVE"
+metadata/_custom_type_script = "uid://b8gcpdtp867fe"

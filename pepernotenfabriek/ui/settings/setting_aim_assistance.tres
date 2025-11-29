@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://canvjinn7t4dt"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_5f3u2"]
+
+[resource]
+script = ExtResource("1_5f3u2")
+key = "enable_aim_assistance"
+label = "SETTING_AIM_ASSIST"
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

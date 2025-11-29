@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConfigSharedData" load_steps=22 format=3 uid="uid://dvtq7hggu4kjk"]
+[gd_resource type="Resource" script_class="ConfigSharedData" load_steps=27 format=3 uid="uid://dvtq7hggu4kjk"]
 
 [ext_resource type="AudioStream" uid="uid://cfe2jylsp4enn" path="res://pq-obg/audio/sfx/ui_click.mp3" id="1_5brs3"]
 [ext_resource type="AudioStream" uid="uid://cdhavdq1uu45w" path="res://pepernotenfabriek/audio/bg-theme.mp3" id="1_if6eq"]
@@ -21,6 +21,11 @@
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_tsist"]
 [ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="12_lbq6e"]
 [ext_resource type="Script" uid="uid://dui163ptds6sq" path="res://pq-obg/settings/config_shared_data.gd" id="16_go5d3"]
+[ext_resource type="Resource" uid="uid://cffsu4o0tqpd7" path="res://pepernotenfabriek/ui/settings/tab_game.tres" id="20_tsist"]
+[ext_resource type="Resource" uid="uid://b711h7gre405p" path="res://pepernotenfabriek/ui/tutorial/tut_objective.tres" id="23_21vjk"]
+[ext_resource type="Resource" uid="uid://cc8e5b8pq4kko" path="res://pepernotenfabriek/ui/tutorial/tut_hold.tres" id="24_3chxq"]
+[ext_resource type="Resource" uid="uid://cl48iohsqgvlj" path="res://pepernotenfabriek/ui/tutorial/tut_press.tres" id="25_q2c44"]
+[ext_resource type="Resource" uid="uid://cna6q4xllhlx" path="res://pepernotenfabriek/ui/tutorial/tut_gameplay.tres" id="26_hqb1b"]
 
 [resource]
 script = ExtResource("16_go5d3")
@@ -28,6 +33,7 @@ game_id = "de-pepernotenfabriek"
 language_default = "nl"
 game_scene = "pepernotenfabriek/main.tscn"
 game_over_data = ExtResource("11_go5d3")
+settings = Array[ExtResource("8_dtlrj")]([ExtResource("9_if6eq"), ExtResource("10_go5d3"), ExtResource("20_tsist")])
 audio_bg = Array[AudioStream]([ExtResource("1_if6eq")])
 bg_color = Color(1, 0.6097793, 0.22592148, 1)
 bg_image = ExtResource("2_dtlrj")
@@ -37,6 +43,6 @@ font_body_bold = ExtResource("3_o1a7f")
 font_body_bold_italic = ExtResource("4_dtlrj")
 font_heading = ExtResource("7_tsist")
 font_special = ExtResource("8_lbq6e")
-button_instructions_icon_size = 32.0
-button_instructions_font_size = 12.0
+color_main = Color(0.9882353, 0.81960785, 0.5254902, 1)
+tutorials = Array[ExtResource("12_lbq6e")]([ExtResource("23_21vjk"), ExtResource("24_3chxq"), ExtResource("25_q2c44"), ExtResource("26_hqb1b")])
 metadata/_custom_type_script = "uid://dui163ptds6sq"

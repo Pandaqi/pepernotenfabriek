@@ -50,7 +50,7 @@ func _on_buttons_changed() -> void:
 
 func recalculate_target() -> void:
 	var ratio := player_data.get_ratio()
-	gifts_delivered_target = floor(lerp(Global.config.gifts_target_min, Global.config.gifts_target_max, ratio))
+	gifts_delivered_target = floor(lerp(Global.config.gifts_target_min, Global.config.gifts_target_max, ratio) * Global.config.gifts_target_factor)
 	target_changed.emit(gifts_delivered_target)
 	progress.emit(get_delivery_ratio())
 

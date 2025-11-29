@@ -16,7 +16,7 @@ func get_shooting_dir() -> Vector2:
 	return raw_dir
 
 func get_shooting_force(time_ratio:float) -> float:
-	return lerp(Global.config.bullet_min_fire_speed, Global.config.bullet_max_fire_speed, time_ratio)
+	return lerp(Global.config.bullet_min_fire_speed, Global.config.bullet_max_fire_speed, time_ratio) * Global.config.bullet_speed_factor
 
 func get_shooting_vec(time_ratio:float) -> Vector2:
 	return get_shooting_force(time_ratio) * get_shooting_dir()

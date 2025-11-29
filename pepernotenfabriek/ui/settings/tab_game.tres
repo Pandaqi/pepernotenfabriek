@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SettingTab" load_steps=5 format=3 uid="uid://cffsu4o0tqpd7"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_jw05b"]
+[ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="2_f1wa1"]
+[ext_resource type="Resource" uid="uid://copggbmk7c2d" path="res://pepernotenfabriek/ui/settings/group_map.tres" id="2_hlu00"]
+[ext_resource type="Resource" uid="uid://c6fwunhv1pw32" path="res://pepernotenfabriek/ui/settings/group_machines.tres" id="3_763a0"]
+
+[resource]
+script = ExtResource("2_f1wa1")
+groups = Array[ExtResource("1_jw05b")]([ExtResource("2_hlu00"), ExtResource("3_763a0")])
+label = "ST_TAB_GAME"
+metadata/_custom_type_script = "uid://bk8734ulnri1t"

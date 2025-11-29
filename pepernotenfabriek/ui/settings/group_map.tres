@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=8 format=3 uid="uid://copggbmk7c2d"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_45u54"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_ddxq5"]
+[ext_resource type="Resource" uid="uid://bvbcw8ci5gt7v" path="res://pepernotenfabriek/ui/settings/setting_grid_size.tres" id="3_8j2u7"]
+[ext_resource type="Resource" uid="uid://bexwkk6donqt7" path="res://pepernotenfabriek/ui/settings/setting_num_belts.tres" id="4_1hbvx"]
+[ext_resource type="Resource" uid="uid://ccxtw7f8mpdsi" path="res://pepernotenfabriek/ui/settings/setting_gift_target.tres" id="5_f2572"]
+[ext_resource type="Resource" uid="uid://bqpij6hhc0fk4" path="res://pepernotenfabriek/ui/settings/setting_gift_standstill.tres" id="6_yq0h5"]
+[ext_resource type="Resource" uid="uid://cucnbdvkwuqlg" path="res://pepernotenfabriek/ui/settings/setting_basket_quantity.tres" id="7_f8v75"]
+
+[resource]
+script = ExtResource("1_45u54")
+settings = Array[ExtResource("2_ddxq5")]([ExtResource("3_8j2u7"), ExtResource("4_1hbvx"), ExtResource("5_f2572"), ExtResource("6_yq0h5"), ExtResource("7_f8v75")])
+label = "SETTING_GROUP_MAP"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

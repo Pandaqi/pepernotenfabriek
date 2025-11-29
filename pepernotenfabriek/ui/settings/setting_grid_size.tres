@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bvbcw8ci5gt7v"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_qlpj7"]
+
+[resource]
+script = ExtResource("1_qlpj7")
+type = 1
+key = "grid_size_factor"
+label = "SETTING_GRID_SIZE"
+min_value = 0.25
+max_value = 4.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

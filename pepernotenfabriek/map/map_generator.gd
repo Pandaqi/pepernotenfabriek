@@ -47,7 +47,7 @@ func print_grid() -> void:
 	print("###")
 
 func create_grid() -> void:
-	
+	var grid_size := Vector2i(Global.config.grid_size * Global.config.grid_size_factor)
 	var starting_state : Dictionary[GridCell.ContentType, bool] = {
 		GridCell.ContentType.BELT: true,
 		GridCell.ContentType.MACHINE: false,
@@ -56,10 +56,10 @@ func create_grid() -> void:
 	
 	grid = []
 	grid_flat = []
-	for y in range(GRID_SIZE.y):
+	for y in range(grid_size.y):
 		grid.append([])
 		
-		for x in range(GRID_SIZE.x):
+		for x in range(grid_size.x):
 			var cell := GridCell.new(Vector2i(x,y))
 			grid[y].append(cell)
 			grid_flat.append(cell)
@@ -212,8 +212,10 @@ func place_baskets() -> void:
 		#return a.dist_avg < b.dist_avg
 	#)
 	
-	var num_baskets : int = min(cells_reachable.size(), Global.config.max_num_baskets)
-	if num_baskets < Global.config.min_num_baskets:
+	var min_b := int(round(Global.config.min_num_baskets * Global.config.basket_quantity_factor))
+	var max_b := int(round(Global.config.max_num_baskets * Global.config.basket_quantity_factor))
+	var num_baskets : int = min(cells_reachable.size(), max_b)
+	if num_baskets < min_b:
 		generation_failed = true
 		return
 	

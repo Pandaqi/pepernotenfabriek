@@ -241,11 +241,11 @@ Tiamo
 
 
 
+fcd186
 
 @TODO VOOR SPEL:
 
 * UITLEGPLAATJES
-* Settings + Localization (specifiek voor spel)
 
 
 REMEMBER: When doing object pooling, have a delay before giving it back, to make sure it has probably turned off physics and finished tweens and stuff before it's being reused. Current solution = add back to back, pop from front, which makes it very unlikely it's reused.
@@ -253,11 +253,10 @@ REMEMBER: When doing object pooling, have a delay before giving it back, to make
 
 **THEME/SETTINGS ISSUES LEFT**:
 
-* SETTINGS IN DEFAULTS
-  * TUTORIAL
-  * TUTORIAL SCALE/FONT SIZE 
-  * CLICK_INSTRUCTION_TO_LOGIN
+* Also add default setting for tutorial_delay_remove?
 * `use_system_fonts` does not _immediately_ refresh those with "custom font overrrides". Is that bad? Or should I find a different system for that anyway? Is there a way to differentiate 2 labels within the same theme? (One `LabelBody` and one `LabelHeading`? **No, don't think so.**)
+
+* Maybe I went a little overboard on the hue_rotate ... or at least for a bright orange/beige it's weird that it picks greens?
 
 * **The button instructions can be much smaller and more concise.** No need for the whole panel around it. That would also fit more instructions. Just a Nintendo-style "button/icon + small outlined text" would be fine, no?
 * The buttons for the all-important pause menu (Escape/Gamepad??/Touch??) should be much better explained. => Show this on the PAUSE MENU, as that's where you start each game anyway + reminds you how to get away.

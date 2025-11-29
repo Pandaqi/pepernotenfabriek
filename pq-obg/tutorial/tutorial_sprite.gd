@@ -14,6 +14,8 @@ var stage : TutorialStage
 @export var margin_container : MarginContainer
 @export var margin_container_texture : MarginContainer
 
+@export var timer : Timer
+
 var backgrounds : Dictionary[TutorialStage.Type, AtlasTexture] = {
 	TutorialStage.Type.OBJECTIVE: preload("res://pq-obg/tutorial/textures/tutorial_bg_objective.tres"),
 	TutorialStage.Type.GAME_OVER: preload("res://pq-obg/tutorial/textures/tutorial_bg_game_over.tres"),
@@ -29,6 +31,9 @@ var type_to_heading_key : Dictionary[TutorialStage.Type, String] = {
 	TutorialStage.Type.BUTTON_HOLD: "TUT_BUTTON_HOLD_HEADING",
 	TutorialStage.Type.GAMEPLAY: "TUT_GAMEPLAY_HEADING"
 }
+
+func _ready() -> void:
+	timer.timeout.connect(_on_timer_timeout)
 
 func set_stage(s:TutorialStage) -> void:
 	stage = s
@@ -56,21 +61,20 @@ func set_stage(s:TutorialStage) -> void:
 	hide()
 
 func refresh_size(factor:float) -> void:
-	var base_size := 256.0
-	
-	label_heading_icon.custom_minimum_size.x = factor * (48.0 / base_size)
-	heading_hbox.add_theme_constant_override("separation", int(factor * 24.0 / base_size))
-	heading_hbox.custom_minimum_size.y = factor * 42.0 / base_size
+	# @NOTE: the base size for all these values is 256,256---but that doesn't matter here now
+	label_heading_icon.custom_minimum_size.x = factor * 48.0
+	heading_hbox.add_theme_constant_override("separation", int(factor * 24.0))
+	heading_hbox.custom_minimum_size.y = factor * 42.0
 	
 	# the container that has the whole thing
-	var m : int = int(factor * (8.0 / base_size))
+	var m : int = int(factor * 8.0)
 	margin_container.add_theme_constant_override("margin_left", m)
 	margin_container.add_theme_constant_override("margin_right", m)
 	margin_container.add_theme_constant_override("margin_top", m)
 	margin_container.add_theme_constant_override("margin_bottom", int((20/8.0) * m))
 	
 	# the container that has the tutorial texture
-	var mt : int = int(factor * (16.0 / base_size))
+	var mt : int = int(factor * 16.0)
 	margin_container_texture.add_theme_constant_override("margin_left", mt)
 	margin_container_texture.add_theme_constant_override("margin_right", mt)
 	margin_container_texture.add_theme_constant_override("margin_top", mt)
@@ -78,5 +82,16 @@ func refresh_size(factor:float) -> void:
 
 func appear() -> void:
 	show()
-	# @TODO: tween/animate this in a nicer way?
-	# @TODO: also set a timer for REMOVING it again after a while
+	Global.tween.play_fadein_tween(self, 1.0)
+	
+	# @TODO: handle it gracefully when pause menu is closed
+	timer.stop()
+	timer.wait_time = Global.config_shared.tutorial_delay_remove
+	var should_remove := timer.wait_time > 0.03
+	if should_remove:
+		timer.start()
+
+func _on_timer_timeout() -> void:
+	var tw := Global.tween.play_fadeout_tween(self, 1.0)
+	await tw.finished
+	hide()

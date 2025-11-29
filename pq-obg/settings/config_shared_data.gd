@@ -136,13 +136,14 @@ class_name ConfigSharedData
 @export var game_victory_conversion := Objective.VictoryConversion.RANKING
 
 @export_group("Tutorial")
+@export var tutorial_enabled := true
 @export var tutorials : Array[TutorialStage] = []
 @export var tutorials_debug : Array[TutorialStage] = []
-@export var tutorial_delay := 3 # seconds before next tutorial appears
+@export var tutorial_delay := 5.5 # seconds before next tutorial appears
+@export var tutorial_delay_remove := 5.0 # seconds before that tutorial fades away again
 @export var tutorial_scale := 1.0
 @export var tutorial_heading_font_size : int = 16
 @export var tutorial_content_font_size : int = 16
-@export var tutorial_enabled := true
 @export var tutorial_only_once := false # if so, doesn't repeat the tutorial any time you pause
 
 @export_group("UI")

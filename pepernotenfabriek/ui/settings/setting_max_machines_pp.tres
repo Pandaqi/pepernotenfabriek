@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bbwq8whwhav6q"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_ix8xc"]
+
+[resource]
+script = ExtResource("1_ix8xc")
+type = 2
+type_display = 1
+key = "max_machines_per_player"
+label = "SETTING_MAX_MACHINES_PP"
+min_value = 1.0
+max_value = 8.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

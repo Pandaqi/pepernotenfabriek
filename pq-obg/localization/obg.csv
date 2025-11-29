@@ -15,10 +15,10 @@ GO_MESSAGE,Press a button to go back to menu or restart with current settings.,K
 GO_CONTINUE,Continue,Doorgaan
 GO_QUIT,Quit,Afsluiten
 GO_PLAY_AGAIN,Play Again,Speel opnieuw
-TUT_OBJECTIVE_HEADING,Objective,Doel,
-TUT_GAME_OVER_HEADING,Game Over,Speleinde,
-TUT_BUTTON_PRESS_HEADING,Button Press,Knop Loslaten
-TUT_BUTTON_HOLD_HEADING,Button Hold,Knop Vasthouden
+TUT_OBJECTIVE_HEADING,Objective,Doel
+TUT_GAME_OVER_HEADING,Game Over,Einde spel
+TUT_BUTTON_PRESS_HEADING,Button Press,Knop loslaten
+TUT_BUTTON_HOLD_HEADING,Button Hold,Knop vasthouden
 TUT_GAMEPLAY_HEADING,Gameplay,Spelregels
 SETTINGS_RESET_ALL,Reset All,Alles herstellen
 SETTINGS_CLOSE,Close,Teruggaan
@@ -60,10 +60,16 @@ ST_ALLOW_DYN_LOGOUT,Allow removing players while playing?,Mogen spelers uitlogge
 ST_ALLOW_DYN_LOGOUT_TT,Allows adding a player when not paused.,Staat toe dat spelers erbij komen terwijl het spel niet is gepauzeerd.
 ST_ALLOW_DYN_LOGIN,Allow adding players while playing?,Mogen spelers inloggen tijdens het spelen?
 ST_ALLOW_DYN_LOGIN_TT,Allows removing a player when not paused.,Staat toe dat spelers het spel verlaten terwijl het spel niet is gepauzeerd.
+ST_INPUT_LOGIN_CLICK,Login with instruction click,Spelers toevoegen door instructie klikken
+ST_INPUT_LOGIN_CLICK_TT,Also allows adding a player by simply clicking the instruction that tells you what to press.,Staat toe dat je ook spelers kan inloggen door simpelweg op de instructie te klikken die vertelt waarop je moet drukken.
 ST_FULLSCREEN,Fullscreen,Volledig scherm
 ST_FULLSCREEN_TT,Makes the game fullscreen (instead of windowed).,Laat het spel het volledige scherm in beslag nemen.
+ST_TUT_ENABLED,Enable Tutorial,Laat uitlegplaatjes zien
+ST_TUT_ENABLED_TT,Show simple images at the start to explain how to play the game.,Laat simpele uitlegplaatjes zien aan het begin van het spel zodat je weet hoe je moet spelen.
 ST_TUT_SCALE,Tutorial Image Scale,Grootte uitlegplaatjes
 ST_TUT_SCALE_TT,How large the images should be that explain how to play at the start.,Hoe groot de plaatjes moeten zijn die uitleggen hoe je het spel speelt.
+ST_TUT_FONT_SIZE,Tutorial Font Size,Uitleg tekstgrootte
+ST_TUT_FONT_SIZE_TT,"If the tutorial images are text-based, this decides how large that text is.","Als de uitleg via tekst gedaan wordt, dan bepaald dit de grootte daarvan."
 ST_TUT_DELAY,Delay between tutorial images,Vertraging tonen uitlegplaatjes
 ST_TUT_DELAY_TT,How much time the system waits before showing the next explanation image.,Hoe lang het systeem wacht voordat het doorgaat naar het volgende uitlegplaatje.
 ST_BUTTON_VIS_SCALE,Button Hint Scale,Grootte speelknoppen

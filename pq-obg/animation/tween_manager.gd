@@ -14,3 +14,17 @@ func play_shrink_tween(obj:Node2D) -> Tween:
 	var tw := get_tree().create_tween()
 	tw.tween_property(obj, "scale", Vector2.ZERO, base_duration)
 	return tw
+
+func play_fadein_tween(obj:Node, dur := base_duration) -> Tween:
+	obj.modulate.a = 0.0
+	
+	var tw := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tw.tween_property(obj, "modulate:a", 1.0, base_duration)
+	return tw 
+
+func play_fadeout_tween(obj:Node, dur := base_duration) -> Tween:
+	obj.modulate.a = 1.0
+	
+	var tw := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tw.tween_property(obj, "modulate:a", 0.0, base_duration)
+	return tw 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="4_an53l"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="4_u3wn5"]
 
-[node name="TutorialSprite" type="Control" unique_id=1073214069 node_paths=PackedStringArray("texture_background", "texture_content", "label_heading", "label_content")]
+[node name="TutorialSprite" type="Control" unique_id=1073214069 node_paths=PackedStringArray("texture_background", "texture_content", "label_heading", "label_content", "label_heading_icon", "heading_hbox", "margin_container", "margin_container_texture")]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 3
 anchors_preset = 8
@@ -20,6 +20,10 @@ texture_background = NodePath("TextureBackground")
 texture_content = NodePath("MarginContainer/VBoxContainer/Control/MarginContainer/TextureContent")
 label_heading = NodePath("MarginContainer/VBoxContainer/HBoxContainer/LabelHeading")
 label_content = NodePath("MarginContainer/VBoxContainer/Control/MarginContainer/LabelContent")
+label_heading_icon = NodePath("MarginContainer/VBoxContainer/HBoxContainer/LabelHeadingIcon")
+heading_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer")
+margin_container = NodePath("MarginContainer")
+margin_container_texture = NodePath("MarginContainer/VBoxContainer/Control/MarginContainer")
 
 [node name="TextureBackground" type="TextureRect" parent="." unique_id=1841029731]
 layout_mode = 1
@@ -87,6 +91,7 @@ texture = ExtResource("4_an53l")
 stretch_mode = 5
 
 [node name="LabelContent" type="Label" parent="MarginContainer/VBoxContainer/Control/MarginContainer" unique_id=917952514]
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("4_u3wn5")
@@ -94,3 +99,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Lalalala"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="." unique_id=714718452]
+one_shot = true

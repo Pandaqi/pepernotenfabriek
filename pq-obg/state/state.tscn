@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://c51fddt4uf8oa"
 [node name="PauseMenu" parent="." unique_id=1738070768 instance=ExtResource("4_mwql8")]
 
 [node name="Tutorial" type="Control" parent="." unique_id=185661830 node_paths=PackedStringArray("container")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

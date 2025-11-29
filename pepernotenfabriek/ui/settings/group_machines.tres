@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=8 format=3 uid="uid://c6fwunhv1pw32"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_u86a8"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_ek345"]
+[ext_resource type="Resource" uid="uid://canvjinn7t4dt" path="res://pepernotenfabriek/ui/settings/setting_aim_assistance.tres" id="3_c5vv4"]
+[ext_resource type="Resource" uid="uid://r5qpj0ncid84" path="res://pepernotenfabriek/ui/settings/setting_bullet_speed.tres" id="4_5qdv7"]
+[ext_resource type="Resource" uid="uid://bq8atghfmydwl" path="res://pepernotenfabriek/ui/settings/setting_machine_rotate.tres" id="5_4fx4d"]
+[ext_resource type="Resource" uid="uid://buxjd7b2hvnqa" path="res://pepernotenfabriek/ui/settings/setting_machine_rotate_held.tres" id="6_raxrp"]
+[ext_resource type="Resource" uid="uid://bbwq8whwhav6q" path="res://pepernotenfabriek/ui/settings/setting_max_machines_pp.tres" id="7_qreea"]
+
+[resource]
+script = ExtResource("1_u86a8")
+settings = Array[ExtResource("2_ek345")]([ExtResource("3_c5vv4"), ExtResource("4_5qdv7"), ExtResource("5_4fx4d"), ExtResource("6_raxrp"), ExtResource("7_qreea")])
+label = "SETTING_GROUP_MACHINES"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

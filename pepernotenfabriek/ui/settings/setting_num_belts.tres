@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://bexwkk6donqt7"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_7vfoc"]
+
+[resource]
+script = ExtResource("1_7vfoc")
+type = 2
+type_display = 1
+key = "num_belts"
+label = "SETTING_NUM_BELTS"
+min_value = 1.0
+max_value = 6.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"
