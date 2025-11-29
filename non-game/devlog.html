@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>De Pepernotenfabriek &lpar;Dagboek&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="de-pepernotenfabriek-dagboek">De Pepernotenfabriek (Dagboek)</h1>
+<p>Welkom bij dit &quot;speldagboek&quot; voor <strong>De Pepernotenfabriek</strong>. Het is een simpel computerspel dat ik maakte voor Sinterklaas, bedoeld om te spelen met meerdere kinderen (of &quot;de hele familie&quot;) achter hetzelfde scherm. Het was ook mijn tweede &quot;test&quot; voor mijn idee en systeem voor &quot;One Button Games&quot;. Daarom leek het mij interessant om even op te schrijven wat ik heb gedaan en wat ik heb geleerd :)</p>
+<h2 id="wat-is-het-idee">Wat is het idee?</h2>
+<p>Je runt samen een &quot;pepernotenfabriek&quot;.</p>
+<ul>
+<li>Over het scherm loopt een simpele loopband.</li>
+<li>Elke speler krijgt één knopje.</li>
+<li>Dat knopje is verbonden met een machine naast die loopband. Als je op de knop drukt, activeer je jouw machine en duwt wat voor je ligt van de loopband.</li>
+<li>Achter de loopband staan simpele bakken waarin de voorwerpen kunnen vallen. Bijvoorbeeld: pepernoten moeten in de mand met het plaatje van een pepernoot.</li>
+</ul>
+<p>Het doel is natuurlijk om <strong>de juiste dingen op de juiste plekken te krijgen</strong>. Jij moet <em>niet</em> op de knop drukken als er iets langs komt dat niet in jouw mand moet. Je moet <em>wel</em> op tijd drukken om de juiste dingen in jouw mand te duwen.</p>
+<p>Dit voelde als een van de meer simpele en directe ideeën die ik had. Druk op knop = je machine gaat even aan. Een loopband die standaard dingen van links naar rechts over je scherm beweegt is ook makkelijk begrijpen en semi-makkelijk te maken.</p>
+<p>Het voelde ook alsof het iets <em>meer</em> moest hebben dan dit. Anders was het te makkelijk. Jij bent de pepernootmachine? Dan druk je op de knop als er een pepernoot langskomt, anders niet. Niet zo veel aan.</p>
+<p>Dus ik hield al in mijn achterhoofd dat ik mijn code wat &quot;flexibeler&quot; moest schrijven. Want misschien werkt het spel beter ...</p>
+<ul>
+<li>Met <em>twee loopbanden</em>.</li>
+<li>Of met loopbanden die <em>schuin</em> gaan.</li>
+<li>Of als iedereen <em>twee machines</em> bestuurt, etcetera.</li>
+<li>Of als jouw machine ronddraait/beweegt zodat je niet altijd op dezelfde plak staat</li>
+<li>Of als de emmers waarin dingen moeten soms <em>veranderen</em>.</li>
+<li>Of misschien staan die emmers <em>ook</em> op een loopband, waardoor het steeds wisselt welke speler in staat is om welke pakjes af te leveren.</li>
+</ul>
+<h2 id="loopbanden-maken">Loopbanden Maken</h2>
+<p>In 3D is het een ander verhaal, maar in 2D is het redelijk simpel.</p>
+<ul>
+<li>Je rekent de grootte van de loopband uit. (Ik wil dat hij het hele scherm bestrijkt, dus dan gebruik je breedte van het scherm.)</li>
+<li>Je maakt een vierkant gebied dat even groot is en registreert of er dingen in of uit gaan. (Voor Godot is dat een <code>Area2D</code> met een <code>RectangleShape2D</code>, waarbij je luistert naar de signalen <code>body_entered</code> en <code>body_exited</code>)</li>
+<li>Zo kan je bijhouden wat er op elk moment op de loopband ligt. Elk frame duw je al die dingen in de richting van de loopband. (Dus als ik hem van links naar rechts laat lopen, dan tel ik <code>(1,0)</code> op bij de coördinaten van de pepernoten die erop liggen.)</li>
+</ul>
+<p>Als je dit redelijk algemeen opzet, dan zijn loopbanden in alle richtingen mogelijk. Door gewoon die richting te draaien (bijv. boven naar beneden), gaat de hele loopband anders.</p>
+<p>Ook werkt dit met meerdere loopbanden. Een pakje kan gewoon op beide loopbanden tegelijk liggen.</p>
+<p>Om dingen te laten verschijnen, plaats ik gewoon (eens in de zoveel tijd) iets aan het <em>begin</em> van de loopband. Het zal vanzelf het scherm op komen, de hele weg afleggen, en er aan het einde weer afgaan.</p>
+<p><strong>Werkt dit?</strong> Ja, dit werkte eigenlijk meteen de eerste keer. Dat is best zeldzaam bij spellen maken.</p>
+<h2 id="machines-maken">Machines Maken</h2>
+<p>Let op dat alle pepernoten (of &quot;dingen die op de loopband kunnen liggen&quot;) dus worden geregeld door de &quot;physics&quot;. Dat is het ingebouwde systeem in alle game engines dat checkt of dingen tegen elkaar botsen of elkaar raken, en dan de juitse krachten uitrekent.</p>
+<p>De algemene regel is dat je physics lekker z'n ding moet laten doen. Niet van bovenaf dingen opleggen, of krachten manipuleren, of wat dan ook. Bijvoorbeeld, dingen kunnen niet teleporteren in het echt, dus als jij ineens iets van plaats verandert dan wordt het hele physics systeem gek en krijg je fouten/crashes!</p>
+<p>Als je physics gebruikt, doe dan <em>alles</em> via dat systeem. Daarom koos ik voor de volgende methode voor de machines.</p>
+<ul>
+<li>De machine &quot;arm&quot; is een vierkant &quot;physics&quot; lichaam.</li>
+<li>Als je op de knop drukt, geef ik die arm een hele hoge kracht naar voren (richting de loopband).
+<ul>
+<li>Hoe <em>langer</em> je je knop ingedrukt hield, hoe groter die kracht. Je duwt dan dus verder en harder.</li>
+</ul>
+</li>
+<li>Elk frame vraag ik &quot;goh, hoe ver is die arm inmiddels weggevlogen van de machine?&quot;
+<ul>
+<li>Hoe verder dit is, hoe harder ik de arm weer terugduw.</li>
+<li>Totdat hij uiteindelijk weer netjes terug in de machine komt.</li>
+</ul>
+</li>
+</ul>
+<p>Dit zorg ervoor dat ik niet &quot;van buitenaf&quot; dingen moet verplaatsen of stilzetten, maar het helemaal door physics kan laten regelen. Pakjes kunnen nu op allerlei unieke manieren wegstuiteren, afketsen, worden afgeleverd, etcetera. (Unieke manieren, maar ook <em>realistisch en voorspelbaar voor spelers</em>.) Dit heeft het extra voordeel dat ik andere grappige soorten machines hiermee kan proberen. (Dat kan niet als ik die arm een vaste animatie maak, of altijd op exact dezelfde manier/exact dezelfde afstand laat bewegen.)</p>
+<p><strong>Werkt dit?</strong> Nee! Nou, ja, het werkt alleen als de machine stilstaat. Zodra hij gaat bewegen of draaien, werkt dit niet meer. Dan kan je bijvoorbeeld de arm wegschieten, en terwijl hij uitgeschoven is draait de machine verder, en dan kan de arm niet meer fatsoenlijk terugkomen, want hij is nog gedraaid zoals toen hij werd weggeschoten! Van die stomme dingen die je meteen ziet als je het hebt gebouwd, maar die je nooit bedenkt als je het originele idee opschrijft.</p>
+<p>Ik moet toegeven dat ik een uur heb lopen puzzelen met allerlei mogelijke oplossingen hiervoor. Physics blijft soms een beetje een duistere magie waarbij je net even dat trucje moet vinden om de game engine te laten doen wat je wilt. Moest ik toch niet via physics werken? Moest ik de arm daadwerkelijk langer/korter maken ipv uitschuiven? Moest ik iets heel anders proberen?</p>
+<p>Uiteindelijk was het trucje om <strong>rails te bouwen rondom de uitschuifarm</strong>.</p>
+<ul>
+<li>De arm zit vast aan de machine met een speciale &quot;joint&quot;. (Een <code>GrooveJoint</code> in dit geval; vrijwel alle game engines hebben dit soort dingen ingebouwd).</li>
+<li>Deze joint zegt &quot;deze twee dingen mogen alleen in één richting bewegen ten opzichte van elkaar&quot;. (In dit geval natuurlijk de richting waarin de machine kijkt/de arm uitschuift.)</li>
+<li>In alle andere richtingen blijven ze dus aan elkaar vastzitten! Dus als de machine draait, dan draait de arm netjes mee, en tegelijkertijd kan hij nog steeds uitgeschoven.</li>
+<li>MAAR! De arm draait dan ook om z'n eigen as, in plaats van netjes vooruit te blijven wijzen. Want ja, dat is realistisch. In het echt draaien dingen vrijuit ... tenzij je ze tegenhoudt.
+<ul>
+<li>Dus elke machine heeft stiekem twee rechthoeken langs de uitschuifarm (links en rechts, heel dicht erop) die hem &quot;in het gareel houden&quot;.</li>
+<li>Die rechthoeken zijn net zo lang als de maximale lengte waarop de arm kan uitschuiven. Dus hoe ver hij ook uitschuift, hij blijft gedraaid zoals je verwacht.</li>
+<li>(Alle andere dingen in het spel botsen <em>niet</em> met deze onzichtbare &quot;veiligheidsrails&quot;.)</li>
+</ul>
+</li>
+</ul>
+<p>@TODO: PLAATJE HIERVAN (OPMERKING: De cirkel is dan de machine, de middelste van de drie rechthoeken is degene die daadwerkelijk los zit en kan bewegen.)</p>
+<p>Op deze manier kan ik de machines laten draaien, bewegen, en uitschuiven volledig via de &quot;physics&quot;. Dit betekent dat alle botsingen enzo altijd kloppen, welke rare pakjes ik ook op de loopband gooi en wanneer je ook de knop gebruikt.</p>
+<p>Dit proces zette mij echter wel aan het denken dat er misschien leukere/andere manieren zijn om dit spel te besturen.</p>
+<ul>
+<li>De machines zouden pepernoten kunnen <em>schieten</em>. Da's veel makkelijker: je vuurt gewoon een klein bolletje af en dat is het.</li>
+<li>De machines zouden gewoon een vaste arm kunnen hebben (in plaats van uitschuiven), en jouw knop laat de machine slechts <em>draaien</em>.</li>
+<li>Etcetera</li>
+</ul>
+<p>Allemaal opties om later te bekijken. Voor nu werkt mijn originele idee met de uitschuifmachines.</p>
+<h2 id="pepernoten-afleveren">Pepernoten Afleveren</h2>
+<p>Dit is vrij simpel vergeleken met de rest.</p>
+<ul>
+<li>Ik maak weer een <code>Area</code>, en deze keer op <code>body_entered</code> checkt hij of het een pakje is. Zo ja, dan is het nu afgeleverd.</li>
+<li>Ik maak een plaatje van &quot;hier afleveren&quot; dat even groot is als die Area.</li>
+</ul>
+<p>Het interessante deel hier is denk ik dat ik &quot;object pooling&quot; gebruik.</p>
+<ul>
+<li>Ik zou de hele tijd pakjes kunnen <em>maken</em>, en dan weer kunnen <em>vernietigen</em> als ze in de container belanden.</li>
+<li>Maar maken en vernietigen zijn vaak de zwaarste dingen voor een game engine, en ze kunnen dus ook de physics in de war brengen.</li>
+<li>In plaats daarvan maak ik (helemaal aan het begin) een &quot;pool&quot; van 30 pakjes. En die worden gewoon steeds hergebruikt.
+<ul>
+<li>We hebben een pakje nodig? Haal de eerste uit de pool en gooi hem op de loopband.</li>
+<li>Een pakje is afgeleverd? Maak hem onzichtbaar en gooi hem terug in de pool.</li>
+</ul>
+</li>
+</ul>
+<p>Dit is lekker efficiënt en zet tegelijkertijd een mooie limiet op het maximale aantal pakjes.</p>
+<p>{{% remark %}}
+In oudere spellen van mij vergat ik dat wel eens, en vervolgens deden mijn spelers hun uiterste best om 100+ dingen op het scherm te laten komen en de computer te laten crashen. Limieten zijn goed! Restricties zorgen voor creativiteit!
+{{% /remark %}}</p>
+<h2 id="de-fabriek-maken">De Fabriek Maken</h2>
+<p>Ondertussen heb ik een nachtje geslapen. De volgende ochtend wil ik beginnen met de fabriek maken, oftewel, hij &quot;genereert&quot; willekeurig wat loopbanden en machines waarmee je speelt.</p>
+<p>En dan zie ik een (achteraf overduidelijk) probleem.</p>
+<ul>
+<li>One Button Games kunnen meestal van 2 tot 6 of 8 spelers.</li>
+<li>Tegelijkertijd moet de fabriek zodanig zijn gebouwd dat je altijd een kans hebt om een pakje in een emmer te krijgen. Als het pakje bijvoorbeeld nooit langs jou komt, of de emmer ervoor staat niet aan de andere kant, dan... kan je hem letterlijk niet afleveren!</li>
+<li>Dus hoe garanderen we dat?</li>
+<li>En hoe werkt dat als het aantal spelers---en dus het aantal machines---niet altijd hetzelfde is?</li>
+</ul>
+<p>Meestal bedenkt je hoofd dan een aantal oplossingen die vast heel netjes zouden werken, maar ook véél te complex of tijdrovend zijn. Bijvoorbeeld,</p>
+<ul>
+<li>Ik zou kunnen zeggen &quot;één loopband per 2 spelers&quot;. Dus zodra een 3e speler inlogt, verschijnt plots een <em>tweede loopband</em> in de fabriek, waar zij dan verantwoordelijk voor zijn.</li>
+<li>Ik zou de loopband kunnen veranderen naar een <em>pad</em> (ipv gewoon een rechte lijn). Zo kan je een cirkel maken, wat garandeert dat iets natuurlijk overal langskomt. Nieuwe spelers krijgen gewoon een nieuwe machine ergens op een lege plek langs dit pad/deze cirkel.</li>
+<li>En meer van dit soort ingenieuze oplossingen.</li>
+</ul>
+<p>Maar ik wil dit graag klein en simpel houden. Dus ik bedacht het volgende voor de fabrieksgeneratie,</p>
+<ul>
+<li>Houdt stiekem een &quot;grid&quot; bij. (Dus je deelt het scherm op in nette vakjes.) Dit is puur om op te slaan waar al dingen staan, zodat je weet welke vakjes nog leeg zijn.</li>
+<li>Plaats eerst ~3 loopbanden. (En alle gridvakjes die ze gebruiken, die markeer je dus als &quot;vol&quot;!)</li>
+<li>Plaats vervolgens 6 machines op vakjes langs de loopbanden. (Ook die vakjes zijn nu natuurlijk &quot;vol&quot;.)</li>
+<li>En nu komt de truc,
+<ul>
+<li>Ga langs alle overgebleven vakjes.</li>
+<li>Trek een lijn van dat vakje naar elke machine.</li>
+<li>Als er tenminste één zo'n lijn is die <em>kruist met een loopband</em>, dan weet je dus het volgende: er staat een machine aan de <em>ene kant</em> van de loopband, en deze emmer zou aan de <em>andere kant</em> komen. Dus hij is bereikbaar. Hier kan je een emmer plaatsen!</li>
+<li>Ik geef voorkeur aan vakjes die zoveel mogelijk machines kunnen bereiken + zo dicht bij de loopband mogelijk staan. Dáár plaats ik emmers.</li>
+</ul>
+</li>
+</ul>
+<p>En wat als er minder dan die 6 spelers zijn? Dan worden de machines gewoon <em>verdeeld</em> over de spelers. <strong>Sommige spelers besturen dus twee machines tegelijk.</strong></p>
+<p>Het is niet perfect. Ook nu kan je toevallig een fabriek krijgen die net wat minder speelbaar is, bijvoorbeeld doordat machines net in elkaars lijn zitten. Het is wel de meest simpele/efficiënte manier om al deze problemen in één klap op te lossen.</p>
+<p>De <em>breedte</em> van de loopbanden is identiek aan die van vakjes in het grid. Dat leek me een goed ijkpunt. De machines en emmers zijn net ietsje kleiner zodat ze fijn in één vakje passen met wat witruimte eromheen.</p>
+<p>O ja, iets wat dit algoritme duizend keer beter maakte was om een maximale afstand te hebben tussen machines. Dus het telt alleen &quot;deze emmer kan worden bereikt door machine X&quot; als hij behoorlijk dichtbij staat (binnen 4 gridvakjes volgens mij). Die ene regel code maakt de hele fabriek een stuk mooier en speelbaarder dan eerst.</p>
+<h2 id="lastige-keuzes-maken">Lastige Keuzes Maken</h2>
+<p>Zoals ik aan het begin al vermoedde: met één loopband, en de machines netjes ernaast, is het spel gewoon niet echt een spel. Je drukt op de knop als precies jouw pakje langskomt, en dat is het.</p>
+<p>Meerdere loopbanden maakt het al beter, maar dan moet je de machines dus draaien (of een veel slimmer algoritme schrijven voor genereren van de fabriek).</p>
+<p>En als machines moeten draaien, en eventueel een redelijke afstand moeten overbruggen ... dan werkt zo'n uitschuifarm niet meer. Dan moet je dingen kunnen afvuren / over grotere afstand werken.</p>
+<p>En als je dus zoveel vrijheid hebt, dan moet ik eigenlijk ook toestaan dat pakjes niet worden opgepikt door &quot;foute&quot; containers (maar eroverheen vliegen). Want nu krijg je soms fabrieken waarbij emmers achter elkaar staan en je moet toch echt dat pakje eerst langs die andere emmer krijgen.</p>
+<p>Dit soort dingen worden altijd vrij snel duidelijk nadat je iets hebt gemaakt. Meestal is dat eerste idee ook helemaal niet goed, en dan voelt het een beetje alsof je tijd hebt verspild (&quot;ugh waarom werken mijn ideeën nooit in één keer&quot;). Maar dat is dus niet zo, want dit was nodig om te zien hoe het wel moest.</p>
+<p>Uiteindelijk moet ik mezelf steeds herinneren dat het gaat om <em>een leuk spel</em>. Houd dingen simpel. Kies gewoon iets wat grappig en speels is, dat is belangrijker dan dat iets helemaal &quot;eerlijk&quot; of &quot;speelbaar&quot; is.</p>
+<p>Dus het werd...</p>
+<ul>
+<li>Pepernoten afvuren vanuit je machine.</li>
+<li>Die pepernoten herladen alleen als ze uit het scherm vliegen. Dus je kan ook gewoon verliezen door te slecht te schieten en je hele fabriek vol stilstaande pepernoten te hebben.</li>
+<li>Die pepernoten knallen tegen pakjes, en zo moeten ze in de emmer.</li>
+<li>Het is bijna logisch, hoe je zo'n fabriek runt :p</li>
+</ul>
+<p>Dat is het algemene idee. Er waren ook een hoop kleine dingetjes die het spel fijner maakten.</p>
+<ul>
+<li>Ik veranderde de code voor loopbanden om ze &quot;strenger&quot; te maken. Een pakje behoort maar tot één loopband (dat is gewoon leuker spelen dan als er twee of drie banden tegelijk aan kunnen sjorren). Ook trekt de loopband harder om het pakje &quot;in het gareel&quot; te krijgen, zodat ze duidelijker meegaan met de band.</li>
+<li>Er zit een limiet op de hoeveelheid pakjes, en hoe snel ze verschijnen, op basis van het <em>aantal actieve spelers</em>. Met meer spelers kan je veel meer pakjes aan; als je met maar 2 spelers bent is datzelfde aantal natuurlijk al snel overweldigend.</li>
+<li>Ik maakte de pepernoten die je schiet een stuk groter dan eerst. (Eerst waren het meer &quot;kogels&quot;, meer &quot;realistische grootte&quot;.) Dat maakt ze gewoon beter zichtbaar en maakt het makkelijker om dingen te raken.</li>
+</ul>
+<p>Het allerlastigste was het spel speelbaar maken voor zowel 2 spelers als (maximaal) 8 spelers. Ik was een paar uur bezig met van alles testen, zoals</p>
+<ul>
+<li>Iedereen bestuurt één machine, maar je kan switchen door heel snel/kort je knop in te drukken. (Met 2 spelers moet je dan alsnog de hele tijd tussen 4 machines heen en weer, en dat was gewoon te lastig.)</li>
+<li>De machines worden volledig opgedeeld. (Met 2/3 spelers schiet elke speler dan de hele tijd 3/4 pepernoten tegelijk, en dat is een rotzooi.)</li>
+<li>Ik schakel gewoon alle overbodige machines uit. (Maakt het spel weer overzichtelijk en simpel, maar zorgt dus ook dat je allerlei pakjes überhaupt nooit had kunnen raken ... omdat die machines dus weg zijn.)</li>
+<li>Maar als ik het aantal machines omlaag doe, of de kaart versimpel, is het spel weer saai/meh met 4(+) spelers.</li>
+</ul>
+<p>De wanhoop nabij zag ik toen eindelijk het licht :p</p>
+<ul>
+<li>Ik stel een &quot;maximum&quot; aantal machines per speler in. Dus zelfs met weinig spelers kan je er maar 2 tegelijk hebben.</li>
+<li>Maar je kan nog steeds <em>switchen</em> van machine---maar dan <em>allebei tegelijk</em>.</li>
+<li>Zo kan één speler effectief 4 machines hebben (of je bestuurt A+B, of je bestuurt C+D). Dat is overzichtelijk, dat is te doen, dat is &quot;speelbaar&quot;.</li>
+<li>Tegelijkertijd kan je zo dus zelfs met 2 spelers de volledige fabriek beslaan.</li>
+</ul>
+<h2 id="een-speelbaar-spel">Een speelbaar spel</h2>
+<p>Het grote probleem met dit project was dat ik eigenlijk nooit had vastgelegd wat nou je <em>doel</em> was. Het is een coöperatief spel. Het moet ook te spelen zijn met jonge kinderen, op bijv Sinterklaasavond. Dus iets heel competitiefs zag ik niet zitten, en iets heel strengs ook niet (zoals verliezen/doodgaan als je 10 pakjes hebt gemist bijvoorbeeld),</p>
+<p>Het spel moet luchtig en grappig blijven. Het is expres lastig om de fabriek te besturen, dus foute pakjes moeten geen (grote) straf hebben. Het moet juist grappig zijn---het moet goed voelen als je wél een paar dingen op rij goed aflevert. Het moet <em>simpel</em> zijn.</p>
+<p>Zo kwam ik uit bij het volgende doel.</p>
+<ul>
+<li>Er is wel een score, maar die is niet cruciaal (zodat kinderen die getallen nog niet kennen ook begrijpen of ze goed bezig zijn)</li>
+<li>Je wilt gewoon &quot;genoeg dingen klaarmaken&quot;. Dus alles wat je aflevert brengt je verder richting &quot;100%&quot;.
+<ul>
+<li>Als in: het spel eindigt als je daar komt (je hebt X dingen goed afgeleverd). Je <em>score</em>, die het eindscherm prominent toont, staat los daarvan.</li>
+</ul>
+</li>
+<li>Maar je wordt wel beloond voor minder dingen verspillen, natuurlijk. Namelijk:
+<ul>
+<li>COMBO (1): Het spel houdt bij wat jouw pepernoten raken. Zolang jij dingen raakt die uiteindelijk worden afgeleverd, gaat jouw &quot;streak&quot; door en scoor je meer punten voor alles wat jij aflevert.</li>
+<li>COMBO (2): Het spel houdt ook in het geheel bij of iets niet op tijd wordt afgeleverd. Als dat gebeurt, gaat de &quot;streak&quot; van je hele groep weer naar nul.</li>
+<li>LANGER HOUDBAAR: Andersom, als het niet zo lekker gaat, blijven dingen langer op het veld liggen voordat ze verdwijnen. Zo raak je nooit helemaal in een negatieve spiraal, want dat is niet leuk.</li>
+</ul>
+</li>
+</ul>
+<p>Nou goed, zoals je ziet duurt dit hele project al een stuk langer dan ik in eerste instantie had gepland. Maar ik leer weer een hele hoop nieuwe dingen, want ik heb bijvoorbeeld (op een of andere manier) nog nooit streaks/combos geprogrammeerd in een eerder spel. En uiteindelijk is iteratie toch het toverwoord voor spellen maken, nog meer dan bij alle andere creatieve uitingen.</p>
+<p>En dan ... is het eindelijk af.</p>
+<p>Met elk spelersaantal is de fabriek speelbaar. (Na een hoop finetunen van getalletjes, zoals altijd, lijkt de moeilijkheidsgraad en snelheid van dingen goed.) Het is overzichtelijk. Er komt wat geluk/pech bij kijken, maar je kunt ook echt beter worden in strategie en mikken van je pepernoten. Het is niet te erg/frustrerend als je een aantal dingen laat gaan of mist, maar je wilt wel echt foutloos blijven om je streak in leven te houden en zo veel meer punten te scoren.</p>
+<p>Ik voegde nog wat laatste geluidseffecten en animaties toe. Ik voegde nog wat laatste geniepige hulpmiddelen toe om spelers meer plezier te laten hebben, zoals vrijwel elk spel doet.</p>
+<p>De belangrijkste? <strong>Je wordt enorm geholpen bij het richten van je machine/pepernoten.</strong> Als je &quot;dichtbij genoeg&quot; bent, verandert hij je richting een beetje om je te helpen (&quot;aim assistance&quot;). De truc hier is natuurlijk dat het onzichtbaar is, dus als je echt verkeerd mikt gaat hij gewoon verkeerd. Maar als je in de buurt komt dan zal je sowieso iets raken. Dat werkt volgens een vrij simpel mechanisme.</p>
+<ul>
+<li>Reken de hoek uit tussen je machine en alle pakjes in het veld.</li>
+<li>Reken de hoek uit waarop je nu richt ( = de hoek waarin je normaal gesproken zou schieten, zonder aim assistance)</li>
+<li>Vind het pakje met de hoek die het <em>dichtste bij</em> jouw richthoek ligt.
+<ul>
+<li>Als je héél dichtbij bent, doe dan niks---je richt al goed.</li>
+<li>Als je er iets verder van af zit, duw je richting dan dichterbij die &quot;perfecte richting&quot; (maar niet helemaal---controle moet bij de speler blijven, en een beetje willekeurigheid maakt dit mooier.) Dus als je eronder zit, duw ik je hoek naar boven. Als je erboven zit, duw ik je hoek naar onder.</li>
+<li>Maar als je er nóg verder van af zit, doe dan weer helemaal niks---je schiet zo mis dat het systeem je lekker laat missen.</li>
+</ul>
+</li>
+</ul>
+<p>{{% remark %}}
+In eerste instantie deed ik dit met een &quot;homing algoritme&quot; op de pepernoten zelf. Dus terwijl ze vlogen, keken ze om zich heen en werden als magneten aangetrokken tot het dichtstbijzijnde pakje. Dit werkt doorgaans erg goed ... maar niet in een spel met zo'n klein veld en zoveel andere dingen die je zou kunnen raken. Het algoritme wordt afgeleid en doet niet vaak genoeg wat je wilt, en als je de magneet dan superkrachtig maakt is het té overduidelijk en ziet het er stom uit.</p>
+<p>Dus toen switchte ik naar de <em>machine</em>. Die corrigeert de richting <em>waarop je schiet</em> (helemaal aan het begin), daarna vliegt de pepernoot gewoon in een rechte lijn. Dat ziet er in dit geval veel natuurlijker uit, en het speelt echt veel fijner, want je mist dus niet drie keer op rij op een haar na hetzelfde pakje :p
+{{% /remark %}}</p>
+<p>@TODO VOOR SPEL:</p>
+<ul>
+<li>UITLEGPLAATJES</li>
+<li>Verplaats alles naar config
+<ul>
+<li>Settings + Localization</li>
+</ul>
+</li>
+</ul>
+<p>REMEMBER: When doing object pooling, have a delay before giving it back, to make sure it has probably turned off physics and finished tweens and stuff before it's being reused. Current solution = add back to back, pop from front, which makes it very unlikely it's reused.</p>
+<p><strong>THEME/SETTINGS ISSUES LEFT</strong>:</p>
+<ul>
+<li><code>use_system_fonts</code> does not <em>immediately</em> refresh those with &quot;custom font overrrides&quot;. Is that bad? Or should I find a different system for that anyway? Is there a way to differentiate 2 labels within the same theme? (One <code>LabelBody</code> and one <code>LabelHeading</code>? <strong>No, don't think so.</strong>)</li>
+<li>No, I do <em>not</em> actually read settings when bypassing menu at the moment. I should at least make that possible: just call SettingsReader function on all Global.config_shared.settings?</li>
+<li>Also style the TOGGLE (for CheckButton) and SCROLLBAR</li>
+<li>TUTORIAL: Has no text anymore by default (removed that from image), so I must add a label there with translated text myself
+<ul>
+<li>BUT WAIT, we also want to localize the IMAGES, so should I support just using TEXT in tutorial frame too?</li>
+</ul>
+</li>
+</ul>
+<p><strong>OTHER</strong>:</p>
+<ul>
+<li>FIX the fact that I need to wait one frame in the &quot;on_buttons_changed&quot; call -&gt; figure out why/control &quot;order&quot; of signals and stuff better myself
+<ul>
+<li>I think it's because it's a signal that activates/connects the input stuff, so you can't rely on things already being set/figured out immediately, must wait for next frame</li>
+<li>Is there a cleaner way to solve this issue for good?</li>
+</ul>
+</li>
+<li>Add more tweens to <code>TweenManager</code> and make that system more robust</li>
+<li>Explain GameOver / GameOverMenu / GameOverData in docs</li>
+<li>Move some of those modules (map bounds, pooling, etc) into OBG for standardized reuse?</li>
+<li>Implement automatic SAVING of older highscores and attempts (to display at game over screen)</li>
+<li><strong>Really, I should split pq-obg and pq-obg-tools</strong>. The first one has all the NECESSARY, INTERCONNECTED STUFF. The second one just has reusable modules, static functions, useful algorithms for stuff, etc.</li>
+<li>Probably also want a <strong>setting</strong></li>
+</ul>
+<p>SAMEN STOOMBOTEN:</p>
+<ul>
+<li>Do we NEED a tutorial?</li>
+<li>REFACTOR: Have fewer dependencies; if we do need them, INJECT them upon activation/ready</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

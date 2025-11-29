@@ -12,6 +12,9 @@ func kill() -> void:
 	is_broken.emit(self)
 	is_updated.emit(self)
 
+func is_active() -> bool:
+	return steps > 0
+
 func grow(ds := +1) -> void:
 	steps = clamp(steps + ds, 0, max_steps)
 	is_updated.emit(self)

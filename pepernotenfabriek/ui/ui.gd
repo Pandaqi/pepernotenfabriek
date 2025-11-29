@@ -6,7 +6,14 @@ class_name UI
 @export var target_label : Label
 @export var prog_bar : TextureProgressBar
 @export var map_data : MapData
+@export var state_data : StateData
+
 @export var anim_player_streak : AnimationPlayer
+@export var anim_player_score : AnimationPlayer
+
+@export var audio_player : AudioStreamPlayer
+
+@export var game_over_menu : GameOverMenu
 
 func _ready() -> void:
 	score.score_changed.connect(_on_score_changed)
@@ -17,17 +24,24 @@ func _ready() -> void:
 
 func _on_score_changed(s:float) -> void:
 	score_label.set_text(str(int(floor(s))))
+	anim_player_score.play("score")
 
 func _on_progress(ratio:float) -> void:
 	prog_bar.set_value(ratio)
+	update_target_label()
 
-func _on_target_changed(target:int) -> void:
-	target_label.set_text(str(target))
+func _on_target_changed(_target:int) -> void:
+	update_target_label()
+
+func update_target_label() -> void:
+	var string := str(score.gifts_delivered) + " / " + str(score.gifts_delivered_target)
+	target_label.set_text(string)
 
 func _on_game_over() -> void:
 	execute_machine_party_time()
-		
-	# @TODO: pause game, show screen
+	state_data.final_score = score.get_value()
+	game_over_menu.activate()
+	audio_player.play()
 
 func execute_machine_party_time() -> void:
 	var machines := map_data.machines
@@ -37,10 +51,9 @@ func execute_machine_party_time() -> void:
 			m.shoot_random()
 
 func _on_streak_updated(streak:ScoreStreak) -> void:
-	var ratio := streak.get_ratio()
-	if ratio < 0.25: 
+	if not streak.is_active(): 
 		anim_player_streak.stop()
 		return
 	
-	anim_player_streak.speed_scale = lerp(0.5, 2.0, ratio)
+	anim_player_streak.speed_scale = lerp(0.5, 2.0, streak.get_ratio())
 	anim_player_streak.play("score_streak")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddcriby0xa2bw"]
 
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="1_bbfh5"]
-[ext_resource type="Script" uid="uid://6v4if0eefs5c" path="res://pq-obg/ui/pause/pause_menu.gd" id="1_uv1md"]
-[ext_resource type="PackedScene" uid="uid://dgfewhemw8ofh" path="res://pq-obg/ui/pause/pause_overlay.tscn" id="2_r0jos"]
+[ext_resource type="Script" uid="uid://6v4if0eefs5c" path="res://pq-obg/game_loop/pause/pause_menu.gd" id="1_uv1md"]
+[ext_resource type="PackedScene" uid="uid://dgfewhemw8ofh" path="res://pq-obg/game_loop/pause/pause_overlay.tscn" id="2_r0jos"]
 [ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="3_r0jos"]
 [ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="4_xq5ji"]
 [ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="6_xq5ji"]

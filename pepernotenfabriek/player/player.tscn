@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lm7mmlvckyaq" path="res://pepernotenfabriek/player/player.gd" id="1_s0ber"]
 [ext_resource type="Script" uid="uid://5otym1ynh7vi" path="res://pepernotenfabriek/player/module_machines.gd" id="2_jtfek"]
-[ext_resource type="Script" uid="uid://cbh8pskekcq4r" path="res://pq-obg/tools/input/module_input.gd" id="3_7jauv"]
+[ext_resource type="Script" uid="uid://cbh8pskekcq4r" path="res://pq-obg/input/module_input.gd" id="3_7jauv"]
 [ext_resource type="AudioStream" uid="uid://bmx7p0w8ui40b" path="res://pepernotenfabriek/machine/machine_switch.mp3" id="3_s0ber"]
 [ext_resource type="Script" uid="uid://d0cl065fevm6l" path="res://pepernotenfabriek/score/score_streak.gd" id="5_jtfek"]
 

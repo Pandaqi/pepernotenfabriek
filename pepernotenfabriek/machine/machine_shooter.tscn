@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnyrjm2gdr6sv"]
+[gd_scene load_steps=16 format=3 uid="uid://bnyrjm2gdr6sv"]
 
 [ext_resource type="Script" uid="uid://dyg6agl64qnj" path="res://pepernotenfabriek/machine/machine.gd" id="1_vqvy0"]
 [ext_resource type="Script" uid="uid://dikjje4c1af4m" path="res://pepernotenfabriek/machine/module_cannon.gd" id="2_mawh5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="3_q5wxt"]
 [ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_vnpx2"]
 [ext_resource type="Script" uid="uid://demybhw66n310" path="res://pepernotenfabriek/machine/module_rotator.gd" id="4_obqqw"]
+[ext_resource type="Texture2D" uid="uid://bm3f108vjjc4e" path="res://pepernotenfabriek/ui/textures/score_counter_bg.webp" id="5_20joj"]
 [ext_resource type="Animation" uid="uid://7gcej1qu8mj7" path="res://pepernotenfabriek/score/score_streak_animation.res" id="5_qppn1"]
 [ext_resource type="AudioStream" uid="uid://qkxq1v74n67s" path="res://pepernotenfabriek/machine/machine_shot.mp3" id="7_vnpx2"]
 
@@ -146,6 +147,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StreakIndicator:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iy1ud"]
 _data = {
@@ -160,10 +173,11 @@ module_cannon = NodePath("ModuleCannon")
 module_visuals = NodePath("ModuleVisuals")
 metadata/_custom_type_script = "uid://dyg6agl64qnj"
 
-[node name="ModuleVisuals" type="Node2D" parent="." unique_id=1986401030 node_paths=PackedStringArray("machine", "active_indicators", "anim_player_streak")]
+[node name="ModuleVisuals" type="Node2D" parent="." unique_id=1986401030 node_paths=PackedStringArray("machine", "active_indicators", "streak_indicator", "anim_player_streak")]
 script = ExtResource("2_obqqw")
 machine = NodePath("..")
 active_indicators = NodePath("ActiveIndicators")
+streak_indicator = NodePath("StreakIndicator")
 anim_player_streak = NodePath("AnimationPlayerStreak")
 
 [node name="ActiveIndicators" type="Node2D" parent="ModuleVisuals" unique_id=375551882]
@@ -200,6 +214,12 @@ texture = ExtResource("3_vnpx2")
 [node name="Sprite2D" parent="ModuleVisuals/Machine" unique_id=489109551 instance=ExtResource("2_q5wxt")]
 frame = 9
 
+[node name="StreakIndicator" type="Node2D" parent="ModuleVisuals" unique_id=1096711089]
+position = Vector2(-84, 75)
+
+[node name="Sprite" type="Sprite2D" parent="ModuleVisuals/StreakIndicator" unique_id=1479335654]
+texture = ExtResource("5_20joj")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ModuleVisuals" unique_id=1593512326]
 libraries = {
 &"": SubResource("AnimationLibrary_r0q2k")
@@ -222,7 +242,6 @@ audio_player = NodePath("AudioStreamPlayer2D")
 stream = ExtResource("7_vnpx2")
 volume_db = -3.0
 max_distance = 8000.0
-bus = &"Game"
 
 [node name="ModuleRotator" type="Node2D" parent="." unique_id=698014199 node_paths=PackedStringArray("entity", "node_to_rotate")]
 script = ExtResource("4_obqqw")

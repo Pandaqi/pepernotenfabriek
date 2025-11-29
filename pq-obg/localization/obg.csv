@@ -10,6 +10,8 @@ MENU_SETTINGS,Settings,Instellingen
 MENU_QUIT,Quit,Afsluiten
 GO_RESULTS_GAME,Game Results,Uitslagen (Spel)
 GO_RESULTS_MATCH,Match Results,Uitslagen (Ronde)
+GO_HEADER,Game Over,Spel Afgelopen
+GO_MESSAGE,Press a button to go back to menu or restart with current settings.,Klik op een knop hieronder om terug te gaan naar het menu of opnieuw te spelen met dezelfde instellingen.
 GO_CONTINUE,Continue,Doorgaan
 GO_QUIT,Quit,Afsluiten
 GO_PLAY_AGAIN,Play Again,Speel opnieuw
@@ -19,6 +21,7 @@ ST_BOOL_TRUE,On,Aan
 ST_BOOL_FALSE,Off,Uit
 ST_TAB_CORE,Core,Algemeen
 ST_TAB_THEME,Theme,Visueel
+ST_TAB_GAME,Game,Spel
 ST_GROUP_VIDEO,Video,Video
 ST_GROUP_TUTORIAL,Tutorial,Uitleg
 ST_GROUP_LOGIN_OUT,Login / Logout,Inloggen / uitloggen

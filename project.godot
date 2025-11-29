@@ -24,9 +24,13 @@ Global="*uid://cjblsc7fxuoqg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
-locale/translations=PackedStringArray("res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation")
+locale/translations=PackedStringArray("res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation", "res://pepernotenfabriek/localization/custom.en.translation", "res://pepernotenfabriek/localization/custom.nl.translation")
 
 [physics]
 

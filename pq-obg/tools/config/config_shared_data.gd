@@ -5,6 +5,7 @@ class_name ConfigSharedData
 @export var clear_input_at_menu := true
 @export var language_default := "en"
 @export var game_scene : String
+@export var game_over_data : GameOverData
 
 @export_group("Settings")
 # resources for SettingTabs to display

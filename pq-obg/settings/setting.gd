@@ -257,6 +257,8 @@ func is_value_default() -> bool:
 	return value_string == str(def)
 
 func on_value_changed(new_val:Variant, r:SettingReader) -> void:
+	var actually_changed : bool = (value != new_val)
+	
 	# save the value on ourselves, so it permanently enters into the ConfigFile
 	value = new_val
 	update_display_value()
@@ -275,10 +277,11 @@ func on_value_changed(new_val:Variant, r:SettingReader) -> void:
 	# trigger instant modifications on change, if callback set
 	run_custom_callback(new_val, r)
 	
-	if needs_input_refresh:
-		Global.input.refresh_button_selection()
-	if needs_theme_refresh:
-		Global.theme.refresh()
+	if actually_changed:
+		if Global.input and needs_input_refresh:
+			Global.input.refresh_button_selection()
+		if Global.theme and needs_theme_refresh:
+			Global.theme.refresh()
 
 # we basically just create a new GDScript with the custom code as the body
 # then add it to the tree and run it

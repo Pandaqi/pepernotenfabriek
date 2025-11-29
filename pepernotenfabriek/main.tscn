@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://na47h6r8oeyx"]
+[gd_scene load_steps=36 format=3 uid="uid://na47h6r8oeyx"]
 
 [ext_resource type="Texture2D" uid="uid://c0hmiy682c01l" path="res://pepernotenfabriek/ui/textures/fabrieksvloer@0.5x.webp" id="1_1tmg5"]
 [ext_resource type="Resource" uid="uid://dwrgtsldm0xft" path="res://pepernotenfabriek/map/map_data.tres" id="2_0bfsn"]
@@ -14,22 +14,137 @@
 [ext_resource type="Script" uid="uid://cdt6r7eggio0d" path="res://pepernotenfabriek/machine/machine_distributor.gd" id="10_rddda"]
 [ext_resource type="PackedScene" uid="uid://c3mew7u5cevle" path="res://pq-obg/state/state.tscn" id="13_ehouy"]
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="14_1tmg5"]
-[ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/tools/players/player_spawner.gd" id="15_ernh0"]
-[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/tools/players/player_data.tres" id="15_fj44h"]
+[ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/players/player_spawner.gd" id="15_ernh0"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/players/player_data.tres" id="15_fj44h"]
 [ext_resource type="Script" uid="uid://bog5gg2bb0gxf" path="res://pepernotenfabriek/score/score.gd" id="15_qeb6e"]
 [ext_resource type="Script" uid="uid://d0cl065fevm6l" path="res://pepernotenfabriek/score/score_streak.gd" id="16_iqoxf"]
 [ext_resource type="PackedScene" uid="uid://s10incg4a6hm" path="res://pepernotenfabriek/player/player.tscn" id="16_qeb6e"]
 [ext_resource type="Script" uid="uid://1ey01g548jb" path="res://pepernotenfabriek/ui/ui.gd" id="17_crau4"]
-[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="17_yde53"]
-[ext_resource type="Texture2D" uid="uid://b3xoiwk76ch5f" path="res://pq-obg/ui/textures/icon_quit.tres" id="18_crau4"]
+[ext_resource type="Texture2D" uid="uid://bm3f108vjjc4e" path="res://pepernotenfabriek/ui/textures/score_counter_bg.webp" id="19_p74vk"]
+[ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="19_u3sq7"]
 [ext_resource type="FontFile" uid="uid://r4wr5f23gxn5" path="res://pepernotenfabriek/ui/fonts/heading.otf" id="20_g0dew"]
+[ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="20_mkp4w"]
+[ext_resource type="Texture2D" uid="uid://i3qnxwa2hlcn" path="res://pepernotenfabriek/ui/textures/progress_bar_under.webp" id="21_23etg"]
+[ext_resource type="Texture2D" uid="uid://b1rwor8voo0sr" path="res://pepernotenfabriek/ui/textures/progress_bar_over.webp" id="22_u3sq7"]
+[ext_resource type="Texture2D" uid="uid://dm3wktp44axxd" path="res://pepernotenfabriek/ui/textures/progress_bar_progress.webp" id="23_e62m8"]
+[ext_resource type="PackedScene" uid="uid://bm52gxys3unnf" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.tscn" id="24_23etg"]
+[ext_resource type="AudioStream" uid="uid://byvjsx540q7n2" path="res://pepernotenfabriek/score/finish_cheers.mp3" id="26_e62m8"]
+
+[sub_resource type="Animation" id="Animation_p74vk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/Score:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/Score:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.5, -2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/TextureRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/TextureRect:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_23etg"]
+resource_name = "score"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/Score:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.11600948, 0.06981317007977318, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/Score:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1.5, -2), Vector2(-9.5, -4), Vector2(6, 0), Vector2(-1.5, -2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/TextureRect:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.09915811, 0.20062222, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5.4999995, -5.9999995), Vector2(1.4999998, 2.9999995), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/HBoxContainer/ScoreContainer/TextureRect:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.09915811, 0.20062222, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.06981317, -0.034906585, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3sq7"]
+_data = {
+&"RESET": SubResource("Animation_p74vk"),
+&"score": SubResource("Animation_23etg")
+}
 
 [sub_resource type="Animation" id="Animation_iqoxf"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/MarginContainer/Score:modulate")
+tracks/0/path = NodePath("Control/MarginContainer/HBoxContainer/ScoreContainer/Score:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,11 +156,12 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_tt8t8"]
 resource_name = "score_streak"
+length = 0.88
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/MarginContainer/Score:modulate")
+tracks/0/path = NodePath("Control/MarginContainer/HBoxContainer/ScoreContainer/Score:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +177,7 @@ _data = {
 &"score_streak": SubResource("Animation_tt8t8")
 }
 
-[node name="Main" type="Node2D" unique_id=1617459695]
+[node name="Main2" type="Node2D" unique_id=1617459695]
 
 [node name="BG" type="CanvasLayer" parent="." unique_id=1114809584]
 layer = -1
@@ -93,15 +209,15 @@ machine_scene = ExtResource("8_tgxkw")
 basket_scene = ExtResource("6_tgxkw")
 map_data = ExtResource("2_0bfsn")
 
-[node name="PlayerSpawner" type="Node2D" parent="Map" unique_id=431052717]
-script = ExtResource("15_ernh0")
-player_scene = ExtResource("16_qeb6e")
-player_data = ExtResource("15_fj44h")
-
 [node name="MachineDistributor" type="Node2D" parent="Map" unique_id=224796423]
 script = ExtResource("10_rddda")
 player_data = ExtResource("15_fj44h")
 map_data = ExtResource("2_0bfsn")
+
+[node name="PlayerSpawner" type="Node2D" parent="Map" unique_id=431052717]
+script = ExtResource("15_ernh0")
+player_scene = ExtResource("16_qeb6e")
+player_data = ExtResource("15_fj44h")
 
 [node name="Score" type="Node2D" parent="." unique_id=926846671 node_paths=PackedStringArray("streak_global")]
 script = ExtResource("15_qeb6e")
@@ -117,15 +233,20 @@ metadata/_custom_type_script = "uid://d0cl065fevm6l"
 script = ExtResource("8_0bfsn")
 map_data = ExtResource("2_0bfsn")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=251231002 node_paths=PackedStringArray("score", "score_label", "target_label", "prog_bar", "anim_player_streak")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=251231002 node_paths=PackedStringArray("score", "score_label", "target_label", "prog_bar", "anim_player_streak", "anim_player_score", "audio_player", "game_over_menu")]
+process_mode = 3
 layer = 4
 script = ExtResource("17_crau4")
 score = NodePath("../Score")
-score_label = NodePath("Control/MarginContainer/Score")
-target_label = NodePath("Control/MarginContainer/Target")
-prog_bar = NodePath("Control/MarginContainer/TextureProgressBar")
+score_label = NodePath("Control/MarginContainer/HBoxContainer/ScoreContainer/Score")
+target_label = NodePath("Control/MarginContainer/HBoxContainer/Target")
+prog_bar = NodePath("Control/MarginContainer/HBoxContainer/TextureProgressBar")
 map_data = ExtResource("2_0bfsn")
+state_data = ExtResource("19_u3sq7")
 anim_player_streak = NodePath("AnimationPlayerStreak")
+anim_player_score = NodePath("AnimationPlayerScore")
+audio_player = NodePath("AudioStreamPlayer")
+game_over_menu = NodePath("GameOverMenu")
 
 [node name="Control" type="Control" parent="UI" unique_id=711419068]
 layout_mode = 3
@@ -136,6 +257,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("20_mkp4w")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Control" unique_id=1045842183]
 layout_mode = 1
@@ -146,44 +268,83 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/MarginContainer" unique_id=159282888]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/MarginContainer" unique_id=814421843]
+layout_mode = 2
+alignment = 1
+
+[node name="ScoreContainer" type="Control" parent="UI/Control/MarginContainer/HBoxContainer" unique_id=2022460173]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control/MarginContainer/HBoxContainer/ScoreContainer" unique_id=1178575452]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("19_p74vk")
+
+[node name="Score" type="Label" parent="UI/Control/MarginContainer/HBoxContainer/ScoreContainer" unique_id=734411477]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -34.0
+offset_right = 32.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5058824)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("20_g0dew")
+theme_override_font_sizes/font_size = 38
+text = "??"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/MarginContainer/HBoxContainer" unique_id=159282888]
 layout_mode = 2
 max_value = 1.0
 step = 0.05
-fill_mode = 3
-texture_under = ExtResource("17_yde53")
-texture_progress = ExtResource("18_crau4")
+texture_under = ExtResource("21_23etg")
+texture_over = ExtResource("22_u3sq7")
+texture_progress = ExtResource("23_e62m8")
 
-[node name="Score" type="Label" parent="UI/Control/MarginContainer" unique_id=734411477]
+[node name="Target" type="Label" parent="UI/Control/MarginContainer/HBoxContainer" unique_id=1205578397]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5058824)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 4
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("20_g0dew")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 20
 text = "??"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Target" type="Label" parent="UI/Control/MarginContainer" unique_id=1205578397]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5058824)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("20_g0dew")
-theme_override_font_sizes/font_size = 32
-text = "??"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="AnimationPlayerScore" type="AnimationPlayer" parent="UI" unique_id=410530870]
+root_node = NodePath("../Control")
+libraries = {
+&"": SubResource("AnimationLibrary_u3sq7")
+}
 
 [node name="AnimationPlayerStreak" type="AnimationPlayer" parent="UI" unique_id=1816811078]
 libraries = {
 &"": SubResource("AnimationLibrary_p74vk")
 }
+
+[node name="GameOverMenu" parent="UI" unique_id=721452580 instance=ExtResource("24_23etg")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI" unique_id=996181564]
+stream = ExtResource("26_e62m8")
+bus = &"Game"
 
 [node name="State" parent="." unique_id=1145839826 instance=ExtResource("13_ehouy")]
 start_game_immediately = true

@@ -6,7 +6,6 @@ class_name Basket
 @export var sprite : Sprite2D
 @export var sprite_type : Sprite2D
 var type : Gift.GiftType
-var area_size_factor := 0.7
 
 func _ready() -> void:
 	area.body_entered.connect(_on_body_entered)
@@ -17,7 +16,7 @@ func set_type(tp:Gift.GiftType) -> void:
 
 func set_size(s:Vector2) -> void:
 	var new_shape = RectangleShape2D.new()
-	new_shape.size = s * area_size_factor
+	new_shape.size = s * Global.config.basket_area_size_factor
 	col_shape.shape = new_shape
 	
 	var base_scale := 256

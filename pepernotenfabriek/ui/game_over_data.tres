@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameOverDataCustom" load_steps=3 format=3 uid="uid://bkrcguybtagps"]
+
+[ext_resource type="Script" uid="uid://cm5i7vlwjv1fs" path="res://pepernotenfabriek/ui/game_over_data.gd" id="1_e34im"]
+[ext_resource type="Resource" uid="uid://bhlcvxr17vu2o" path="res://pq-obg/state/state_data.tres" id="2_1yrtk"]
+
+[resource]
+script = ExtResource("1_e34im")
+state_data = ExtResource("2_1yrtk")
+metadata/_custom_type_script = "uid://cm5i7vlwjv1fs"

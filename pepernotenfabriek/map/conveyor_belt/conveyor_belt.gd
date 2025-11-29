@@ -2,17 +2,14 @@ extends Node2D
 class_name ConveyorBelt
 
 @export var dir := Vector2.RIGHT
-@export var push_force := 700.0
-@export var max_push_change_per_frame := 100.0
 @export var area : Area2D
 @export var col_shape : CollisionShape2D
 @export var sprite : Sprite2D
-@export var belt_thickness := 80.0
-@export var belt_extra_margin := 0.0
 
 var bounds : Array[Vector2]
 var start_pos : Vector2
 var end_pos : Vector2
+var belt_thickness := 0.0 # set automatically to grid cell size
 
 var bodies : Array[Gift]
 var gift_types : Array[Gift.GiftType]
@@ -34,14 +31,15 @@ func _on_body_exited(body:Node2D) -> void:
 	body.module_belt_tracker.remove_belt(self)
 
 func _physics_process(_delta: float) -> void:
-	var target_velocity := dir.normalized() * push_force
+	var target_velocity := dir.normalized() * Global.config.belt_push_force
+	var max_change := Global.config.belt_max_push_change_per_frame
 	for body in bodies:
 		var controlled_by_this_belt := body.module_belt_tracker.is_controlled_by(self)
 		if not controlled_by_this_belt: continue
 		
 		var cur_velocity := body.get_linear_velocity()
 		var change_needed := target_velocity - cur_velocity
-		var change_amount_clamped : float = clamp(change_needed.length(), 0.0, max_push_change_per_frame)
+		var change_amount_clamped : float = clamp(change_needed.length(), 0.0, max_change)
 		var change_clamped := change_amount_clamped * change_needed.normalized()
 		body.apply_central_force(change_clamped)
 
@@ -108,8 +106,10 @@ func update_sizes(map_bounds:Rect2) -> void:
 	# (the direction that matches DIR will have highest dot product, namely 1, other is -1)
 	# (that should be the ENDING direction; that's where we're GOING)
 	bounds = [first_bound_negative_dot, first_bound_positive_dot]
-	start_pos = bounds[0] - dir.normalized()*belt_extra_margin
-	end_pos = bounds[1] + dir.normalized()*belt_extra_margin
+	
+	var margin := Global.config.belt_extra_margin_factor * belt_thickness
+	start_pos = bounds[0] - dir.normalized()*margin
+	end_pos = bounds[1] + dir.normalized()*margin
 	
 	# update sprites and area to match
 	# (because they're centered, we need to offset their local anchor pos to be center of screen)

@@ -17,6 +17,7 @@ func _ready() -> void:
 	for btn in btns_already_in_play:
 		place_player(btn)
 	
+	# @NOTE: other things wait for this signal, which is why the PlayerSpawner must be the LAST of all the map elements, otherwise it emits the signal too soon and some things are not initialized
 	player_data.all_players_ready.emit()
 
 func on_button_added(btn:InputButton) -> void:

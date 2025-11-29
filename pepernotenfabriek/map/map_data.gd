@@ -25,6 +25,9 @@ func reset() -> void:
 	gifts_active = []
 	gifts_inactive = []
 	
+	bullets_active = []
+	bullets_inactive = []
+	
 	belts = []
 	machines = []
 	baskets = []

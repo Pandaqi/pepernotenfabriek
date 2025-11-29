@@ -5,8 +5,6 @@ const ZOOM_SPEED := 8.0
 
 @export var map_data : MapData
 
-@export var EDGE_MARGIN := Vector2(0.0, 64.0)
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -16,7 +14,7 @@ func _process(dt:float) -> void:
 	
 	var target_position := map_bounds.get_center()
 	
-	var vp_size := get_viewport_rect().size - 2*EDGE_MARGIN
+	var vp_size := get_viewport_rect().size - 2*Global.config.camera_edge_margin
 	var desired_size := map_bounds.size
 	var ratios := vp_size / desired_size
 	

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cn6aeumcvijey"
+
+[deps]
+
+files=["res://pepernotenfabriek/localization/custom.en.translation", "res://pepernotenfabriek/localization/custom.nl.translation"]
+
+source_file="res://pepernotenfabriek/localization/custom.csv"
+dest_files=["res://pepernotenfabriek/localization/custom.en.translation", "res://pepernotenfabriek/localization/custom.nl.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

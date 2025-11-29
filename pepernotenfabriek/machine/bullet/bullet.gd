@@ -13,6 +13,7 @@ class_name Bullet
 
 ## player who shot this bullet; goes through index to prevent cyclic references to Player objects
 var player_index : int
+var hit_something := false
 
 func _ready() -> void:
 	module_pooling.killed.connect(_on_killed)
@@ -26,6 +27,7 @@ func set_size(s:float) -> void:
 func shoot(player:int, from:Vector2, vec:Vector2) -> void:
 	module_pooling.revive(from)
 	player_index = player
+	hit_something = false
 	apply_central_impulse(vec)
 
 # Unfortunately, I don't see an automatic way to hook into a RigidBody's _integrate_forces
@@ -41,7 +43,9 @@ func get_size() -> Vector2:
 
 func _on_body_entered(body: Node) -> void:
 	if not (body is Gift): return
+	
 	body.module_bullet_hits.register(self)
+	hit_something = true
 	
 	if not audio_player.playing:
 		audio_player.pitch_scale = AudioManager.get_pitch_shift_semitones()

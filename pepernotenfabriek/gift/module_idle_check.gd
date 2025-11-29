@@ -8,8 +8,7 @@ class_name ModuleIdleCheck
 
 const STANDING_STILL_THRESHOLD := 1.0
 var standing_still := false
-var time_standstill
-var delay_before_removal := 10000.0 # ms
+var time_standstill := 0.0
 
 func _physics_process(_delta: float) -> void:
 	var was_standing_still := standing_still
@@ -24,6 +23,7 @@ func _physics_process(_delta: float) -> void:
 		time_standstill = Time.get_ticks_msec()
 	
 	var diff : float = Time.get_ticks_msec() - time_standstill
+	var delay_before_removal := Global.config.gift_standstill_delay_before_removal
 	var ratio : float = 1.0 - clamp(diff / delay_before_removal, 0.0, 1.0)
 	entity.modulate.a = ratio
 	if diff < delay_before_removal: return

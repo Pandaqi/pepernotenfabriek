@@ -183,13 +183,6 @@ De wanhoop nabij zag ik toen eindelijk het licht :p
 * Zo kan één speler effectief 4 machines hebben (of je bestuurt A+B, of je bestuurt C+D). Dat is overzichtelijk, dat is te doen, dat is "speelbaar".
 * Tegelijkertijd kan je zo dus zelfs met 2 spelers de volledige fabriek beslaan.
 
-
-
-
-
-
-
-
 ## Een speelbaar spel
 
 Het grote probleem met dit project was dat ik eigenlijk nooit had vastgelegd wat nou je _doel_ was. Het is een coöperatief spel. Het moet ook te spelen zijn met jonge kinderen, op bijv Sinterklaasavond. Dus iets heel competitiefs zag ik niet zitten, en iets heel strengs ook niet (zoals verliezen/doodgaan als je 10 pakjes hebt gemist bijvoorbeeld),
@@ -208,22 +201,52 @@ Zo kwam ik uit bij het volgende doel.
 
 Nou goed, zoals je ziet duurt dit hele project al een stuk langer dan ik in eerste instantie had gepland. Maar ik leer weer een hele hoop nieuwe dingen, want ik heb bijvoorbeeld (op een of andere manier) nog nooit streaks/combos geprogrammeerd in een eerder spel. En uiteindelijk is iteratie toch het toverwoord voor spellen maken, nog meer dan bij alle andere creatieve uitingen.
 
+En dan ... is het eindelijk af.
+
+Met elk spelersaantal is de fabriek speelbaar. (Na een hoop finetunen van getalletjes, zoals altijd, lijkt de moeilijkheidsgraad en snelheid van dingen goed.) Het is overzichtelijk. Er komt wat geluk/pech bij kijken, maar je kunt ook echt beter worden in strategie en mikken van je pepernoten. Het is niet te erg/frustrerend als je een aantal dingen laat gaan of mist, maar je wilt wel echt foutloos blijven om je streak in leven te houden en zo veel meer punten te scoren.
+
+Ik voegde nog wat laatste geluidseffecten en animaties toe. Ik voegde nog wat laatste geniepige hulpmiddelen toe om spelers meer plezier te laten hebben, zoals vrijwel elk spel doet.
+
+De belangrijkste? **Je wordt enorm geholpen bij het richten van je machine/pepernoten.** Als je "dichtbij genoeg" bent, verandert hij je richting een beetje om je te helpen ("aim assistance"). De truc hier is natuurlijk dat het onzichtbaar is, dus als je echt verkeerd mikt gaat hij gewoon verkeerd. Maar als je in de buurt komt dan zal je sowieso iets raken. Dat werkt volgens een vrij simpel mechanisme.
+
+* Reken de hoek uit tussen je machine en alle pakjes in het veld.
+* Reken de hoek uit waarop je nu richt ( = de hoek waarin je normaal gesproken zou schieten, zonder aim assistance)
+* Vind het pakje met de hoek die het _dichtste bij_ jouw richthoek ligt.
+  * Als je héél dichtbij bent, doe dan niks---je richt al goed.
+  * Als je er iets verder van af zit, duw je richting dan dichterbij die "perfecte richting" (maar niet helemaal---controle moet bij de speler blijven, en een beetje willekeurigheid maakt dit mooier.) Dus als je eronder zit, duw ik je hoek naar boven. Als je erboven zit, duw ik je hoek naar onder. 
+  * Maar als je er nóg verder van af zit, doe dan weer helemaal niks---je schiet zó mis dat het systeem je lekker laat missen.
+
+{{% remark %}}
+In eerste instantie deed ik dit met een "homing algoritme" op de pepernoten zelf. Dus terwijl ze vlogen, keken ze om zich heen en werden als magneten aangetrokken tot het dichtstbijzijnde pakje. Dit werkt doorgaans erg goed ... maar niet in een spel met zo'n klein veld en zoveel andere dingen die je zou kunnen raken. Het algoritme wordt afgeleid en doet niet vaak genoeg wat je wilt, en als je de magneet dan superkrachtig maakt is het té overduidelijk en ziet het er stom uit.
+
+Dus toen switchte ik naar de _machine_. Die corrigeert de richting _waarop je schiet_ (helemaal aan het begin), daarna vliegt de pepernoot gewoon in een rechte lijn. Dat ziet er in dit geval veel natuurlijker uit, en het speelt echt veel fijner, want je mist dus niet drie keer op rij op een haar na hetzelfde pakje :p
+{{% /remark %}}
+
+## Conclusie
+
+Uiteindelijk heb ik ~3 dagen over dit spel gedaan. Het werd wat groter en ingewikkelder dan ik hoopte vanwege de fouten en praktische missers in mijn eerste idee. Tegelijkertijd ben ik trots op het vrij sterke algoritme voor het genereren van willekeurige fabrieken die tot nog toe allemaal speelbaar zijn geweest, en het vrij vloeiend ondersteunen van lage en hoge spelersaantallen.
+
+Het spel is niet groots, maar het is wel grappig om even met een groep te doen tijdens Sinterklaas. En daar ging het toch vooral om.
+
+Bij het dagboek van _Samen Stoomboten_ legde ik al meer uit over het "systeem" achter de One Button Games. Dit was het tweede spel dat ik er ooit mee maakte, dus het systeem is nog verre van af. Maar door het te _gebruiken_ voor iets, vind ik steeds nieuwe dingen om toe te voegen en te verbeteren. Zo vond ik dankzij dit spel een cruciale (domme) fout in een deel van het systeem, die zorgde dat iets 95% van de tijd werkte ... en 5% van de tijd het hele spel liet crashen.
+
+Met elke One Button Game wordt dat systeem weer wat schoner en bruikbaarder voor _volgende_ spellen. Voor nu kan je lekker pepernoten schieten in deze pepernotenfabriek.
+
+Tot de volgende keer,
+
+Tiamo
 
 
 
 
-
-@TODO: over wanneer het eigenlijk eindigt/wat je score is, het hele spel rond maken en speelbaar
 
 
 
 @TODO VOOR SPEL:
 
-* UITLEGPLAATJES
-* UI / PROGRESS BAR
-* Game over check + scherm
-
-
+* UITLEGPLAATJES -> de TutorialStage resources kunnen gewoon text erbij krijgen die ze dan laten zien ipv plaatje
+* Settings + Localization (specifiek voor spel)
+* Create "PDF" to accompany OBGs? Like I did for the Quiz system?
 
 
 REMEMBER: When doing object pooling, have a delay before giving it back, to make sure it has probably turned off physics and finished tweens and stuff before it's being reused. Current solution = add back to back, pop from front, which makes it very unlikely it's reused.
@@ -231,12 +254,26 @@ REMEMBER: When doing object pooling, have a delay before giving it back, to make
 
 **THEME/SETTINGS ISSUES LEFT**:
 
-* Turn the **game over screen** from Samen Stoomboten into a **standard OBG thing** I can just copy/reuse in all games?
 * `use_system_fonts` does not _immediately_ refresh those with "custom font overrrides". Is that bad? Or should I find a different system for that anyway? Is there a way to differentiate 2 labels within the same theme? (One `LabelBody` and one `LabelHeading`? **No, don't think so.**)
-* No, I do _not_ actually read settings when bypassing menu at the moment. I should at least make that possible: just call SettingsReader function on all Global.config_shared.settings?
 * Also style the TOGGLE (for CheckButton) and SCROLLBAR
 * TUTORIAL: Has no text anymore by default (removed that from image), so I must add a label there with translated text myself 
   * BUT WAIT, we also want to localize the IMAGES, so should I support just using TEXT in tutorial frame too?
+* **The button instructions can be much smaller and more concise.** No need for the whole panel around it. That would also fit more instructions. Just a Nintendo-style "button/icon + small outlined text" would be fine, no?
+* The buttons for the all-important pause menu (Escape/Gamepad??/Touch??) should be much better explained.
+  * TOUCH = Touch the "logout explainer" for pause screen.
+  * GAMEPAD = just show the right button icon next to showing escape key?
+* Make **global.tscn** part of the OBG system. It's fine that it can't find "config_data.tres" when you insert it.
+* Create an actual `one-button-games` Git project? At least for backup, but also to collect my notes and this to-do and stuff. (Can merge that with the ideas and stuff inside the existing folder. The other games should be ignored for being Git-submodules.)
+
+**OTHER**:
+* FIX the fact that I need to wait one frame in the "on_buttons_changed" call -> figure out why/control "order" of signals and stuff better myself
+  * I think it's because it's a signal that activates/connects the input stuff, so you can't rely on things already being set/figured out immediately, must wait for next frame
+  * Is there a cleaner way to solve this issue for good?
+* Add more tweens to `TweenManager` and make that system more robust
+* Move some of those modules (map bounds, pooling, etc) into OBG for standardized reuse?
+  * **Really, I should split pq-obg and pq-obg-tools**. The first one has all the NECESSARY, INTERCONNECTED STUFF. The second one just has reusable modules, static functions, useful algorithms for stuff, etc.
+
+
 
 
 SAMEN STOOMBOTEN:

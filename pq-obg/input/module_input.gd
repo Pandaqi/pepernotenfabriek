@@ -11,7 +11,7 @@ var touch_area_scene := preload("res://pq-obg/ui/touch/input_touch_area.tscn")
 var touch_area : InputTouchArea
 
 @export var hold_time := 250.0
-@export var player_data : PlayerData = preload("res://pq-obg/tools/players/player_data.tres")
+@export var player_data : PlayerData = preload("res://pq-obg/players/player_data.tres")
 @export var num_button_visualizers := 1
 
 signal pressed()

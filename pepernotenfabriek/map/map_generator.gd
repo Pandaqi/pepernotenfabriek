@@ -3,16 +3,12 @@ class_name MapGenerator
 
 const GRID_SIZE := Vector2(10, 8)
 
-const NUM_BELTS := 4
 var belt_positions : Array[Vector2i]
 var belt_directions : Array[Vector2]
 var belt_gift_types : Array[PackedInt32Array]
 
-const NUM_MACHINES := 8
 var machine_positions : Array[Vector2i]
 
-var min_num_baskets := 14
-var max_num_baskets := 20
 var basket_positions : Array[Vector2i]
 var basket_types : Array[Gift.GiftType]
 
@@ -22,8 +18,6 @@ var grid_flat : Array[GridCell]
 var belt_directions_allowed := [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 var generation_failed := false
 var generation_attempts := 0
-
-const MAX_DIST_BASKET_MACHINE := 4
 
 func is_valid() -> bool:
 	return not generation_failed and generation_attempts > 0
@@ -150,7 +144,8 @@ func place_belts() -> void:
 	belt_positions = []
 	belt_directions = []
 	
-	for i in range(NUM_BELTS):
+	var num_belts := Global.config.num_belts
+	for i in range(num_belts):
 		# pick a random valid position
 		var cells := get_all_cells_for_content(GridCell.ContentType.BELT)
 		if cells.size() <= 0:
@@ -178,7 +173,8 @@ func place_belts() -> void:
 func place_machines() -> void:
 	machine_positions = []
 	
-	for i in range(NUM_MACHINES):
+	var num_machines := Global.config_shared.input_max_players_bound
+	for i in range(num_machines):
 		# pick a random valid position
 		var cells := get_all_cells_for_content(GridCell.ContentType.MACHINE)
 		if cells.size() <= 0:
@@ -216,8 +212,8 @@ func place_baskets() -> void:
 		#return a.dist_avg < b.dist_avg
 	#)
 	
-	var num_baskets : int = min(cells_reachable.size(), max_num_baskets)
-	if num_baskets < min_num_baskets:
+	var num_baskets : int = min(cells_reachable.size(), Global.config.max_num_baskets)
+	if num_baskets < Global.config.min_num_baskets:
 		generation_failed = true
 		return
 	
@@ -286,11 +282,12 @@ func query_basket_suitability(cell:GridCell) -> Dictionary:
 	}
 	
 	# for every machine...
+	var max_dist := Global.config.max_dist_basket_to_machine
 	for m in range(machine_positions.size()):
 		var pos := Vector2(machine_positions[m])
 		var vec_to_machine : Vector2 = pos - my_pos
 		var dist_to_machine := vec_to_machine.length()
-		if dist_to_machine > MAX_DIST_BASKET_MACHINE: continue
+		if dist_to_machine > max_dist: continue
 		
 		var crosses_belt := false
 		
