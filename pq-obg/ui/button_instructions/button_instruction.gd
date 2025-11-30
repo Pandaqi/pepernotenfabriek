@@ -15,6 +15,7 @@ var button : InputButton
 
 func _ready() -> void:
 	gui_input.connect(_on_input_event)
+	button_container.gui_input.connect(_on_input_event)
 
 func activate(btn: InputButton, tp:Type) -> void:
 	set_type(tp)

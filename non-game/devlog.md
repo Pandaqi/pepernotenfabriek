@@ -224,7 +224,9 @@ Dus toen switchte ik naar de _machine_. Die corrigeert de richting _waarop je sc
 
 ## Conclusie
 
-Uiteindelijk heb ik ~3 dagen over dit spel gedaan. Het werd wat groter en ingewikkelder dan ik hoopte vanwege de fouten en praktische missers in mijn eerste idee. Tegelijkertijd ben ik trots op het vrij sterke algoritme voor het genereren van willekeurige fabrieken die tot nog toe allemaal speelbaar zijn geweest, en het vrij vloeiend ondersteunen van lage en hoge spelersaantallen.
+Uiteindelijk heb ik ~3 dagen over dit spel gedaan. Het werd wat groter en ingewikkelder dan ik hoopte vanwege de fouten en praktische missers in mijn eerste idee. Merk op, bijvoorbeeld, hoe de helft van de dingen waarin ik veel tijd heb gestoken (zoals realistische uitschuifmachines) ... gewoon totaal niet meer in het uiteindelijke spel zijn gekomen.
+
+Tegelijkertijd ben ik trots op het vrij sterke algoritme voor het genereren van willekeurige fabrieken die tot nog toe allemaal speelbaar zijn geweest, en het vrij vloeiend ondersteunen van lage en hoge spelersaantallen.
 
 Het spel is niet groots, maar het is wel grappig om even met een groep te doen tijdens Sinterklaas. En daar ging het toch vooral om.
 
@@ -235,45 +237,3 @@ Met elke One Button Game wordt dat systeem weer wat schoner en bruikbaarder voor
 Tot de volgende keer,
 
 Tiamo
-
-
-
-
-
-
-fcd186
-
-@TODO VOOR SPEL:
-
-* UITLEGPLAATJES
-
-
-REMEMBER: When doing object pooling, have a delay before giving it back, to make sure it has probably turned off physics and finished tweens and stuff before it's being reused. Current solution = add back to back, pop from front, which makes it very unlikely it's reused.
-
-
-**THEME/SETTINGS ISSUES LEFT**:
-
-* Also add default setting for tutorial_delay_remove?
-* `use_system_fonts` does not _immediately_ refresh those with "custom font overrrides". Is that bad? Or should I find a different system for that anyway? Is there a way to differentiate 2 labels within the same theme? (One `LabelBody` and one `LabelHeading`? **No, don't think so.**)
-
-* Maybe I went a little overboard on the hue_rotate ... or at least for a bright orange/beige it's weird that it picks greens?
-
-* **The button instructions can be much smaller and more concise.** No need for the whole panel around it. That would also fit more instructions. Just a Nintendo-style "button/icon + small outlined text" would be fine, no?
-* The buttons for the all-important pause menu (Escape/Gamepad??/Touch??) should be much better explained. => Show this on the PAUSE MENU, as that's where you start each game anyway + reminds you how to get away.
-  * Some small fixed buttons for ESCAPE / GAMEPAD START / TOUCH LOGOUT below it should do?
-
-* Create an actual `one-button-games` Git project? At least for backup, but also to collect my notes and this to-do and stuff. (Can merge that with the ideas and stuff inside the existing folder. The other games should be ignored for being Git-submodules.)
-* Add a little text with the game name, that I created it, the version, etc on the start screen. Makes it look more professional.
-
-**OTHER**:
-* Add more tweens to `TweenManager` and make that system more robust
-* Move some of those modules (map bounds, pooling, etc) into OBG for standardized reuse?
-* I COULD maybe style the TOGGLE (for CheckButton) in same style as other buttons, but not necessary right now.
-
-
-
-SAMEN STOOMBOTEN:
-
-* Do we NEED a tutorial?
-* REFACTOR: Have fewer dependencies; if we do need them, INJECT them upon activation/ready
- 

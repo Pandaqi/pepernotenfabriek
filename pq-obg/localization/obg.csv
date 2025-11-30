@@ -71,7 +71,9 @@ ST_TUT_SCALE_TT,How large the images should be that explain how to play at the s
 ST_TUT_FONT_SIZE,Tutorial Font Size,Uitleg tekstgrootte
 ST_TUT_FONT_SIZE_TT,"If the tutorial images are text-based, this decides how large that text is.","Als de uitleg via tekst gedaan wordt, dan bepaald dit de grootte daarvan."
 ST_TUT_DELAY,Delay between tutorial images,Vertraging tonen uitlegplaatjes
-ST_TUT_DELAY_TT,How much time the system waits before showing the next explanation image.,Hoe lang het systeem wacht voordat het doorgaat naar het volgende uitlegplaatje.
+ST_TUT_DELAY_TT,How much time the system waits before showing the next explanation image (0 = show all immediately).,Hoe lang het systeem wacht voordat het doorgaat naar het volgende uitlegplaatje (0 = laat allemaal direct zien).
+ST_TUT_DELAY_REMOVE,Delay before removing tutorial images,Vertraging verwijderen uitlegplaatjes
+ST_TUT_DELAY_TT,How much time the system waits before removing an existing explanation image (0 = stays forever).,Hoe lang het systeem wacht voordat het een bestaand uitlegplaatje weer vervaagd (0 = blijft altijd).
 ST_BUTTON_VIS_SCALE,Button Hint Scale,Grootte speelknoppen
 ST_BUTTON_VIS_SCALE_TT,How large instructions should be for which button to press.,Hoe groot de knoppen moeten zijn die je vertellen wat je als speler moet indrukken.
 ST_BUTTON_INSTRUC_SIZE_ICON,Instructions Icon Size,Grootte van icoontje in knop-instructies

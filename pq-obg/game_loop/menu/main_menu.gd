@@ -7,11 +7,22 @@ class_name MainMenu extends CanvasLayer
 @export var settings_btn : Button
 @export var quit_btn : Button
 
+@export var label_credits : Label
+
 func _ready() -> void:
 	if Global.config_shared.clear_input_at_menu: Global.input.clear()
 	settings.active_changed.connect(_on_settings_active_changed)
 	grab_focus()
 	set_icons()
+	show_credits()
+
+func show_credits() -> void:
+	var string := "{game_id} · v{version} · {author}© · One Button Game".format({
+		"game_id": Global.config_shared.game_id,
+		"version": Global.config_shared.game_version,
+		"author": Global.config_shared.game_author
+	})
+	label_credits.set_text(string)
 
 func set_icons() -> void:
 	play_btn.icon = Global.config_shared.icon_play

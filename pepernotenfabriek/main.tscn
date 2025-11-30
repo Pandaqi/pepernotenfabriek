@@ -224,8 +224,8 @@ player_data = ExtResource("15_fj44h")
 script = ExtResource("15_qeb6e")
 map_data = ExtResource("2_0bfsn")
 player_data = ExtResource("15_fj44h")
-debug_game_over = null
 streak_global = NodePath("ScoreStreak")
+debug_game_over = null
 
 [node name="ScoreStreak" type="Node2D" parent="Score" unique_id=2105720983]
 script = ExtResource("16_iqoxf")

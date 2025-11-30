@@ -82,9 +82,8 @@ func refresh_size(factor:float) -> void:
 
 func appear() -> void:
 	show()
-	Global.tween.play_fadein_tween(self, 1.0)
+	Global.tween.play_fadein_tween(self, 0.66)
 	
-	# @TODO: handle it gracefully when pause menu is closed
 	timer.stop()
 	timer.wait_time = Global.config_shared.tutorial_delay_remove
 	var should_remove := timer.wait_time > 0.03
@@ -92,6 +91,6 @@ func appear() -> void:
 		timer.start()
 
 func _on_timer_timeout() -> void:
-	var tw := Global.tween.play_fadeout_tween(self, 1.0)
+	var tw := Global.tween.play_fadeout_tween(self, 0.66)
 	await tw.finished
 	hide()

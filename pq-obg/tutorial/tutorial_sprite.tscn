@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cbue28i4wsoti" path="res://pq-obg/ui/textures/icon_reset.tres" id="4_an53l"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="4_u3wn5"]
 
-[node name="TutorialSprite" type="Control" unique_id=1073214069 node_paths=PackedStringArray("texture_background", "texture_content", "label_heading", "label_content", "label_heading_icon", "heading_hbox", "margin_container", "margin_container_texture")]
+[node name="TutorialSprite" type="Control" unique_id=1073214069 node_paths=PackedStringArray("texture_background", "texture_content", "label_heading", "label_content", "label_heading_icon", "heading_hbox", "margin_container", "margin_container_texture", "timer")]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 3
 anchors_preset = 8
@@ -24,6 +24,10 @@ label_heading_icon = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label
 heading_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer")
 margin_container = NodePath("MarginContainer")
 margin_container_texture = NodePath("MarginContainer/VBoxContainer/Control/MarginContainer")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="." unique_id=714718452]
+one_shot = true
 
 [node name="TextureBackground" type="TextureRect" parent="." unique_id=1841029731]
 layout_mode = 1
@@ -100,6 +104,3 @@ text = "Lalalala"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="Timer" type="Timer" parent="." unique_id=714718452]
-one_shot = true

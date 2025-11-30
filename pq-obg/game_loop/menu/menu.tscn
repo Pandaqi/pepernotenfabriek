@@ -13,12 +13,13 @@
 
 [node name="BG" parent="." unique_id=1882044302 instance=ExtResource("1_klxda")]
 
-[node name="Main" type="CanvasLayer" parent="." unique_id=638506886 node_paths=PackedStringArray("settings", "play_btn", "settings_btn", "quit_btn")]
+[node name="Main" type="CanvasLayer" parent="." unique_id=638506886 node_paths=PackedStringArray("settings", "play_btn", "settings_btn", "quit_btn", "label_credits")]
 script = ExtResource("1_g206a")
 settings = NodePath("../Settings")
 play_btn = NodePath("Control/CenterContainer/VBoxContainer/Play")
 settings_btn = NodePath("Control/CenterContainer/VBoxContainer/Settings")
 quit_btn = NodePath("Control/CenterContainer/VBoxContainer/Quit")
+label_credits = NodePath("MarginContainer/LabelCredits")
 
 [node name="Control" type="Control" parent="Main" unique_id=1841443822]
 layout_mode = 3
@@ -54,6 +55,28 @@ icon = ExtResource("4_cqcj2")
 layout_mode = 2
 text = "MENU_QUIT"
 icon = ExtResource("6_p2nwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main" unique_id=1727733209]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_axedv")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="LabelCredits" type="Label" parent="Main/MarginContainer" unique_id=89014253]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Lalalalalal"
 
 [node name="Settings" type="CanvasLayer" parent="." unique_id=1838816528 node_paths=PackedStringArray("reset_btn", "close_btn")]
 script = ExtResource("3_qagmd")

@@ -1,8 +1,10 @@
 extends Resource
 class_name ConfigSharedData
 
+@export_group("Game")
 @export var game_id : String = "game-id"
-@export var clear_input_at_menu := true
+@export var game_version : String = "1.0.0"
+@export var game_author : String = "Tiamo Pastoor"
 @export var language_default := "en"
 @export var game_scene : String
 @export var game_over_data : GameOverData
@@ -102,6 +104,7 @@ class_name ConfigSharedData
 @export var allow_login_by_clicking_instruction := true
 @export var input_removal_type := InputManager.ButtonRemovalType.HOLD_COND
 @export var input_check_login_on_released := true
+@export var clear_input_at_menu := true
 
 @export_group("Players")
 @export var player_colors : Array[Color] = [
@@ -139,12 +142,12 @@ class_name ConfigSharedData
 @export var tutorial_enabled := true
 @export var tutorials : Array[TutorialStage] = []
 @export var tutorials_debug : Array[TutorialStage] = []
-@export var tutorial_delay := 5.5 # seconds before next tutorial appears
-@export var tutorial_delay_remove := 5.0 # seconds before that tutorial fades away again
+@export var tutorial_delay := 6.0 # seconds before next tutorial appears
+@export var tutorial_delay_remove := 12.0 # seconds before that tutorial fades away again
 @export var tutorial_scale := 1.0
 @export var tutorial_heading_font_size : int = 16
 @export var tutorial_content_font_size : int = 16
-@export var tutorial_only_once := false # if so, doesn't repeat the tutorial any time you pause
+@export var tutorial_only_once := true # if so, doesn't repeat the tutorial any time you pause
 
 @export_group("UI")
 @export var tutorial_anchor := ScreenAnchorTool.Anchor.CENTER

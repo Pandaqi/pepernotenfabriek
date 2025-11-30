@@ -8,4 +8,5 @@ type = 1
 type_unit = 2
 key = "tutorial_delay"
 label = "ST_TUT_DELAY"
+min_value = 0.0
 max_value = 10.0
